@@ -53,9 +53,9 @@
 
     <com.app.view.RankNumView
         android:id="@+id/woman_rank_num"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         
-        android_custom:textSize="16sp" />
+        android_custom:textSize="13sp" />
 
 </FrameLayout>

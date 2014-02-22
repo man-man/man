@@ -145,7 +145,7 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 						&& taskCollection.isEmpty()) {
 					myScrollView.loadMoreImages();
 				}
-				myScrollView.checkVisibility();
+//				myScrollView.checkVisibility();
 			} else {
 				lastScrollY = scrollY;
 				Message message = new Message();

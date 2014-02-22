@@ -78,6 +78,7 @@ public class RankNumView extends View {
 		// 画三角形
 		paint.setColor(bgColor);
 		paint.setStyle(Paint.Style.FILL);
+		paint.setAlpha(125);
 		Path path = new Path();
 		path.moveTo(0, 0);// 此点为多边形的起点
 		path.lineTo(getWidth(), 0);
