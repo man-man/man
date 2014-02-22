@@ -40,7 +40,7 @@ public class Welcome extends Activity implements Callback {
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Login.class);
+		Intent intent = new Intent(this, Woman.class);
 		startActivity(intent);
 		finish();
 	}

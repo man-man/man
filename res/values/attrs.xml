@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<resources>  
+    <declare-styleable name="WomanRankNum">    
+        <attr name="bgColor" format="color"/>
+        <attr name="text" format="string"/>
+        <attr name="textColor" format="color" />    
+        <attr name="textSize" format="dimension" />
+        <attr name="alpha" format="float" />
+    </declare-styleable>
+</resources>  

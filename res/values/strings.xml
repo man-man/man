@@ -15,5 +15,10 @@
     <string name="title_activity_login">Login</string>
     
     <string name="base_response_error">网络请求返回错误</string>
+    
+    <!-- woman rank使用 -->
+    <string name="border_top">Border Top</string>
+    <string name="border_bottom">Border Bottom</string>
+    <string name="image_url">Image Url</string>
 
 </resources>

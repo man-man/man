@@ -1,11 +1,18 @@
 package com.app.model;
 
 public class WomanItemModel {
-
-	private int img;//装女郎图片
-	private String name; //装女郎名字
-	private int vote = 0;//装女郎被投票数
-	private int rank = 0; //排名
+	
+	private int defaultImg; //榛樿澶村儚
+	public int getDefaultImg() {
+		return defaultImg;
+	}
+	public void setDefaultImg(int defaultImg) {
+		this.defaultImg = defaultImg;
+	}
+	private String img;//澶村儚
+	private String name; //鍚嶅瓧
+	private int vote = 0;//鎶曠エ
+	private int rank = 0; //鎺掕
 	
 	public int getRank() {
 		return rank;
@@ -13,10 +20,10 @@ public class WomanItemModel {
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
-	public int getImg() {
+	public String getImg() {
 		return img;
 	}
-	public void setImg(int img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 	public String getName() {
