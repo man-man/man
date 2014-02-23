@@ -33,8 +33,16 @@
             android:name="com.app.activity.Login"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name="com.app.activity.Man"
+            android:label="@string/title_activity_man" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Mine"
+            android:label="@string/title_activity_mine" >
+        </activity>
     </application>
-    
+
     <!-- permission-groups -->
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>

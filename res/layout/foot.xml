@@ -1,32 +1,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:background="#181818"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp">
-    <TextView android:layout_width="match_parent"
+    android:layout_marginBottom="0dp" >
+
+    <TextView
+        android:id="@+id/foot_woman"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:drawableTop="@drawable/woman_on_bar"
+        android:gravity="center"
         android:text="装女郎"
-        android:layout_weight="1"
         android:textColor="#fff"
-        android:textSize="11sp"
-        android:gravity="center"/>
-    <TextView android:layout_width="match_parent"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/foot_man"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:drawableTop="@drawable/man_bar"
+        android:gravity="center"
         android:text="男人帮"
-        android:layout_weight="1"
         android:textColor="#555"
-        android:textSize="11sp"
-        android:gravity="center"/>
-    <TextView android:layout_width="match_parent"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/foot_mine"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/mine_bar"
-        android:text="我的"
         android:layout_weight="1"
+        android:drawableTop="@drawable/mine_bar"
+        android:gravity="center"
+        android:text="我的"
         android:textColor="#555"
-        android:textSize="11sp"
-        android:gravity="center"/>
+        android:textSize="11sp" />
 </LinearLayout>

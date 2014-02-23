@@ -7,4 +7,9 @@
         <attr name="textSize" format="dimension" />
         <attr name="alpha" format="float" />
     </declare-styleable>
+    
+    <declare-styleable name="FootView">
+        <attr name="currentTab" format="string"></attr>
+        
+    </declare-styleable>
 </resources>  
