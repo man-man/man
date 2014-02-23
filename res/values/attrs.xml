@@ -10,6 +10,9 @@
     
     <declare-styleable name="FootView">
         <attr name="currentTab" format="string"></attr>
-        
+    </declare-styleable>
+    
+    <declare-styleable name="WomanHeadView">
+        <attr name="curTab" format="string"></attr>
     </declare-styleable>
 </resources>  

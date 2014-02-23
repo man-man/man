@@ -7,15 +7,12 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.app.man.R;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.StrictMode;
+
+import com.app.man.R;
 
 public class HttpRequestUtils {
 	public static String BASE_HTTP_CONTEXT = "http://192.168.1.101:8080/manWear/";

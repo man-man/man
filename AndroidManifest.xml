@@ -41,6 +41,14 @@
             android:name="com.app.activity.Mine"
             android:label="@string/title_activity_mine" >
         </activity>
+        <activity
+            android:name="com.app.activity.Vote"
+            android:label="@string/title_activity_vote" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Sign"
+            android:label="@string/title_activity_sign" >
+        </activity>
     </application>
 
     <!-- permission-groups -->

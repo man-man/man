@@ -21,5 +21,8 @@
     <string name="image_url">Image Url</string>
     <string name="title_activity_man">Man</string>
     <string name="title_activity_mine">Mine</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_vote">Vote</string>
+    <string name="title_activity_sign">Sign</string>
 
 </resources>
