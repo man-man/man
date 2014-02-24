@@ -18,7 +18,7 @@ import android.os.Message;
 import android.os.StrictMode;
 
 public class HttpRequestUtils {
-	public static String BASE_HTTP_CONTEXT = "http://192.168.1.101:8080/manWear/";
+	public static String BASE_HTTP_CONTEXT = "http://10.10.8.85:8080/manWear/";
 
 	public static String BUNDLE_KEY_ISPOST = "isPost";
 	public static String BUNDLE_KEY_HTTPURL = "httpUrl";
@@ -181,8 +181,9 @@ public class HttpRequestUtils {
 				result.append(line);
 			}
 		} catch (Exception e) {
-			System.out.println("发送 POST 请求出现异常！" + e);
+			// System.out.println("发送 POST 请求出现异常！" + e);
 			e.printStackTrace();
+			return getNetworkWrongStr();
 		}
 		// 使用finally块来关闭输出流、输入流
 		finally {
