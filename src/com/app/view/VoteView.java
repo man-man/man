@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.app.activity.Sign;
 import com.app.activity.Vote;
+import com.app.activity.VoteAfter;
 import com.app.activity.Woman;
 import com.app.man.R;
 
@@ -32,6 +33,16 @@ public class VoteView extends LinearLayout {
 	 * 评选信息右侧
 	 */
 	private RelativeLayout voteInfoRight;
+	
+	/**
+	 * 评选左侧按钮
+	 */
+	private VoteButtonView voteBtLeft;
+	
+	/**
+	 * 评选右侧按钮
+	 */
+	private VoteButtonView voteBtRight;
 	
 	/**
 	 * 评选按钮容器
@@ -60,9 +71,14 @@ public class VoteView extends LinearLayout {
 		
 		voteInfoLeft = (RelativeLayout) findViewById(R.id.vote_info_left);
 		voteInfoRight = (RelativeLayout) findViewById(R.id.vote_info_right);
+		voteBtLeft = (VoteButtonView) findViewById(R.id.vote_bt_left);
+		voteBtRight = (VoteButtonView) findViewById(R.id.vote_bt_right);
 		
 		voteInfoLeft.addView(getItemView());
 		voteInfoRight.addView(getItemView());
+		
+		voteBtLeft.setOnClickListener(new VoteBtLeftOnClick());
+		voteBtRight.setOnClickListener(new VoteBtRightOnClick());
 	}
 	
 	private View getItemView(){
@@ -84,31 +100,21 @@ public class VoteView extends LinearLayout {
 		return itemView;
 	}
 	
-	class RankOnClick implements OnClickListener{
+	class VoteBtLeftOnClick implements OnClickListener{
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Woman.class);
+			Intent intent = new Intent(getContext(), VoteAfter.class);
 			getContext().startActivity(intent);
 		}
 		
 	}
 	
-	class VoteOnClick implements OnClickListener{
+	class VoteBtRightOnClick implements OnClickListener{
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Vote.class);
-			getContext().startActivity(intent);
-		}
-		
-	}
-	
-	class SignOnClick implements OnClickListener{
-
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Sign.class);
+			Intent intent = new Intent(getContext(), VoteAfter.class);
 			getContext().startActivity(intent);
 		}
 		

@@ -56,6 +56,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical" >
                 <com.app.view.VoteButtonView
+                    android:id="@+id/vote_bt_left"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_alignParentRight="true" >
@@ -82,6 +83,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical" >
                 <com.app.view.VoteButtonView
+                    android:id="@+id/vote_bt_right"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true" >

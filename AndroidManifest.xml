@@ -49,6 +49,10 @@
             android:name="com.app.activity.Sign"
             android:label="@string/title_activity_sign" >
         </activity>
+        <activity
+            android:name="com.app.activity.VoteAfter"
+            android:label="@string/title_activity_vote_after" >
+        </activity>
     </application>
 
     <!-- permission-groups -->

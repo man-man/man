@@ -24,5 +24,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_vote">Vote</string>
     <string name="title_activity_sign">Sign</string>
+    <string name="title_activity_vote_after">VoteAfter</string>
 
 </resources>
