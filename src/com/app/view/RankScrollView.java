@@ -144,7 +144,7 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 						&& taskCollection.isEmpty()) {
 					myScrollView.loadMoreImages();
 				}
-//				myScrollView.checkVisibility();
+				// myScrollView.checkVisibility();
 			} else {
 				lastScrollY = scrollY;
 				Message message = new Message();
@@ -305,8 +305,8 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 		@Override
 		protected void onPostExecute(Bitmap bitmap) {
 			if (bitmap != null) {
-//				double ratio = bitmap.getWidth() / (columnWidth * 1.0);
-//				int scaledHeight = (int) (bitmap.getHeight() / ratio);
+				// double ratio = bitmap.getWidth() / (columnWidth * 1.0);
+				// int scaledHeight = (int) (bitmap.getHeight() / ratio);
 				addImage(bitmap, columnWidth, columnWidth);
 			}
 			taskCollection.remove(this);
@@ -506,23 +506,24 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 	 * 模拟数据
 	 */
 	private void rankReqSend2() {
-		int len = 30;
-		imageUrlArr = new String[len];
-
-		for (int i = 0; i < len; i++) {
-
-			WomanItemModel model = new WomanItemModel();
-			model.setDefaultImg(R.drawable.default_img);
-			model.setImg(imageUrls[i]);
-			model.setName("装女郎" + i);
-			model.setVote(100 * i);
-			model.setRank(i + 1);
-
-			imageUrlArr[i] = model.getImg();
-
-			models.add(model);
-		}
-		loadMoreImages();
+		rankReqSend();
+		// int len = 30;
+		// imageUrlArr = new String[len];
+		//
+		// for (int i = 0; i < len; i++) {
+		//
+		// WomanItemModel model = new WomanItemModel();
+		// model.setDefaultImg(R.drawable.default_img);
+		// model.setImg(imageUrls[i]);
+		// model.setName("装女郎" + i);
+		// model.setVote(100 * i);
+		// model.setRank(i + 1);
+		//
+		// imageUrlArr[i] = model.getImg();
+		//
+		// models.add(model);
+		// }
+		// loadMoreImages();
 	}
 
 	/**
