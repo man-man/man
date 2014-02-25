@@ -45,17 +45,15 @@ public class RankNumView extends View {
 	private Paint paint;
 
 	public RankNumView(Context context) {
-		this(context, null);
+		super(context, null);
 	}
 
 	public RankNumView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs, 0);
 	}
 
 	public RankNumView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-
-		paint = new Paint();
 
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
 				R.styleable.WomanRankNum);
@@ -74,7 +72,9 @@ public class RankNumView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-
+		
+		paint = new Paint();
+		
 		// 画三角形
 		paint.setColor(bgColor);
 		paint.setStyle(Paint.Style.FILL);

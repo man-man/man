@@ -6,6 +6,11 @@ import android.view.Menu;
 
 import com.app.man.R;
 
+/**
+ * 我的
+ * @author 王灵
+ *
+ */
 public class Mine extends Activity {
 
 	@Override

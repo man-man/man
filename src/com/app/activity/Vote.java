@@ -7,6 +7,11 @@ import android.view.Window;
 
 import com.app.man.R;
 
+/**
+ * 评选
+ * @author 王灵
+ *
+ */
 public class Vote extends Activity {
 
 	@Override
@@ -14,13 +19,6 @@ public class Vote extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.vote);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.vote, menu);
-		return true;
 	}
 
 }
