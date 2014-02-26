@@ -85,19 +85,76 @@
                 android:background="@drawable/mine_btnlist_bg"
                 android:orientation="vertical" >
 
-                <Button
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:id="@+id/mine_btn1"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_border"
-                    android:text="测试"
-                    android:textColor="@android:color/black" />
+                    android:background="@drawable/button_border" >
+
+                    <TextView
+                        android:id="@+id/mine_btn1_sec1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:text="左图"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/mine_btn1_sec2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/mine_btn1_sec1"
+                        android:text="测试"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/mine_btn1_sec3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:text=">"
+                        android:textColor="@android:color/black" />
+                </RelativeLayout>
                 
-                <Button
-                    android:layout_width="match_parent"
+                 <RelativeLayout
+                    android:id="@+id/mine_btn2"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_border"
-                    android:text="测试2"
-                    android:textColor="@android:color/black" />
+                    android:background="@drawable/button_border" >
+
+                    <TextView
+                        android:id="@+id/mine_btn2_sec1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:text="左图"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/mine_btn2_sec2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/mine_btn2_sec1"
+                        android:text="测试"
+                        android:textColor="@android:color/black" />
+
+
+                    <TextView
+                        android:id="@+id/mine_btn2_sec3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:text=">"
+                        android:textColor="@android:color/black" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
