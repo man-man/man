@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <!-- 填充 -->
+    <solid android:color="#ffffff" />
+
+    <!-- 描边 -->
+    <stroke
+        android:width="1dip"
+        android:color="#999999" />
+
+    <!-- 圆角 -->
+    <corners android:radius="2dip" />
+
+    <padding
+        android:bottom="10dip"
+        android:left="10dip"
+        android:right="10dip"
+        android:top="10dip" />
+
+    <!-- http://kofi1122.blog.51cto.com/2815761/521605 -->
+    <!-- http://www.cnblogs.com/cyanfei/archive/2012/07/27/2612023.html -->
+
+</shape>

@@ -13,7 +13,7 @@
     <string name="title_choice">评选</string>
     <string name="title_signup">报名</string>
     <string name="title_activity_login">Login</string>
-    <string name="base_response_error">网络请求返回错误</string>
+    
 
     <!-- woman rank使用 -->
     <string name="border_top">Border Top</string>
@@ -24,5 +24,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_vote">Vote</string>
     <string name="title_activity_sign">Sign</string>
+    
+    <!-- 常用的错误提示 -->
+    <string name="base_response_error">网络请求返回错误</string>
+    <string name="base_user_session_empty">用户可能已过期，请尝试重新登陆</string>
 
 </resources>

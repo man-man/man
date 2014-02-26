@@ -1,9 +1,14 @@
 package com.app.activity;
 
+import java.util.Map;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 
+import com.app.common.BaseUtils;
 import com.app.man.R;
 
 public class Mine extends Activity {
@@ -12,6 +17,15 @@ public class Mine extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mine);
+		Map<String, Object> curMap = BaseUtils.CUR_USER_MAP;
+		if (curMap == null) {
+			Toast.makeText(this, R.string.base_user_session_empty,
+					Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(this, Login.class);
+			startActivity(intent);
+		}else{
+			
+		}
 	}
 
 	@Override

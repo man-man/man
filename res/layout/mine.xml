@@ -1,22 +1,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res/com.app.man"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Man" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+    <ScrollView
+        android:id="@+id/mine_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/mine_linear"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="我的"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/mine_logo_linear"
+                android:layout_width="fill_parent"
+                android:layout_height="180dip"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:paddingBottom="10dip" >
+
+                <RelativeLayout
+                    android:id="@+id/mine_bg_rela"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dip" >
+
+                    <LinearLayout
+                        android:id="@+id/mine_bg_linear"
+                        android:layout_width="fill_parent"
+                        android:layout_height="120dip"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/bg"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="120dip"
+                            android:layout_marginTop="100dip"
+                            android:text="张小贤"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mine_info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dip"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="120dip"
+                            android:text="年龄：21"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="120dip"
+                            android:text="城市：北京"
+                            android:textColor="@android:color/black" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/mine_bg_logoimg"
+                        android:layout_width="100dip"
+                        android:layout_height="100dip"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="10dip"
+                        android:src="@drawable/logo" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mine_btnlist_bg"
+                android:orientation="vertical" >
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="测试"
+                    android:textColor="@android:color/black" />
+                
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="测试2"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <com.app.view.FootView
         android:layout_width="match_parent"
