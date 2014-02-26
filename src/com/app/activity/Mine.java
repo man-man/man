@@ -11,6 +11,11 @@ import android.widget.Toast;
 import com.app.common.BaseUtils;
 import com.app.man.R;
 
+/**
+ * 我的
+ * @author 王灵
+ *
+ */
 public class Mine extends Activity {
 
 	@Override

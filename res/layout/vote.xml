@@ -6,23 +6,96 @@
     android:orientation="vertical"
     android:paddingTop="5dp" >
 
-    <com.app.view.WomanHeadView android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android_custom:curTab="vote">
-    </com.app.view.WomanHeadView>
-    
-	<LinearLayout android:layout_width="match_parent"
-	    android:layout_height="0dp"
-	    android:layout_weight="2">
-	    <TextView android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="评选"
-	        android:textSize="20sp" />
-	</LinearLayout>
-
-    <com.app.view.FootView 
+    <com.app.view.WomanHeadView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android_custom:currentTab="woman"></com.app.view.FootView>
+        android_custom:curTab="vote" >
+    </com.app.view.WomanHeadView>
+
+    <com.app.view.VoteView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <LinearLayout
+            android:id="@+id/vote_infos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/vote_info_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:layout_weight="1">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/vote_info_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="5dp">
+			<RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" >
+                <com.app.view.VoteButtonView
+                    android:id="@+id/vote_bt_left"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentRight="true" >
+                </com.app.view.VoteButtonView>
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="VS"
+                    android:textSize="48sp"
+                    android:textColor="#2f2f2f" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical" >
+                <com.app.view.VoteButtonView
+                    android:id="@+id/vote_bt_right"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true" >
+                </com.app.view.VoteButtonView>
+            </RelativeLayout>
+        </LinearLayout>
+    </com.app.view.VoteView>
+
+    <com.app.view.FootView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android_custom:currentTab="woman" >
+    </com.app.view.FootView>
 
 </LinearLayout>

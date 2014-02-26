@@ -6,7 +6,11 @@ import android.view.Menu;
 import android.view.Window;
 
 import com.app.man.R;
-
+/**
+ * 装女郎 排行榜
+ * @author 王灵
+ *
+ */
 public class Woman extends Activity {
 
 	@Override

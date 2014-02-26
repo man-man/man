@@ -25,6 +25,11 @@ import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 
+/**
+ * 登陆
+ * @author 王灵
+ *
+ */
 public class Login extends Activity {
 
 	private Button loginBt = null;

@@ -6,6 +6,11 @@ import android.view.Menu;
 
 import com.app.man.R;
 
+/**
+ * 男人帮
+ * @author 王灵
+ *
+ */
 public class Man extends Activity {
 
 	@Override

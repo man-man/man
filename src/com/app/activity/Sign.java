@@ -7,6 +7,11 @@ import android.view.Window;
 
 import com.app.man.R;
 
+/**
+ * 报名
+ * @author 王灵
+ *
+ */
 public class Sign extends Activity {
 
 	@Override
