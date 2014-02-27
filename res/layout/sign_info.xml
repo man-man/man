@@ -1,0 +1,112 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignInfo" >
+
+    <include layout="@layout/title" />
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="vertical"
+        android:background="#efefef" >
+        <!-- 上部信息 -->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+            <LinearLayout android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginRight="20dp">
+                <LinearLayout
+                    android:id="@+id/sign_info_date_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    style="@style/sign_info_item"
+                    android:background="@drawable/sign_info_bottom">
+                    <TextView android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        style="@style/sign_info_text_gray"
+                        android:text="生日" />
+                    <TextView
+                        android:id="@+id/sign_info_date_text"
+                        android:layout_width="95dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="center_horizontal"
+                        style="@style/sign_info_text"
+                        android:text="1990-12-31"/>
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/right_arrow"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    style="@style/sign_info_item"
+                    android:background="@drawable/sign_info_bottom">
+                    <TextView android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        style="@style/sign_info_text_gray"
+                        android:text="三围" />
+                    <TextView android:layout_width="95dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="center_horizontal"
+                        style="@style/sign_info_text"
+                        android:text="36  22  33"/>
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/right_arrow"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    style="@style/sign_info_item">
+                    <TextView android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        style="@style/sign_info_text_gray"
+                        android:text="参赛地区" />
+                    <TextView android:layout_width="95dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="center_horizontal"
+                        style="@style/sign_info_text"
+                        android:text="上海"/>
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/right_arrow"/>
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/default_img"
+                android:background="#ccc" />
+        </LinearLayout>
+        <!-- 上部信息end -->
+        <!-- 下部大图 -->
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp">
+            <ImageView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/default_img"
+                android:background="#ccc" />
+        </RelativeLayout>
+        <!-- 下部大图end -->
+    </LinearLayout>
+
+</LinearLayout>

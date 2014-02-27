@@ -19,11 +19,10 @@
     <string name="border_top">Border Top</string>
     <string name="border_bottom">Border Bottom</string>
     <string name="image_url">Image Url</string>
-    <string name="title_activity_man">Man</string>
-    <string name="title_activity_mine">Mine</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_vote">Vote</string>
-    <string name="title_activity_sign">Sign</string>
-    <string name="title_activity_vote_after">VoteAfter</string>
+    <!-- woman rank使用end -->
+    
+    
+    <string name="sign_title">装女郎报名</string>
+    <string name="sign_submit">提交</string>
 
 </resources>

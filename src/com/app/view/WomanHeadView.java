@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.activity.Sign;
+import com.app.activity.SignInfo;
 import com.app.activity.Vote;
 import com.app.activity.Woman;
 import com.app.man.R;
@@ -101,8 +102,10 @@ public class WomanHeadView extends LinearLayout {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Woman.class);
-			getContext().startActivity(intent);
+			if(!TABS[0].equals(curTab)){
+				Intent intent = new Intent(getContext(), Woman.class);
+				getContext().startActivity(intent);
+			}
 		}
 		
 	}
@@ -111,8 +114,10 @@ public class WomanHeadView extends LinearLayout {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Vote.class);
-			getContext().startActivity(intent);
+			if(!TABS[1].equals(curTab)){
+				Intent intent = new Intent(getContext(), Vote.class);
+				getContext().startActivity(intent);
+			}
 		}
 		
 	}
@@ -121,8 +126,10 @@ public class WomanHeadView extends LinearLayout {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Sign.class);
-			getContext().startActivity(intent);
+			if(!TABS[2].equals(curTab)){
+				Intent intent = new Intent(getContext(), SignInfo.class);
+				getContext().startActivity(intent);
+			}
 		}
 		
 	}

@@ -30,33 +30,30 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.app.activity.Login"
-            android:label="@string/title_activity_login" >
+            android:name="com.app.activity.Login">
         </activity>
         <activity
-            android:name="com.app.activity.Man"
-            android:label="@string/title_activity_man" >
+            android:name="com.app.activity.Man" >
         </activity>
         <activity
-            android:name="com.app.activity.Mine"
-            android:label="@string/title_activity_mine" >
+            android:name="com.app.activity.Mine">
         </activity>
         <activity
-            android:name="com.app.activity.Vote"
-            android:label="@string/title_activity_vote" >
+            android:name="com.app.activity.Vote">
         </activity>
         <activity
-            android:name="com.app.activity.Sign"
-            android:label="@string/title_activity_sign" >
+            android:name="com.app.activity.Sign">
         </activity>
         <activity
-            android:name="com.app.activity.VoteAfter"
-            android:label="@string/title_activity_vote_after" >
+            android:name="com.app.activity.VoteAfter">
+        </activity>
+        <activity
+            android:name="com.app.activity.SignInfo">
         </activity>
     </application>
 
     <!-- permission-groups -->
-    <uses-permission android:name="android.permission.INTERNET" >
+    <uses-permission android:name="android.permission.INTERNET">
     </uses-permission>
 
 </manifest>

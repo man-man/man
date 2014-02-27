@@ -18,8 +18,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#1fc232"
-            android:src="@drawable/default_img" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl" />
 
         <!-- 信息容器 -->
 

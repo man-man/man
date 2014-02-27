@@ -506,24 +506,24 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 	 * 模拟数据
 	 */
 	private void rankReqSend2() {
-		rankReqSend();
-		// int len = 30;
-		// imageUrlArr = new String[len];
-		//
-		// for (int i = 0; i < len; i++) {
-		//
-		// WomanItemModel model = new WomanItemModel();
-		// model.setDefaultImg(R.drawable.default_img);
-		// model.setImg(imageUrls[i]);
-		// model.setName("装女郎" + i);
-		// model.setVote(100 * i);
-		// model.setRank(i + 1);
-		//
-		// imageUrlArr[i] = model.getImg();
-		//
-		// models.add(model);
-		// }
-		// loadMoreImages();
+		// rankReqSend();
+		int len = 9;
+		imageUrlArr = new String[len];
+
+		for (int i = 0; i < len; i++) {
+
+			WomanItemModel model = new WomanItemModel();
+			model.setDefaultImg(R.drawable.default_img);
+			model.setImg(imageUrls[i]);
+			model.setName("装女郎" + i);
+			model.setVote(100 * i);
+			model.setRank(i + 1);
+
+			imageUrlArr[i] = model.getImg();
+
+			models.add(model);
+		}
+		loadMoreImages();
 	}
 
 	/**
@@ -587,8 +587,9 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 	}
 
 	public final static String[] imageUrls = new String[] {
+			"http://e.hiphotos.baidu.com/image/w%3D2048/sign=d5c6221ddf54564ee565e33987e69d82/738b4710b912c8fc5f5ce8c3fe039245d6882114.jpg",
 			"http://img.my.csdn.net/uploads/201309/01/1378037235_3453.jpg",
-			"http://img.my.csdn.net/uploads/201309/01/1378037235_7476.jpg",
+			"http://e.hiphotos.baidu.com/image/w%3D2048/sign=d5c6221ddf54564ee565e33987e69d82/738b4710b912c8fc5f5ce8c3fe039245d6882114.jpg",
 			"http://img.my.csdn.net/uploads/201309/01/1378037235_9280.jpg",
 			"http://img.my.csdn.net/uploads/201309/01/1378037234_3539.jpg",
 			"http://img.my.csdn.net/uploads/201309/01/1378037234_6318.jpg",

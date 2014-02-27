@@ -19,9 +19,7 @@ import com.app.man.R;
 public class FootView extends LinearLayout {
 
 	public final static String[] TABS = new String[] { "woman", "man", "mine" };
-	public final static int[] COLORS = new int[]{
-		0xffffffff, 0xff555555
-	};
+	public final static int[] COLORS = new int[] { 0xffffffff, 0xff555555 };
 
 	/**
 	 * 当前tab
@@ -62,7 +60,7 @@ public class FootView extends LinearLayout {
 
 		mTypedArray.recycle();
 	}
-	
+
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
@@ -75,68 +73,80 @@ public class FootView extends LinearLayout {
 		womanText = (TextView) findViewById(R.id.foot_woman);
 		manText = (TextView) findViewById(R.id.foot_man);
 		mineText = (TextView) findViewById(R.id.foot_mine);
-		
+
 		womanText.setOnClickListener(new WomanOnClick());
 		manText.setOnClickListener(new ManOnClick());
 		mineText.setOnClickListener(new MineOnClick());
-		
-		if(TABS[0].equals(currentTab)){
+
+		if (TABS[0].equals(currentTab)) {
 			System.out.println(womanText.getTextColors());
 			womanText.setTextColor(COLORS[0]);
-			womanText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.woman_on_bar, 0, 0);
-		}else{
+			womanText.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.woman_on_bar, 0, 0);
+		} else {
 			womanText.setTextColor(COLORS[1]);
-			womanText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.woman_bar, 0, 0);
+			womanText.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.woman_bar, 0, 0);
 		}
-		
-		if(TABS[1].equals(currentTab)){
+
+		if (TABS[1].equals(currentTab)) {
 			System.out.println(manText.getTextColors());
 			manText.setTextColor(COLORS[0]);
-			manText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.man_on_bar, 0, 0);
-		}else{
+			manText.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.man_on_bar, 0, 0);
+		} else {
 			System.out.println(manText.getTextColors());
 			manText.setTextColor(COLORS[1]);
-			manText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.man_bar, 0, 0);
+			manText.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.man_bar, 0, 0);
 		}
-		
-		if(TABS[2].equals(currentTab)){
+
+		if (TABS[2].equals(currentTab)) {
 			mineText.setTextColor(COLORS[0]);
-			mineText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mine_on_bar, 0, 0);
-		}else{
+			mineText.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.mine_on_bar, 0, 0);
+		} else {
 			mineText.setTextColor(COLORS[1]);
-			mineText.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.mine_bar, 0, 0);
+			mineText.setCompoundDrawablesWithIntrinsicBounds(0,
+					R.drawable.mine_bar, 0, 0);
 		}
-		
+
 	}
-	
-	class WomanOnClick implements OnClickListener{
+
+	class WomanOnClick implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Woman.class);
-			getContext().startActivity(intent);
+			if (!TABS[0].equals(currentTab)) {
+				Intent intent = new Intent(getContext(), Woman.class);
+				getContext().startActivity(intent);
+			}
 		}
-		
+
 	}
-	
-	class ManOnClick implements OnClickListener{
+
+	class ManOnClick implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Man.class);
-			getContext().startActivity(intent);
+			if (!TABS[1].equals(currentTab)) {
+				Intent intent = new Intent(getContext(), Man.class);
+				getContext().startActivity(intent);
+			}
 		}
-		
+
 	}
-	
-	class MineOnClick implements OnClickListener{
+
+	class MineOnClick implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), Mine.class);
-			getContext().startActivity(intent);
+			if (!TABS[2].equals(currentTab)) {
+				Intent intent = new Intent(getContext(), Mine.class);
+				getContext().startActivity(intent);
+			}
 		}
-		
+
 	}
 
 	public String getCurrentTab() {
