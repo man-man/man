@@ -4,15 +4,14 @@
     android:background="#181818"
     android:orientation="horizontal"
     android:paddingBottom="5dp"
-    android:paddingTop="5dp"
-    android:layout_marginBottom="0dp" >
-
+    android:paddingTop="5dp">
     <TextView
         android:id="@+id/foot_woman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:drawableTop="@drawable/woman_on_bar"
+        android:drawablePadding="0dp"
         android:gravity="center"
         android:text="装女郎"
         android:textColor="#fff"
@@ -24,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:drawableTop="@drawable/man_bar"
+        android:drawablePadding="0dp"
         android:gravity="center"
         android:text="男人帮"
         android:textColor="#555"
@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:drawableTop="@drawable/mine_bar"
+        android:drawablePadding="0dp"
         android:gravity="center"
         android:text="我的"
         android:textColor="#555"

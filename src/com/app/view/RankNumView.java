@@ -45,11 +45,11 @@ public class RankNumView extends View {
 	private Paint paint;
 
 	public RankNumView(Context context) {
-		super(context, null);
+		this(context, null);
 	}
 
 	public RankNumView(Context context, AttributeSet attrs) {
-		super(context, attrs, 0);
+		this(context, attrs, 0);
 	}
 
 	public RankNumView(Context context, AttributeSet attrs, int defStyle) {

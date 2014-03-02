@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -16,7 +16,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
+
     <!-- 装女郎 排行榜 -->
     <style name="woman_rank_name">
         <item name="android:textSize">13sp</item>
@@ -26,7 +26,7 @@
         <item name="android:paddingLeft">5dp</item>
         <item name="android:gravity">left</item>
     </style>
-    
+
     <style name="woman_vote_num">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">#7e7e7e</item>
@@ -36,16 +36,18 @@
         <item name="android:gravity">right</item>
     </style>
     <!-- 装女郎 排行榜end -->
-    
+
+
     <!-- 装女郎  评选 -->
-	<style name="vote_item_text">
+    <style name="vote_item_text">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#2f2f2f</item>
         <item name="android:paddingBottom">2dp</item>
         <item name="android:paddingTop">2dp</item>
     </style>
     <!-- 装女郎 评选end -->
-    
+
+
     <!-- 装女郎 评选后 页面 -->
     <style name="vote_after_left_text">
         <item name="android:textSize">14sp</item>
@@ -54,6 +56,7 @@
         <item name="android:paddingTop">2dp</item>
         <item name="android:gravity">left</item>
     </style>
+
     <style name="vote_after_right_text">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#fff</item>
@@ -65,20 +68,40 @@
         <item name="android:background">@drawable/vote_after_text_corner</item>
         <item name="android:alpha" tools:ignore="NewApi">0.5</item>
     </style>
-    <!-- 装女郎 评选后 页面 end-->
-    <!-- 装女郎 报名详情页-->
+    <!-- 装女郎 评选后 页面 end -->
+    <!-- 装女郎 报名详情页 -->
     <style name="sign_info_item">
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
+
     <style name="sign_info_text_gray">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#b1b1b1</item>
     </style>
+
     <style name="sign_info_text">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#565656</item>
         <item name="android:layout_marginRight">0dp</item>
     </style>
-    <!-- 装女郎 报名详情页end-->
+    <!-- 装女郎 报名详情页end -->
+	
+	<!-- 我的页面 -->
+	<style name="mine_container_b">
+	    <item name="android:layout_marginLeft">5dp</item>
+	    <item name="android:layout_marginRight">5dp</item>
+	    <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:background">@drawable/mine_container_b_corner</item>
+    </style>
+    <style name="mine_container_s">
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingRight">18dp</item>
+        <item name="android:background">@drawable/mine_container_s_corner</item>
+    </style>
+	<!-- 我的页面end -->
 </resources>

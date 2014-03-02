@@ -1,51 +1,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/com.app.man"
+    android:id="@+id/vote_item"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    android:orientation="vertical"
-    android:id="@+id/vote_item">
+    android:orientation="vertical" >
 
-    <ImageView
+    <com.app.view.NetImageView
         android:id="@+id/vote_item_img"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:src="@drawable/girl"
         android:scaleType="centerCrop"
-        android:background="#ccc">
-    </ImageView>
+        android:background="@drawable/img_top_corner"
+        android_custom:cornerRadius="3dp"
+        android_custom:cornerType="1"
+        android_custom:netUrl="http://b.hiphotos.baidu.com/image/w%3D2048/sign=38b72a866e81800a6ee58e0e850d32fa/d788d43f8794a4c294f134220cf41bd5ac6e39ed.jpg" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/woman_item_info"
         android:orientation="vertical"
-        android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:background="@drawable/woman_item_info" >
+        android:paddingTop="5dp" >
 
         <TextView
+            style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/vote_item_text"
             android:text="姓名:李玄怡" />
 
         <TextView
+            style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/vote_item_text"
             android:text="年龄:18" />
 
         <TextView
+            style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/vote_item_text"
             android:text="星座:双子座" />
 
         <TextView
+            style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/vote_item_text"
             android:text="三围:86 89 63" />
     </LinearLayout>
 

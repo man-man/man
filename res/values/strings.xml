@@ -25,6 +25,11 @@
     <string name="sign_title">装女郎报名</string>
     <string name="sign_submit">提交</string>
     
+    <!-- 搜索页头 -->
+    <string name="search_hint">搜索</string>
+    
+    <string name="attention_txt">关注</string>
+    
     <!-- 常用的错误提示 -->
     <string name="base_response_error">网络请求返回错误</string>
     <string name="base_user_session_empty">用户可能已过期，请尝试重新登陆</string>

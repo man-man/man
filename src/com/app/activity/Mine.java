@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -27,21 +28,23 @@ public class Mine extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mine);
-		mine_btn1 = (RelativeLayout) findViewById(R.id.mine_btn1);
-		mine_btn2 = (RelativeLayout) findViewById(R.id.mine_btn2);
-		RelativeLayoutOnClickListener clickListener = new RelativeLayoutOnClickListener();
-		mine_btn1.setOnClickListener(clickListener);
-		mine_btn2.setOnClickListener(clickListener);
-		Map<String, Object> curMap = BaseUtils.CUR_USER_MAP;
-		if (curMap == null) {
-			Toast.makeText(this, R.string.base_user_session_empty,
-					Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(this, Login.class);
-			startActivity(intent);
-		}else{
-			
-		}
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.mine2);
+		
+//		mine_btn1 = (RelativeLayout) findViewById(R.id.mine_btn1);
+//		mine_btn2 = (RelativeLayout) findViewById(R.id.mine_btn2);
+//		RelativeLayoutOnClickListener clickListener = new RelativeLayoutOnClickListener();
+//		mine_btn1.setOnClickListener(clickListener);
+//		mine_btn2.setOnClickListener(clickListener);
+//		Map<String, Object> curMap = BaseUtils.CUR_USER_MAP;
+//		if (curMap == null) {
+//			Toast.makeText(this, R.string.base_user_session_empty,
+//					Toast.LENGTH_SHORT).show();
+//			Intent intent = new Intent(this, Login.class);
+//			startActivity(intent);
+//		}else{
+//			
+//		}
 	}
 	
 	public class RelativeLayoutOnClickListener  implements OnClickListener{

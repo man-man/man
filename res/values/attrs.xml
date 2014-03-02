@@ -15,4 +15,16 @@
     <declare-styleable name="WomanHeadView">
         <attr name="curTab" format="string"></attr>
     </declare-styleable>
+    
+    <declare-styleable name="NetImageView">
+        <attr name="cornerRadius" format="dimension"></attr>
+        <attr name="cornerType" format="integer"></attr>
+        <attr name="netUrl" format="string"></attr>
+        <attr name="isRect" format="boolean"></attr>
+        <attr name="heightOfWidth" format="float"></attr>
+    </declare-styleable>
+    
+    <declare-styleable name="InnerScrollView">
+        <attr name="parentScrollView" format="reference"></attr>
+    </declare-styleable>
 </resources>  
