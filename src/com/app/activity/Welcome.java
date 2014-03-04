@@ -14,8 +14,9 @@ import com.app.util.DensityUtil;
 
 /**
  * 欢迎页
+ * 
  * @author 王灵
- *
+ * 
  */
 public class Welcome extends Activity implements Callback {
 
@@ -23,13 +24,13 @@ public class Welcome extends Activity implements Callback {
 	private static final long DELAY = 1000;
 
 	private Handler handler;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.welcome);
-		
+
 		DensityUtil.initWindow(getWindowManager());
 
 		handler = new Handler(this);
@@ -45,7 +46,7 @@ public class Welcome extends Activity implements Callback {
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Mine.class);
+		Intent intent = new Intent(this, Man.class);
 		startActivity(intent);
 		finish();
 	}

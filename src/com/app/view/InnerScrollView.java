@@ -1,9 +1,5 @@
 package com.app.view;
 
-import com.app.activity.Man;
-import com.app.man.R;
-import com.app.util.ContextUtil;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,15 +7,18 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ScrollView;
+import android.widget.HorizontalScrollView;
+import android.widget.ListView;
+
+import com.app.man.R;
 
 @SuppressLint("NewApi")
-public class InnerScrollView extends ScrollView {
+public class InnerScrollView extends HorizontalScrollView {
 
 	/**
 	 * 父辈滚动条
 	 */
-	private ScrollView parentScrollView = null;
+	private ListView parentScrollView = null;
 
 	public InnerScrollView(Context context) {
 		this(context, null);
@@ -119,10 +118,11 @@ public class InnerScrollView extends ScrollView {
 
 				Log.d("test", "---------y:" + Math.abs(currentY - y));
 				Log.d("test", "---------x:" + Math.abs(currentX - x));
-
-				if (Math.abs(currentY - y) < 5 && Math.abs(currentX - x) >= 5) { // 横滑
+				if (Math.abs(currentX - x) >= 2) { // 横滑
+					Log.d("test", "-------------就把滚动拦截");
 					setParentScrollAble(false);
 				} else {
+					Log.d("test", "-------------就把滚动交给父Scrollview");
 					setParentScrollAble(true);
 				}
 
@@ -165,11 +165,11 @@ public class InnerScrollView extends ScrollView {
 		parentScrollView.requestDisallowInterceptTouchEvent(!flag);
 	}
 
-	public ScrollView getParentScrollView() {
+	public ListView getParentScrollView() {
 		return parentScrollView;
 	}
 
-	public void setParentScrollView(ScrollView parentScrollView) {
+	public void setParentScrollView(ListView parentScrollView) {
 		this.parentScrollView = parentScrollView;
 	}
 
