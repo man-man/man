@@ -51,6 +51,13 @@
         <activity
             android:name="com.app.activity.SignInfo">
         </activity>
+        <activity
+            android:name="com.app.activity.Test">
+        </activity>
+        <activity
+            android:name="com.app.activity.SignSanwei"
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
     </application>
 
     <!-- permission-groups -->
