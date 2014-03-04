@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="btn_ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_add">+</string>
+    <string name="btn_less">-</string>
 
     <string name="login_str">登陆</string>
     <string name="login_username_hint">请输入用户名</string>
@@ -35,4 +40,8 @@
     <string name="base_user_session_empty">用户可能已过期，请尝试重新登陆</string>
     <string name="title_activity_vote_after">VoteAfter</string>
 
+    
+    <string name="sanwei_1">胸围</string>
+    <string name="sanwei_2">腰围</string>
+    <string name="sanwei_3">臀围</string>
 </resources>

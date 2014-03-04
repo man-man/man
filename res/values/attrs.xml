@@ -1,21 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<resources>  
-    <declare-styleable name="WomanRankNum">    
-        <attr name="bgColor" format="color"/>
-        <attr name="text" format="string"/>
-        <attr name="textColor" format="color" />    
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <declare-styleable name="WomanRankNum">
+        <attr name="bgColor" format="color" />
+        <attr name="text" format="string" />
+        <attr name="textColor" format="color" />
         <attr name="textSize" format="dimension" />
         <attr name="alpha" format="float" />
     </declare-styleable>
-    
     <declare-styleable name="FootView">
         <attr name="currentTab" format="string"></attr>
     </declare-styleable>
-    
     <declare-styleable name="WomanHeadView">
         <attr name="curTab" format="string"></attr>
     </declare-styleable>
-    
     <declare-styleable name="NetImageView">
         <attr name="cornerRadius" format="dimension"></attr>
         <attr name="cornerType" format="integer"></attr>
@@ -23,8 +21,16 @@
         <attr name="isRect" format="boolean"></attr>
         <attr name="heightOfWidth" format="float"></attr>
     </declare-styleable>
-    
     <declare-styleable name="InnerScrollView">
         <attr name="parentScrollView" format="reference"></attr>
     </declare-styleable>
-</resources>  
+    <declare-styleable name="TextChangeView">
+        <attr name="textLable" format="string"></attr>
+        <attr name="textArrays" format="reference" />
+        <attr name="textArraysStartIndex" format="integer" />
+        <attr name="textArraysStartValue" format="integer" />
+    </declare-styleable>
+     <declare-styleable name="SanweiView">
+    </declare-styleable>
+
+</resources>

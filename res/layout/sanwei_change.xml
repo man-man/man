@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.app.man"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <com.app.view.TextChangeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:textArrays="@array/sanwei_arrays_1"
+        app:textLable="@string/sanwei_1" >
+    </com.app.view.TextChangeView>
+
+    <com.app.view.TextChangeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:textArrays="@array/sanwei_arrays_1"
+        app:textLable="@string/sanwei_2" >
+    </com.app.view.TextChangeView>
+
+    <com.app.view.TextChangeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:textArrays="@array/sanwei_arrays_1"
+        app:textLable="@string/sanwei_3" >
+    </com.app.view.TextChangeView>
+
+</LinearLayout>
