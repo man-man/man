@@ -101,7 +101,7 @@ public class VoteButtonView extends View {
 		Paint pp = new Paint();
 		pp.setColor(0xff2f2f2f);
 		pp.setTextSize(DensityUtil.dip2px(TEXT_SIZE));
-		canvas.drawText("喜欢她", textX, width / 2f + 6, pp);
+		canvas.drawText("喜欢她", textX / 2, width / 2f + 6, pp);
 
 	}
 

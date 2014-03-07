@@ -11,11 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:scaleType="centerCrop"
         android:background="@drawable/img_top_corner"
+        android:scaleType="centerCrop"
         android_custom:cornerRadius="3dp"
-        android_custom:cornerType="1"
-        android_custom:netUrl="http://b.hiphotos.baidu.com/image/w%3D2048/sign=38b72a866e81800a6ee58e0e850d32fa/d788d43f8794a4c294f134220cf41bd5ac6e39ed.jpg" />
+        android_custom:cornerType="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,28 +26,32 @@
         android:paddingTop="5dp" >
 
         <TextView
+            android:id="@+id/vote_item_girlname"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="姓名:李玄怡" />
+            android:text="姓名:" />
 
         <TextView
+            android:id="@+id/vote_item_girlage"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="年龄:18" />
+            android:text="年龄:" />
 
         <TextView
+            android:id="@+id/vote_item_girlxingzuo"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="星座:双子座" />
+            android:text="星座:" />
 
         <TextView
+            android:id="@+id/vote_item_girlsanwei"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="三围:86 89 63" />
+            android:text="三围:" />
     </LinearLayout>
 
 </LinearLayout>
