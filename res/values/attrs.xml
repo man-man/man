@@ -30,7 +30,7 @@
         <attr name="textArraysStartIndex" format="integer" />
         <attr name="textArraysStartValue" format="integer" />
     </declare-styleable>
-     <declare-styleable name="SanweiView">
+    <declare-styleable name="SanweiView">
     </declare-styleable>
 
 </resources>
