@@ -9,14 +9,16 @@
 
     <include layout="@layout/search" />
 	
-    <ScrollView
-        android:id="@+id/man_scroll"
+    <ListView
+        android:id="@+id/man_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:scrollbars="none"
         android:padding="5dp">
+        <!-- 
         <LinearLayout
+            android:id="@+id/man_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -27,7 +29,8 @@
 
             <include layout="@layout/man_item" />
         </LinearLayout>
-    </ScrollView>
+         -->
+    </ListView>
 	
     <com.app.view.FootView
         android:layout_width="match_parent"
