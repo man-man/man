@@ -30,28 +30,28 @@
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="姓名:" />
+            android:text="@string/girlname" />
 
         <TextView
             android:id="@+id/vote_item_girlage"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="年龄:" />
+            android:text="@string/girlage" />
 
         <TextView
             android:id="@+id/vote_item_girlxingzuo"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="星座:" />
+            android:text="@string/girlxingzuo" />
 
         <TextView
             android:id="@+id/vote_item_girlsanwei"
             style="@style/vote_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="三围:" />
+            android:text="@string/girlsanwei" />
     </LinearLayout>
 
 </LinearLayout>

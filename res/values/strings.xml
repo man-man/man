@@ -48,4 +48,9 @@
     <string name="girlxingzuo">星座:</string>
     <string name="girlsanwei">三围:</string>
 
+    <!-- 文字提示，在装女郎pk后对应的女郎详细页里使用 -->
+    <string name="girlmore">更多照片</string>
+    <string name="girlgivescore">送她积分</string>
+    <string name="girlnext">  下一组  </string>
+
 </resources>

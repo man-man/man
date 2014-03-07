@@ -58,10 +58,19 @@ public class VoteView extends LinearLayout {
 	private VoteButtonView voteBtRight;
 
 	/**
+	 * 左侧用户的json对象
+	 */
+	private JSONObject leftUser;
+	/**
+	 * 右侧用户的json对象
+	 */
+	private JSONObject rightUser;
+
+	/**
 	 * 评选按钮容器
 	 */
 	private LinearLayout voteBts;
-	
+
 	private PkListHttpHandler rankQ = new PkListHttpHandler();
 
 	public VoteView(Context context) {
@@ -149,8 +158,10 @@ public class VoteView extends LinearLayout {
 
 					int len = users.length();
 					if (len == 2) {
-						voteInfoLeft.addView(getItemView(users.getJSONObject(0)));// users.getJSONObject(0)
-						voteInfoRight.addView(getItemView(users.getJSONObject(1)));
+						leftUser = users.getJSONObject(0);
+						rightUser = users.getJSONObject(1);
+						voteInfoLeft.addView(getItemView(leftUser));
+						voteInfoRight.addView(getItemView(rightUser));
 					}
 
 				} else {
@@ -174,37 +185,6 @@ public class VoteView extends LinearLayout {
 		// rankReqSend();
 		new Thread(new Runnable() {
 			public void run() {
-//				String resultStr = HttpRequestUtils.getResFromHttpUrl(false,
-//						HttpRequestUtils.BUNDLE_KEY_HTTPURL,
-//						HttpRequestUtils.BASE_HTTP_CONTEXT + "GetGirlPK.shtml");
-//				
-//				JSONTokener jsonParser = new JSONTokener(resultStr);
-//				// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
-//				try {
-//					JSONObject resultObj = (JSONObject) jsonParser.nextValue();
-//					Boolean success = resultObj.getBoolean("success");
-//
-//					if (success) {
-//						JSONObject data = (JSONObject) resultObj.get("data");
-//						JSONArray users = data.getJSONArray("users");
-//
-//						int len = users.length();
-//						if (len == 2) {
-//							voteInfoLeft.addView(getItemView(users.getJSONObject(0)));// users.getJSONObject(0)
-//							voteInfoRight.addView(getItemView());
-//						}
-//
-//					} else {
-//						Toast.makeText(VoteView.this.getContext(),
-//								resultObj.getString("errorMessage"),
-//								Toast.LENGTH_SHORT).show();
-//					}
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//					Toast.makeText(VoteView.this.getContext(),
-//							R.string.base_response_error, Toast.LENGTH_SHORT)
-//							.show();
-//				}
 				Message msg = rankQ.obtainMessage();
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
@@ -273,7 +253,21 @@ public class VoteView extends LinearLayout {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(getContext(), VoteAfter.class);
-			getContext().startActivity(intent);
+			if (leftUser != null) {
+				try {
+					String id = leftUser.getString("id");
+					intent.putExtra("girlId", id);
+					HttpRequestUtils.getResFromHttpUrl(false,
+							HttpRequestUtils.BASE_HTTP_CONTEXT
+									+ "Vote.shtml?userId="
+									+ BaseUtils.CUR_USER_MAP.get("id")
+									+ "&girlId=" + id, null);
+					getContext().startActivity(intent);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
 		}
 
 	}
@@ -283,7 +277,22 @@ public class VoteView extends LinearLayout {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(getContext(), VoteAfter.class);
-			getContext().startActivity(intent);
+			
+			if (rightUser != null) {
+				try {
+					String id = rightUser.getString("id");
+					intent.putExtra("girlId", id);
+					HttpRequestUtils.getResFromHttpUrl(false,
+							HttpRequestUtils.BASE_HTTP_CONTEXT
+									+ "Vote.shtml?userId="
+									+ BaseUtils.CUR_USER_MAP.get("id")
+									+ "&girlId=" + id, null);
+					getContext().startActivity(intent);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
 		}
 
 	}

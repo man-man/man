@@ -16,6 +16,7 @@
         <!-- 图片 -->
 
         <ImageView
+            android:id="@+id/vote_after_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -43,10 +44,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingBottom="8dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="15dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp" >
+                android:paddingTop="8dp" >
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -55,36 +56,40 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:id="@+id/vote_after_name"
                         style="@style/vote_after_left_text"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_gravity="left"
-                        android:text="姓名：李玄怡" />
+                        android:layout_weight="1"
+                        android:text="@string/girlname" />
 
                     <TextView
+                        android:id="@+id/vote_after_age"
                         style="@style/vote_after_left_text"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_gravity="left"
-                        android:text="年龄：22" />
+                        android:layout_weight="1"
+                        android:text="@string/girlage" />
 
                     <TextView
+                        android:id="@+id/vote_after_xingzuo"
                         style="@style/vote_after_left_text"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_gravity="left"
-                        android:text="星座：双子座" />
+                        android:layout_weight="1"
+                        android:text="@string/girlxingzuo" />
 
                     <TextView
+                        android:id="@+id/vote_after_sanwei"
                         style="@style/vote_after_left_text"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_gravity="left"
-                        android:text="三围：84 66 77" />
+                        android:layout_weight="1"
+                        android:text="@string/girlsanwei" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,27 +99,30 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:id="@+id/vote_after_more"
                         style="@style/vote_after_right_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginBottom="5dp"
-                        android:text="更多照片" />
+                        android:text="@string/girlmore" />
 
                     <TextView
+                        android:id="@+id/vote_after_givescore"
                         style="@style/vote_after_right_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginBottom="5dp"
-                        android:text="送她积分" />
+                        android:text="@string/girlgivescore" />
 
                     <TextView
+                        android:id="@+id/vote_after_next"
                         style="@style/vote_after_right_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:text="  下一组  " />
+                        android:text="@string/girlnext" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
