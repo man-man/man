@@ -25,7 +25,7 @@ import android.os.StrictMode;
 import com.app.man.R;
 
 public class HttpRequestUtils {
-	public static String BASE_HTTP_CONTEXT = "http://10.10.10.99:8080/manWear/";
+	public static String BASE_HTTP_CONTEXT = "http://115.28.152.215/manWear/";
 
 	public static String BUNDLE_KEY_ISPOST = "isPost";
 	public static String BUNDLE_KEY_HTTPURL = "httpUrl";
