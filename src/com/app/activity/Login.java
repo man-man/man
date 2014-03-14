@@ -27,14 +27,16 @@ import com.app.man.R;
 
 /**
  * 登陆
+ * 
  * @author 王灵
- *
+ * 
  */
 public class Login extends Activity {
 
 	private Button loginBt = null;
 	private EditText passport;
 	private EditText password;
+	private MyListViewHttpHandler myListViewHttpHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,7 @@ public class Login extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			MyListViewHttpHandler myListViewHttpHandler = new MyListViewHttpHandler();
-			Message msg = myListViewHttpHandler.obtainMessage();
+			myListViewHttpHandler = new MyListViewHttpHandler();
 
 			// /**
 			// * 测试图片上传的post的例子
@@ -87,17 +88,25 @@ public class Login extends Activity {
 			// bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, true);
 			// bundle.putSerializable(HttpRequestUtils.BUNDLE_KEY_PARAMS,
 			// object);
-			
-			// 登陆的例子，get
-			Bundle bundle = new Bundle();
-			bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
-					HttpRequestUtils.BASE_HTTP_CONTEXT + "Login.shtml?"
-							+ "phoneNumber=" + passport.getText().toString()
-							+ "&password=" + password.getText().toString()
-							+ "&platform=1");
-			bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
-			msg.setData(bundle);
-			msg.sendToTarget();
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					// 登陆的例子，get
+					Message msg = myListViewHttpHandler.obtainMessage();
+					Bundle bundle = new Bundle();
+					bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+							HttpRequestUtils.BASE_HTTP_CONTEXT + "Login.shtml?"
+									+ "phoneNumber="
+									+ passport.getText().toString()
+									+ "&password="
+									+ password.getText().toString()
+									+ "&platform=1");
+					bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+					msg.setData(bundle);
+					msg.sendToTarget();
+				}
+			}).start();
 		}
 	};
 

@@ -62,8 +62,8 @@ public class BaseUtils {
 		try {
 			URL url = new URL(imageUrl);
 			con = (HttpURLConnection) url.openConnection();
-			con.setConnectTimeout(25 * 1000);
-			con.setReadTimeout(45 * 1000);
+			con.setConnectTimeout(5 * 1000);
+			con.setReadTimeout(5 * 1000);
 			con.setDoInput(true);
 			con.setDoOutput(true);
 			bis = new BufferedInputStream(con.getInputStream());

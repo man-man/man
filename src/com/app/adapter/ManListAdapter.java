@@ -87,25 +87,25 @@ public class ManListAdapter extends BaseAdapter {
 		holder.authorImg.setNetUrl(model.getAuthorImg());
 		holder.date.setText(model.getDate());
 
-		 holder.innerScrollView.setParentScrollView(listView);
+		holder.innerScrollView.setParentScrollView(listView);
 
 		List<ManItemImgsModel> imgs = model.getImages();
-		Log.d("test", "------------size:" + imgs.size());
-		holder.imagesContainer.removeAllViews();
-		for (int i = 0; i < imgs.size(); i++) {
-			ManItemImgsModel imgModel = imgs.get(i);
+		if (holder.imagesContainer.getChildCount() == 0) {
+			for (int i = 0; i < imgs.size(); i++) {
+				ManItemImgsModel imgModel = imgs.get(i);
 
-			NetImageView imgView = new NetImageView(this.context);
+				NetImageView imgView = new NetImageView(this.context);
 
-			LayoutParams params = new LayoutParams(DensityUtil.dip2px(90),
-					DensityUtil.dip2px(90));
-			params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-			imgView.setLayoutParams(params);
+				LayoutParams params = new LayoutParams(DensityUtil.dip2px(90),
+						DensityUtil.dip2px(90));
+				params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
+				imgView.setLayoutParams(params);
 
-			imgView.setScaleType(ScaleType.CENTER_CROP);
-			imgView.setCornerRadius(3);
-			imgView.setNetUrl(imgModel.getUrl());
-			holder.imagesContainer.addView(imgView);
+				imgView.setScaleType(ScaleType.CENTER_CROP);
+				imgView.setCornerRadius(3);
+				imgView.setNetUrl(imgModel.getUrl());
+				holder.imagesContainer.addView(imgView);
+			}
 		}
 
 		holder.summary.setText(model.getSummary());

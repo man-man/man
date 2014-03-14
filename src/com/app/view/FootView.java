@@ -1,6 +1,7 @@
 package com.app.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -28,6 +29,11 @@ public class FootView extends LinearLayout {
 	private String currentTab = TABS[0];
 
 	/**
+	 * 当前activity
+	 */
+	private Activity curActivity;
+
+	/**
 	 * 装女郎
 	 */
 	private TextView womanText;
@@ -41,6 +47,8 @@ public class FootView extends LinearLayout {
 	 * 我的
 	 */
 	private TextView mineText;
+
+	private BarOnClick barOnClick = new BarOnClick();
 
 	public FootView(Context context) {
 		super(context);
@@ -60,6 +68,8 @@ public class FootView extends LinearLayout {
 		currentTab = mTypedArray.getString(R.styleable.FootView_currentTab);
 
 		mTypedArray.recycle();
+
+		curActivity = (Activity) context;
 	}
 
 	@Override
@@ -75,12 +85,11 @@ public class FootView extends LinearLayout {
 		manText = (TextView) findViewById(R.id.foot_man);
 		mineText = (TextView) findViewById(R.id.foot_mine);
 
-		womanText.setOnClickListener(new WomanOnClick());
-		manText.setOnClickListener(new ManOnClick());
-		mineText.setOnClickListener(new MineOnClick());
+		womanText.setOnClickListener(barOnClick);
+		manText.setOnClickListener(barOnClick);
+		mineText.setOnClickListener(barOnClick);
 
 		if (TABS[0].equals(currentTab)) {
-			System.out.println(womanText.getTextColors());
 			womanText.setTextColor(COLORS[0]);
 			womanText.setCompoundDrawablesWithIntrinsicBounds(0,
 					R.drawable.woman_on_bar, 0, 0);
@@ -91,7 +100,6 @@ public class FootView extends LinearLayout {
 		}
 
 		if (TABS[1].equals(currentTab)) {
-			System.out.println(manText.getTextColors());
 			manText.setTextColor(COLORS[0]);
 			manText.setCompoundDrawablesWithIntrinsicBounds(0,
 					R.drawable.man_on_bar, 0, 0);
@@ -114,16 +122,27 @@ public class FootView extends LinearLayout {
 
 	}
 
-	class WomanOnClick implements OnClickListener {
+	class BarOnClick implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			if (!TABS[0].equals(currentTab)) {
-				Intent intent = new Intent(getContext(), Woman.class);
-				getContext().startActivity(intent);
-			}
-		}
+			Class cls = Woman.class;
 
+			switch (v.getId()) {
+			case R.id.foot_woman:
+				cls = Woman.class;
+				break;
+			case R.id.foot_man:
+				cls = Man.class;
+				break;
+			case R.id.foot_mine:
+				cls = Mine.class;
+				break;
+				
+			}
+			
+			toOtherActivity(cls);
+		}
 	}
 
 	class ManOnClick implements OnClickListener {
@@ -143,11 +162,25 @@ public class FootView extends LinearLayout {
 		@Override
 		public void onClick(View v) {
 			if (!TABS[2].equals(currentTab)) {
-				Intent intent = new Intent(getContext(), Mine.class);
-				getContext().startActivity(intent);
+				Activity a = (Activity) getContext();
+
+				Intent intent = new Intent(a, Mine.class);
+				a.startActivity(intent);
+
+				a.finish();
 			}
 		}
 
+	}
+
+	/**
+	 * 跳转到其它activity
+	 * 
+	 * @param other
+	 */
+	private void toOtherActivity(Class other) {
+		curActivity.startActivity(new Intent(new Intent(curActivity, other)));
+		curActivity.finish();
 	}
 
 	public String getCurrentTab() {

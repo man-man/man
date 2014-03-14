@@ -19,7 +19,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-			
+
             <com.app.view.NetImageView
                 android:id="@+id/man_item_head"
                 android:layout_width="35dp"
@@ -48,6 +48,7 @@
                 android:textColor="#b1b1b1"
                 android:textSize="12sp" />
         </RelativeLayout>
+
         <!-- 关注按钮 -->
 
         <TextView
@@ -55,10 +56,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:drawableLeft="@drawable/attention_bt"
+            android:drawableLeft="@drawable/mine_att_icon"
             android:drawablePadding="3dp"
             android:text="@string/attention_txt"
-            android:textColor="#b1b1b1"
+            android:textColor="#565656"
             android:textSize="12sp" />
     </RelativeLayout>
 
@@ -69,61 +70,14 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp" >
 
         <LinearLayout
             android:id="@+id/man_item_imgs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
-			<!-- 
-            <com.app.view.NetImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/girl2"
-                android_man:cornerRadius="3dp" />
 
-            <com.app.view.NetImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/girl2"
-                android_man:cornerRadius="3dp" />
-
-            <com.app.view.NetImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/girl2"
-                android_man:cornerRadius="3dp" />
-
-            <com.app.view.NetImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/girl2"
-                android_man:cornerRadius="3dp" />
-
-            <com.app.view.NetImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/girl2"
-                android_man:cornerRadius="3dp" />
-            <com.app.view.NetImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/girl2"
-                android_man:cornerRadius="3dp" />
-                 -->
         </LinearLayout>
     </com.app.view.InnerScrollView>
 

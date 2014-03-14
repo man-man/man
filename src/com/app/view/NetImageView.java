@@ -12,7 +12,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -26,12 +28,15 @@ import android.util.AttributeSet;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
+import com.app.common.BaseUtils;
 import com.app.man.R;
 
 /**
  * 自定义imageview，可显示网络图片，可定义圆角
  */
 public class NetImageView extends ImageView {
+	
+	private static int NET_TIMEOUT = 30000;
 
 	/**
 	 * 圆角类型常量值
@@ -166,11 +171,93 @@ public class NetImageView extends ImageView {
 				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0,
 						data.length);
 				// setImageBitmap(toRoundCorner(bitmap, 10));// 显示图片
+				int bitMapWidth = bitmap.getWidth();
+				int bitMapHeight = bitmap.getHeight();
+				
+				Options bitmapFactoryOptions = new BitmapFactory.Options(); 
+                
+//                //下面这个设置是将图片边界不可调节变为可调节 
+//                bitmapFactoryOptions.inJustDecodeBounds = true; 
+//                bitmapFactoryOptions.inSampleSize = 5; 
+//                int outWidth  = bitmapFactoryOptions.outWidth; 
+//                int outHeight = bitmapFactoryOptions.outHeight; 
+//                float imagew = 150; 
+//                float imageh = 150; 
+//                int yRatio = (int) Math.ceil(bitmapFactoryOptions.outHeight 
+//                        / imageh); 
+//                int xRatio = (int) Math 
+//                        .ceil(bitmapFactoryOptions.outWidth / imagew); 
+//                if (yRatio > 1 || xRatio > 1) { 
+//                    if (yRatio > xRatio) { 
+//                        bitmapFactoryOptions.inSampleSize = yRatio; 
+//                    } else { 
+//                        bitmapFactoryOptions.inSampleSize = xRatio; 
+//                    } 
+//
+//                }  
+//                bitmapFactoryOptions.inJustDecodeBounds = false; 
+                 
+				if(BaseUtils.getScreenWidth(NetImageView.this.getContext()) / 2 < bitMapWidth){
+//					bitmapToScaleBitmap(bitmap, newWidth, newHeight);
+				}
 				setImageBitmap(bitmap);
 			}
 		}
 
 	};
+//	private Bitmap copressImage(String imgPath){ 
+//	    File picture = new File(imgPath); 
+//	    Options bitmapFactoryOptions = new BitmapFactory.Options(); 
+//	    //下面这个设置是将图片边界不可调节变为可调节 
+//	    bitmapFactoryOptions.inJustDecodeBounds = true; 
+//	    bitmapFactoryOptions.inSampleSize = 2; 
+//	    int outWidth  = bitmapFactoryOptions.outWidth; 
+//	    int outHeight = bitmapFactoryOptions.outHeight; 
+//	    bmap = BitmapFactory.decodeFile(picture.getAbsolutePath(), 
+//	         bitmapFactoryOptions); 
+//	    float imagew = 150; 
+//	    float imageh = 150; 
+//	    int yRatio = (int) Math.ceil(bitmapFactoryOptions.outHeight 
+//	            / imageh); 
+//	    int xRatio = (int) Math 
+//	            .ceil(bitmapFactoryOptions.outWidth / imagew); 
+//	    if (yRatio > 1 || xRatio > 1) { 
+//	        if (yRatio > xRatio) { 
+//	            bitmapFactoryOptions.inSampleSize = yRatio; 
+//	        } else { 
+//	            bitmapFactoryOptions.inSampleSize = xRatio; 
+//	        } 
+//	 
+//	    }  
+//	    bitmapFactoryOptions.inJustDecodeBounds = false; 
+//	    bmap = BitmapFactory.decodeFile(picture.getAbsolutePath(), 
+//	            bitmapFactoryOptions); 
+//	    if(bmap != null){                
+//	        //ivwCouponImage.setImageBitmap(bmap); 
+//	        return bmap; 
+//	    } 
+//	    return null; 
+//	} 
+public static Bitmap bitmapToScaleBitmap(Bitmap bm, int newWidth, int newHeight){
+		
+		if(bm == null)
+			return null;
+		
+	    // 获得图片的宽高
+	    int width = bm.getWidth();
+	    int height = bm.getHeight();
+	    
+	    // 计算缩放比例
+	    float scaleWidth  = (float)newWidth  / Math.max(width,height);
+	    float scaleHeight = (float)newHeight / Math.max(width,height);
+	    // 取得想要缩放的matrix参数
+	    Matrix matrix = new Matrix();
+	    matrix.postScale(scaleWidth, scaleHeight);
+	    
+	    // 得到新的图片
+	    Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix,true);
+	    return newbm;
+	}
 
 	/**
 	 * 启动加载图片线程
@@ -189,7 +276,10 @@ public class NetImageView extends ImageView {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			conn = (HttpURLConnection) new URL(netUrl).openConnection();
+			//TODO 这里为每个图片的http的超时设置为了5s
 			conn.setConnectTimeout(5000);
+			//conn.setConnectTimeout(NET_TIMEOUT*4);
+			
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() == 200) {
 				is = ((URLConnection) conn).getInputStream();
