@@ -2,6 +2,7 @@ package com.app.adapter;
 
 import java.util.List;
 
+import com.app.common.HandlerUtils;
 import com.app.man.R;
 import com.app.model.ManItemImgsModel;
 import com.app.model.ManItemModel;
@@ -10,6 +11,7 @@ import com.app.view.InnerScrollView;
 import com.app.view.NetImageView;
 
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +94,7 @@ public class ManListAdapter extends BaseAdapter {
 		List<ManItemImgsModel> imgs = model.getImages();
 		if (holder.imagesContainer.getChildCount() == 0) {
 			for (int i = 0; i < imgs.size(); i++) {
+				Looper looper = HandlerUtils.getLooper();
 				ManItemImgsModel imgModel = imgs.get(i);
 
 				NetImageView imgView = new NetImageView(this.context);

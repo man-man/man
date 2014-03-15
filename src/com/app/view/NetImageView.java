@@ -7,6 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,19 +26,28 @@ import android.graphics.Xfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 import com.app.common.BaseUtils;
+import com.app.common.HandlerUtils;
 import com.app.man.R;
 
 /**
  * 自定义imageview，可显示网络图片，可定义圆角
  */
 public class NetImageView extends ImageView {
-	
+
+	public static List<MyImgHandler> NET_IMAGE_LOOPER_LIST = new ArrayList<MyImgHandler>();
+	public static List<Bitmap> NET_IMAGE_BITMAP_LIST = new ArrayList<Bitmap>();
+
+	public static Object IMAGE_URL_LOCK = new Object();
+
 	private static int NET_TIMEOUT = 30000;
 
 	/**
@@ -59,7 +71,7 @@ public class NetImageView extends ImageView {
 	 * 图片是否为方形（高随宽）
 	 */
 	private boolean isRect;
-	
+
 	/**
 	 * 图片高占宽的比例
 	 */
@@ -69,6 +81,40 @@ public class NetImageView extends ImageView {
 	 * 网络url
 	 */
 	private String netUrl;
+
+	MyImgHandler handler;
+
+	public class MyImgHandler extends Handler {
+		private boolean isStart = true;
+
+		public MyImgHandler(boolean isStart) {
+			super();
+			this.isStart = isStart;
+		}
+
+		public MyImgHandler(Looper looper, boolean isStart) {
+			super(looper);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			if (isStart = false) {
+				System.out
+						.println(Thread.currentThread().getId() + "无需执行，直接退出");
+				return;
+			}
+			super.handleMessage(msg);
+		}
+
+		public boolean isStart() {
+			return isStart;
+		}
+
+		public void setStart(boolean isStart) {
+			this.isStart = isStart;
+		}
+
+	}
 
 	public NetImageView(Context context) {
 		this(context, null);
@@ -80,6 +126,53 @@ public class NetImageView extends ImageView {
 
 	public NetImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		HandlerThread tmp = new HandlerThread(new Date().getTime() + "");
+		tmp.start();
+		handler = new MyImgHandler(tmp.getLooper(), true) {
+
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				byte[] data = (byte[]) msg.obj;
+				if (data != null) {
+					Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0,
+							data.length);
+					System.out.println(Thread.currentThread().getId()
+							+ "该图片压缩前： " + Bitmap2BytesPng(bitmap).length);
+					// setImageBitmap(toRoundCorner(bitmap, 10));// 显示图片
+					float bitMapWidth = bitmap.getWidth();
+					float bitMapHeight = bitmap.getHeight();
+
+					Options bitmapFactoryOptions = new BitmapFactory.Options();
+
+					Context fatherContext = NetImageView.this.getContext();
+					int halfScreenWidth = BaseUtils
+							.getScreenWidth(fatherContext) / 2;
+					if (halfScreenWidth < bitMapWidth) {
+						// bitmap = bitmapToScaleBitmap(bitmap, halfScreenWidth,
+						// new Float(bitMapHeight
+						// * (halfScreenWidth / bitMapWidth))
+						// .intValue());
+						System.out.println(halfScreenWidth / bitMapWidth);
+						bitmap = small(bitmap, halfScreenWidth / bitMapWidth  < 1 ?halfScreenWidth / bitMapWidth :1 );
+						System.out.println(Thread.currentThread().getId()
+								+ "该图片压缩后： " + Bitmap2BytesPng(bitmap).length);
+						// if(!bitmap.isRecycled()){
+						// bitmap.recycle();
+						// System.gc();
+						// }
+					}
+					NET_IMAGE_BITMAP_LIST.add(bitmap);
+					mainhandler.sendMessage(handler.obtainMessage(21, bitmap));
+
+					// setImageBitmap(bitmap);
+				}
+
+			}
+
+		};
+
+		NET_IMAGE_LOOPER_LIST.add(handler);
 
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
 				R.styleable.NetImageView);
@@ -91,7 +184,8 @@ public class NetImageView extends ImageView {
 				R.styleable.NetImageView_cornerRadius, 0);
 		netUrl = mTypedArray.getString(R.styleable.NetImageView_netUrl);
 		isRect = mTypedArray.getBoolean(R.styleable.NetImageView_isRect, false);
-		heightOfWidth = mTypedArray.getFloat(R.styleable.NetImageView_heightOfWidth, 0);
+		heightOfWidth = mTypedArray.getFloat(
+				R.styleable.NetImageView_heightOfWidth, 0);
 
 		mTypedArray.recycle();
 
@@ -105,16 +199,16 @@ public class NetImageView extends ImageView {
 		// TODO Auto-generated method stub
 		super.layout(l, t, r, b);
 		LayoutParams params = (LayoutParams) this.getLayoutParams();
-		
-		//图片为矩形
+
+		// 图片为矩形
 		if (isRect) {
 			params.height = getWidth();
 		}
-		
-		if(heightOfWidth != 0){
+
+		if (heightOfWidth != 0) {
 			params.height = (int) (getWidth() * heightOfWidth + 0.5);
 		}
-		
+
 		this.setLayoutParams(params);
 	}
 
@@ -161,102 +255,77 @@ public class NetImageView extends ImageView {
 		}
 	}
 
-	Handler handler = new Handler() {
+	public static byte[] Bitmap2BytesPng(Bitmap bm) {
+		byte[] a = null;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		if (bm != null) {
+			try {
+				bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+				a = baos.toByteArray();
+			} catch (OutOfMemoryError v) {
+				v.printStackTrace();
+			}
+		}
+
+		try {
+			if (baos != null)
+				baos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return a;
+	}
+
+	Handler mainhandler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
-			byte[] data = (byte[]) msg.obj;
+			Bitmap data = (Bitmap) msg.obj;
 			if (data != null) {
-				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0,
-						data.length);
-				// setImageBitmap(toRoundCorner(bitmap, 10));// 显示图片
-				int bitMapWidth = bitmap.getWidth();
-				int bitMapHeight = bitmap.getHeight();
-				
-				Options bitmapFactoryOptions = new BitmapFactory.Options(); 
-                
-//                //下面这个设置是将图片边界不可调节变为可调节 
-//                bitmapFactoryOptions.inJustDecodeBounds = true; 
-//                bitmapFactoryOptions.inSampleSize = 5; 
-//                int outWidth  = bitmapFactoryOptions.outWidth; 
-//                int outHeight = bitmapFactoryOptions.outHeight; 
-//                float imagew = 150; 
-//                float imageh = 150; 
-//                int yRatio = (int) Math.ceil(bitmapFactoryOptions.outHeight 
-//                        / imageh); 
-//                int xRatio = (int) Math 
-//                        .ceil(bitmapFactoryOptions.outWidth / imagew); 
-//                if (yRatio > 1 || xRatio > 1) { 
-//                    if (yRatio > xRatio) { 
-//                        bitmapFactoryOptions.inSampleSize = yRatio; 
-//                    } else { 
-//                        bitmapFactoryOptions.inSampleSize = xRatio; 
-//                    } 
-//
-//                }  
-//                bitmapFactoryOptions.inJustDecodeBounds = false; 
-                 
-				if(BaseUtils.getScreenWidth(NetImageView.this.getContext()) / 2 < bitMapWidth){
-//					bitmapToScaleBitmap(bitmap, newWidth, newHeight);
+				try {
+					setImageBitmap(data);
+				} catch (Exception e) {
+					System.out.println("image add error");
 				}
-				setImageBitmap(bitmap);
+
 			}
+
 		}
 
 	};
-//	private Bitmap copressImage(String imgPath){ 
-//	    File picture = new File(imgPath); 
-//	    Options bitmapFactoryOptions = new BitmapFactory.Options(); 
-//	    //下面这个设置是将图片边界不可调节变为可调节 
-//	    bitmapFactoryOptions.inJustDecodeBounds = true; 
-//	    bitmapFactoryOptions.inSampleSize = 2; 
-//	    int outWidth  = bitmapFactoryOptions.outWidth; 
-//	    int outHeight = bitmapFactoryOptions.outHeight; 
-//	    bmap = BitmapFactory.decodeFile(picture.getAbsolutePath(), 
-//	         bitmapFactoryOptions); 
-//	    float imagew = 150; 
-//	    float imageh = 150; 
-//	    int yRatio = (int) Math.ceil(bitmapFactoryOptions.outHeight 
-//	            / imageh); 
-//	    int xRatio = (int) Math 
-//	            .ceil(bitmapFactoryOptions.outWidth / imagew); 
-//	    if (yRatio > 1 || xRatio > 1) { 
-//	        if (yRatio > xRatio) { 
-//	            bitmapFactoryOptions.inSampleSize = yRatio; 
-//	        } else { 
-//	            bitmapFactoryOptions.inSampleSize = xRatio; 
-//	        } 
-//	 
-//	    }  
-//	    bitmapFactoryOptions.inJustDecodeBounds = false; 
-//	    bmap = BitmapFactory.decodeFile(picture.getAbsolutePath(), 
-//	            bitmapFactoryOptions); 
-//	    if(bmap != null){                
-//	        //ivwCouponImage.setImageBitmap(bmap); 
-//	        return bmap; 
-//	    } 
-//	    return null; 
-//	} 
-public static Bitmap bitmapToScaleBitmap(Bitmap bm, int newWidth, int newHeight){
-		
-		if(bm == null)
+
+	private static Bitmap small(Bitmap bitmap, float scale) {
+		Matrix matrix = new Matrix();
+		matrix.postScale(scale, scale); // 长和宽放大缩小的比例
+		Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+				bitmap.getHeight(), matrix, true);
+		return resizeBmp;
+	}
+
+	public static Bitmap bitmapToScaleBitmap(Bitmap bm, int newWidth,
+			int newHeight) {
+
+		if (bm == null)
 			return null;
-		
-	    // 获得图片的宽高
-	    int width = bm.getWidth();
-	    int height = bm.getHeight();
-	    
-	    // 计算缩放比例
-	    float scaleWidth  = (float)newWidth  / Math.max(width,height);
-	    float scaleHeight = (float)newHeight / Math.max(width,height);
-	    // 取得想要缩放的matrix参数
-	    Matrix matrix = new Matrix();
-	    matrix.postScale(scaleWidth, scaleHeight);
-	    
-	    // 得到新的图片
-	    Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix,true);
-	    return newbm;
+
+		// 获得图片的宽高
+		int width = bm.getWidth();
+		int height = bm.getHeight();
+
+		// 计算缩放比例
+		float scaleWidth = (float) newWidth / Math.max(width, height);
+		float scaleHeight = (float) newHeight / Math.max(width, height);
+		// 取得想要缩放的matrix参数
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleWidth, scaleHeight);
+
+		// 得到新的图片
+		Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix,
+				true);
+		return newbm;
 	}
 
 	/**
@@ -276,10 +345,10 @@ public static Bitmap bitmapToScaleBitmap(Bitmap bm, int newWidth, int newHeight)
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			conn = (HttpURLConnection) new URL(netUrl).openConnection();
-			//TODO 这里为每个图片的http的超时设置为了5s
+			// TODO 这里为每个图片的http的超时设置为了5s
 			conn.setConnectTimeout(5000);
-			//conn.setConnectTimeout(NET_TIMEOUT*4);
-			
+			// conn.setConnectTimeout(NET_TIMEOUT*4);
+
 			conn.setRequestMethod("GET");
 			if (conn.getResponseCode() == 200) {
 				is = ((URLConnection) conn).getInputStream();
