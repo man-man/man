@@ -1,12 +1,15 @@
 package com.app.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.util.AttributeSet;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 
 import com.app.man.R;
@@ -37,7 +40,7 @@ public class Welcome extends Activity implements Callback {
 
 		handler.sendEmptyMessageDelayed(GO_MAIN, DELAY);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -46,7 +49,7 @@ public class Welcome extends Activity implements Callback {
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Man.class);
+		Intent intent = new Intent(this, Mine.class);
 		startActivity(intent);
 		finish();
 	}

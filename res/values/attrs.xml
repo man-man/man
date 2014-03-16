@@ -30,7 +30,13 @@
         <attr name="textArraysStartIndex" format="integer" />
         <attr name="textArraysStartValue" format="integer" />
     </declare-styleable>
-    <declare-styleable name="SanweiView">
+    <declare-styleable name="SanweiView"></declare-styleable>
+    
+    <!-- title -->
+    <declare-styleable name="Title">
+        <attr name="isSubmit" format="boolean" />
+        <attr name="isRelease" format="boolean" />
+        <attr name="titleName" format="string"/>
     </declare-styleable>
 
 </resources>

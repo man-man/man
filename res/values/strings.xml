@@ -8,7 +8,7 @@
     <string name="btn_less">-</string>
     <string name="btn_chu">/</string>
     <string name="btn_cheng">*</string>
-    <string name="login_str">登陆</string>
+    <string name="login_str">提交登陆</string>
     <string name="login_username_hint">请输入用户名</string>
     <string name="login_pwd_hint">请输入密码</string>
     <string name="app_name">男人装</string>
@@ -21,14 +21,27 @@
     <string name="title_signup">报名</string>
     <string name="title_activity_login">Login</string>
 
+    <!-- 登陆注册 -->
+    <string name="login_title">登陆  / 注册</string>
+    <string name="login_goddess">女神帐号登陆</string>
+    <string name="login_weibo">微博帐号登陆</string>
+    <string name="register">注册</string>
+    <!-- 登陆注册end -->
+
+
     <!-- woman rank使用 -->
     <string name="border_top">Border Top</string>
     <string name="border_bottom">Border Bottom</string>
     <string name="image_url">Image Url</string>
     <!-- woman rank使用end -->
 
+
+    <!-- 装女郎报名 -->
     <string name="sign_title">装女郎报名</string>
-    <string name="sign_submit">提交</string>
+
+    <!-- title -->
+    <string name="title_submit">提交</string>
+    <string name="title_release">发布</string>
 
     <!-- 搜索页头 -->
     <string name="search_hint">搜索</string>
@@ -52,5 +65,11 @@
     <string name="girlmore">更多照片</string>
     <string name="girlgivescore">送她积分</string>
     <string name="girlnext">  下一组  </string>
+    
+    <!-- 任务 -->
+    <string name="task_title">我的任务</string>
+    
+    <string name="title_activity_login_b">LoginB</string>
+    <string name="title_activity_task">Task</string>
 
 </resources>

@@ -1,37 +1,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Login" >
 
-    <EditText
-        android:id="@+id/login_passport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/login_username_hint" />
+    <!-- title -->
 
-    <EditText
-        android:id="@+id/login_password"
+    <com.app.view.TitleView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_pwd_hint"
-        android:inputType="textPassword"
-        android:layout_marginTop="15dp" />
+        man:titleName="@string/login_title" >
+    </com.app.view.TitleView>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp" >
-        <Button android:id="@+id/login_bt"
-            android:layout_width="100dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp" >
+
+        <!-- 用户名 -->
+
+        <EditText
+            android:id="@+id/login_passport"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/login_input_bg"
+            android:hint="@string/login_username_hint" />
+
+        <!-- 密码 -->
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:hint="@string/login_pwd_hint"
+            android:background="@drawable/login_input_bg"
+            android:inputType="textPassword" />
+
+        <!-- 提交 -->
+
+        <Button
+            android:id="@+id/login_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:background="@drawable/login_submit_corner"
             android:text="@string/login_str" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

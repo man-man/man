@@ -1,11 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SignInfo" >
 
-    <include layout="@layout/title" />
+    <com.app.view.TitleView
+        android:id="@+id/sign_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:isSubmit="true"
+        man:titleName="@string/sign_title">
+    </com.app.view.TitleView>
 	
     <LinearLayout
         android:layout_width="match_parent"

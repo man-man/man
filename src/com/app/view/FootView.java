@@ -179,7 +179,7 @@ public class FootView extends LinearLayout {
 	 * @param other
 	 */
 	private void toOtherActivity(Class other) {
-		curActivity.startActivity(new Intent(new Intent(curActivity, other)));
+		curActivity.startActivity(new Intent(curActivity, other));
 		curActivity.finish();
 	}
 

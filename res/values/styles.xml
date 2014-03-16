@@ -16,6 +16,27 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <!-- 登陆注册 -->
+    <style name="loginb_txt">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingLeft">60dp</item>
+        <item name="android:paddingRight">60dp</item>
+        <item name="android:background">@drawable/loginb_txt_bg</item>
+    </style>
+    <style name="register_txt">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingRight">40dp</item>
+        <item name="android:background">@drawable/loginb_txt_bg</item>
+    </style>
+    <!-- 登陆注册end -->
 
     <!-- 装女郎 排行榜 -->
     <style name="woman_rank_name">

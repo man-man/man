@@ -12,11 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.man.R;
+import com.app.view.TitleView;
 
 public class SignInfo extends Activity {
 	
+	private TitleView titleView; //页头
 	private LinearLayout dateLinear;
-	
 	private TextView dateText;
 
 	@Override
@@ -29,6 +30,7 @@ public class SignInfo extends Activity {
 	}
 
 	private void initView() {
+		titleView = (TitleView) findViewById(R.id.sign_info_title);
 		dateText = (TextView) findViewById(R.id.sign_info_date_text);
 		dateLinear = (LinearLayout) findViewById(R.id.sign_info_date_linear);
 		

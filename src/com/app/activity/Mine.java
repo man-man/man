@@ -1,18 +1,14 @@
 package com.app.activity;
 
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.view.Window;
 
-import com.app.common.BaseUtils;
 import com.app.man.R;
 
 /**
@@ -23,8 +19,12 @@ import com.app.man.R;
  */
 public class Mine extends Activity {
 
-	private RelativeLayout mine_btn1;
-	private RelativeLayout mine_btn2;
+	private ViewGroup taskBt; // 我的任务
+	private ViewGroup photosBt; // 我的相册
+	private ViewGroup collectBt; // 我的收藏
+	private ViewGroup attBt; // 我关注的人
+	private ViewGroup treeBt; // 树洞
+	private ViewGroup fmBt; // FM电台
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,36 +32,61 @@ public class Mine extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.mine2);
 
-		// mine_btn1 = (RelativeLayout) findViewById(R.id.mine_btn1);
-		// mine_btn2 = (RelativeLayout) findViewById(R.id.mine_btn2);
-		// RelativeLayoutOnClickListener clickListener = new
-		// RelativeLayoutOnClickListener();
-		// mine_btn1.setOnClickListener(clickListener);
-		// mine_btn2.setOnClickListener(clickListener);
-		// Map<String, Object> curMap = BaseUtils.CUR_USER_MAP;
-		// if (curMap == null) {
-		// Toast.makeText(this, R.string.base_user_session_empty,
-		// Toast.LENGTH_SHORT).show();
-		// Intent intent = new Intent(this, Login.class);
-		// startActivity(intent);
-		// }else{
-		//
-		// }
-
-		// Intent intent = new Intent();
-		// Bundle bundle = new Bundle();
-		// bundle.putInt("sanwei1", 33);
-		// intent.setClass(this, Test.class);
-		// startActivity(intent);
+		setupViews();
 	}
 
-	public class RelativeLayoutOnClickListener implements OnClickListener {
+	private void setupViews() {
+		taskBt = (ViewGroup) findViewById(R.id.mine_task_panel);
+		photosBt = (ViewGroup) findViewById(R.id.mine_photo_panel);
+		collectBt = (ViewGroup) findViewById(R.id.mine_collect_panel);
+		attBt = (ViewGroup) findViewById(R.id.mine_att_panel);
+		treeBt = (ViewGroup) findViewById(R.id.mine_tree_panel);
+		fmBt = (ViewGroup) findViewById(R.id.mine_fm_panel);
 
+		taskBt.setOnClickListener(btClickListener);
+		photosBt.setOnClickListener(btClickListener);
+		collectBt.setOnClickListener(btClickListener);
+		attBt.setOnClickListener(btClickListener);
+		treeBt.setOnClickListener(btClickListener);
+		fmBt.setOnClickListener(btClickListener);
+	}
+
+	OnClickListener btClickListener = new OnClickListener() {
+		Class<?> cls = null;
+		
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(Mine.this, "点击了菜单", Toast.LENGTH_SHORT).show();
-		}
+			switch (v.getId()) {
+			case R.id.mine_task_panel:
+				cls = Task.class;
+				break;
+			case R.id.mine_photo_panel:
 
+				break;
+			case R.id.mine_collect_panel:
+
+				break;
+
+			case R.id.mine_att_panel:
+
+				break;
+			case R.id.mine_tree_panel:
+
+				break;
+			case R.id.mine_fm_panel:
+
+				break;
+			default:
+				break;
+			}
+			if (cls != null) {
+				goOther(cls);
+			}
+		}
+	};
+
+	private void goOther(Class<?> cls) {
+		startActivity(new Intent(this, cls));
 	}
 
 	@Override
