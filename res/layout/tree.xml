@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Tree" >
+
+    <com.app.view.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:titleName="@string/tree_title" >
+    </com.app.view.TitleView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
+
+            <include layout="@layout/tree_item" />
+
+            <include layout="@layout/tree_item" />
+
+            <include layout="@layout/tree_item" />
+
+            <include layout="@layout/tree_item" />
+
+            <include layout="@layout/tree_item" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

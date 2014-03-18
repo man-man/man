@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TreeInfo" >
+
+    <com.app.view.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:titleName="@string/tree_title" >
+    </com.app.view.TitleView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
+
+            <!-- 树洞文章 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/task_item_bg"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="15dp" >
+
+                <!-- 文章内容 -->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lineSpacingMultiplier="1.2"
+                    android:lines="3"
+                    android:text="树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树树洞"
+                    android:textColor="#565656"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal" >
+
+                    <!-- 作者临时名 -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="asafdkl"
+                        android:textColor="#b1b1b1"
+                        android:textSize="12sp" />
+
+                    <!-- 发表时间 -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="8小时前"
+                        android:textColor="#b1b1b1"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 回复总条数 -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="200条回复 "
+                android:textColor="#b1b1b1"
+                android:textSize="14sp" />
+			
+            <!-- 评论内容容器 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <include layout="@layout/tree_info_item" />
+
+                <include layout="@layout/tree_info_item" />
+
+                <include layout="@layout/tree_info_item" />
+
+                <include layout="@layout/tree_info_item" />
+
+                <include layout="@layout/tree_info_item" />
+
+                <include layout="@layout/tree_info_item" />
+            </LinearLayout>
+            
+        </LinearLayout>
+    </ScrollView>
+	
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal">
+        
+        <EditText android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/tree_input_bg"
+            android:textSize="16sp"
+            android:hint="@string/tree_repeat_hint"/>
+        
+        <Button android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:background="@drawable/tree_repeat_submit_bg"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:text="@string/tree_repeat_submit"/>
+    </LinearLayout>
+</LinearLayout>

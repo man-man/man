@@ -54,14 +54,19 @@
             android:name="com.app.activity.LoginB"
             android:label="@string/title_activity_login_b" >
         </activity>
+        <activity android:name="com.app.activity.Task" >
+        </activity>
+        <activity android:name="com.app.activity.Tree" >
+        </activity>
         <activity
-            android:name="com.app.activity.Task"
-            android:label="@string/title_activity_task" >
+            android:name="com.app.activity.TreeInfo" >
         </activity>
     </application>
 
     <!-- permission-groups -->
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
+    <!-- 网络请求 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 操作sd card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

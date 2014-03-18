@@ -33,6 +33,9 @@ import com.app.man.R;
  * 
  */
 public class Login extends Activity {
+	
+	final String userName = "18611128524";
+	final String pwd = "123456";
 
 	private Button loginBt = null;
 	private EditText passport;
@@ -46,6 +49,10 @@ public class Login extends Activity {
 		setContentView(R.layout.login);
 		passport = (EditText) findViewById(R.id.login_passport);
 		password = (EditText) findViewById(R.id.login_password);
+		
+		passport.setText(userName);
+		password.setText(pwd);
+		
 		loginBt = (Button) findViewById(R.id.login_bt);
 		loginBt.setOnClickListener(loginOnclickListener);
 

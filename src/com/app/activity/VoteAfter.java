@@ -43,6 +43,7 @@ public class VoteAfter extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.vote_after);
+
 		vote_after_name = (TextView) findViewById(R.id.vote_after_name);
 		vote_after_age = (TextView) findViewById(R.id.vote_after_age);
 		vote_after_xingzuo = (TextView) findViewById(R.id.vote_after_xingzuo);
@@ -51,11 +52,14 @@ public class VoteAfter extends Activity {
 		vote_after_givescore = (TextView) findViewById(R.id.vote_after_givescore);
 		vote_after_next = (TextView) findViewById(R.id.vote_after_next);
 		vote_after_img = (ImageView) findViewById(R.id.vote_after_img);
+
 		TextViewOnClick textViewOnClick = new TextViewOnClick();
 		vote_after_next.setOnClickListener(textViewOnClick);
 		vote_after_more.setOnClickListener(textViewOnClick);
 		vote_after_givescore.setOnClickListener(textViewOnClick);
+
 		girlId = getIntent().getStringExtra("girlId");
+
 		new Thread(new Runnable() {
 
 			@Override
@@ -80,6 +84,7 @@ public class VoteAfter extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(VoteAfter.this, Vote.class);
 				startActivity(intent);
+				finish();
 			}
 			if (v.getId() == R.id.vote_after_more) {
 
@@ -131,6 +136,9 @@ public class VoteAfter extends Activity {
 							.setImageDrawable(Drawable.createFromPath(BaseUtils.downloadImage(
 									userObj.getString("imageUrl"),
 									BaseUtils.getScreenWidth(VoteAfter.this) / 2)));
+
+					Toast.makeText(VoteAfter.this, R.string.req_vote_success,
+							Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(VoteAfter.this,
 							resultObj.getString("errorMessage"),

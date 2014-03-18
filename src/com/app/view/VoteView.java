@@ -1,5 +1,7 @@
 package com.app.view;
 
+import java.io.Console;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -60,29 +63,93 @@ public class VoteView extends LinearLayout {
 	/**
 	 * 左侧用户的json对象
 	 */
-	private JSONObject leftUser;
+	private JSONObject leftUserData;
 	/**
 	 * 右侧用户的json对象
 	 */
-	private JSONObject rightUser;
+	private JSONObject rightUserData;
 
 	/**
 	 * 评选按钮容器
 	 */
 	private LinearLayout voteBts;
 
-	private PkListHttpHandler rankQ = new PkListHttpHandler();
-
 	public VoteView(Context context) {
-		super(context);
+		this(context, null);
 	}
 
 	public VoteView(Context context, AttributeSet attrs) {
-		super(context, attrs, 0);
+		this(context, attrs, 0);
 	}
 
 	public VoteView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		// setupViews();
+	}
+
+	@Override
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+		super.onLayout(changed, l, t, r, b);
+		setupViews();
+	}
+
+	private void setupViews() {
+		Log.d("test", "--------------voteview setupViews");
+		voteInfoLeft = (RelativeLayout) findViewById(R.id.vote_info_left);
+		voteInfoRight = (RelativeLayout) findViewById(R.id.vote_info_right);
+		voteBtLeft = (VoteButtonView) findViewById(R.id.vote_bt_left);
+		voteBtRight = (VoteButtonView) findViewById(R.id.vote_bt_right);
+
+		// voteInfoLeft.addView(getItemView());
+		// voteInfoRight.addView(getItemView());
+
+		voteBtLeft.setOnClickListener(new VoteBtLeftOnClick());
+		voteBtRight.setOnClickListener(new VoteBtRightOnClick());
+	}
+
+	// private View getItemView() {
+	// System.out.println("-----------voteInfoLeft" + voteInfoLeft);
+	//
+	// View itemView = LayoutInflater.from(getContext()).inflate(
+	// R.layout.vote_item, null);
+	//
+	// LinearLayout itemContent = (LinearLayout) itemView
+	// .findViewById(R.id.vote_item);
+	// itemContent.setLayoutParams(new LinearLayout.LayoutParams(voteInfoLeft
+	// .getWidth(), voteInfoLeft.getHeight()));
+	//
+	// ImageView img = (ImageView) itemView.findViewById(R.id.vote_item_img);
+
+	// LayoutParams params = (LayoutParams) img.getLayoutParams();
+	// params.width = voteInfoLeft.getWidth();
+	// params.height = (int) (272/152f * params.width);
+
+	// img.setLayoutParams(params);
+
+	// return itemView;
+	// }
+
+	public void setData(JSONObject data) {
+		JSONArray users;
+		
+		Log.d("test", "-------------voteview setData");
+		try {
+			users = data.getJSONArray("users");
+
+			int len = users.length();
+			if (len == 2) {
+				leftUserData = users.getJSONObject(0);
+				rightUserData = users.getJSONObject(1);
+				voteInfoLeft.addView(getItemView(leftUserData));
+				voteInfoRight.addView(getItemView(rightUserData));
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Toast.makeText(VoteView.this.getContext(),
+					R.string.base_response_error, Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 	private View getItemView(JSONObject userObj) {
@@ -129,139 +196,22 @@ public class VoteView extends LinearLayout {
 		return itemView;
 	}
 
-	/**
-	 * 请求数据内部类
-	 * 
-	 * @author XH
-	 * 
-	 */
-	class PkListHttpHandler extends HttpCallBackHandler {
-
-		public PkListHttpHandler(Looper looper) {
-			super(looper);
-		}
-
-		public PkListHttpHandler() {
-		}
-
-		@Override
-		public void callAfterResponseStr(String resultStr) {
-			JSONTokener jsonParser = new JSONTokener(resultStr);
-			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
-			try {
-				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
-				Boolean success = resultObj.getBoolean("success");
-
-				if (success) {
-					JSONObject data = (JSONObject) resultObj.get("data");
-					JSONArray users = data.getJSONArray("users");
-
-					int len = users.length();
-					if (len == 2) {
-						leftUser = users.getJSONObject(0);
-						rightUser = users.getJSONObject(1);
-						voteInfoLeft.addView(getItemView(leftUser));
-						voteInfoRight.addView(getItemView(rightUser));
-					}
-
-				} else {
-					Toast.makeText(VoteView.this.getContext(),
-							resultObj.getString("errorMessage"),
-							Toast.LENGTH_SHORT).show();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-				Toast.makeText(VoteView.this.getContext(),
-						R.string.base_response_error, Toast.LENGTH_SHORT)
-						.show();
-			}
-		}
-	}
-
-	@Override
-	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		super.onLayout(changed, l, t, r, b);
-		setupViews();
-		// rankReqSend();
-		new Thread(new Runnable() {
-			public void run() {
-				Message msg = rankQ.obtainMessage();
-				Bundle bundle = new Bundle();
-				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
-						HttpRequestUtils.BASE_HTTP_CONTEXT + "GetGirlPK.shtml");
-				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
-				msg.setData(bundle);
-				msg.sendToTarget();
-			}
-		}).start();
-		System.out.println("onLayout");
-	}
-
-	/**
-	 * 发送http请求
-	 */
-	private void rankReqSend() {
-		System.out.println("rankReqSend");
-		PkListHttpHandler rankQ = new PkListHttpHandler();
-		Message msg = rankQ.obtainMessage();
-		Bundle bundle = new Bundle();
-		bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
-				HttpRequestUtils.BASE_HTTP_CONTEXT + "GetGirlPK.shtml");
-		bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
-		msg.setData(bundle);
-		msg.sendToTarget();
-	}
-
-	private void setupViews() {
-
-		voteInfoLeft = (RelativeLayout) findViewById(R.id.vote_info_left);
-		voteInfoRight = (RelativeLayout) findViewById(R.id.vote_info_right);
-		voteBtLeft = (VoteButtonView) findViewById(R.id.vote_bt_left);
-		voteBtRight = (VoteButtonView) findViewById(R.id.vote_bt_right);
-
-		voteInfoLeft.addView(getItemView());
-		voteInfoRight.addView(getItemView());
-
-		voteBtLeft.setOnClickListener(new VoteBtLeftOnClick());
-		voteBtRight.setOnClickListener(new VoteBtRightOnClick());
-	}
-
-	private View getItemView() {
-		System.out.println("-----------voteInfoLeft" + voteInfoLeft);
-
-		View itemView = LayoutInflater.from(getContext()).inflate(
-				R.layout.vote_item, null);
-
-		LinearLayout itemContent = (LinearLayout) itemView
-				.findViewById(R.id.vote_item);
-		itemContent.setLayoutParams(new LinearLayout.LayoutParams(voteInfoLeft
-				.getWidth(), voteInfoLeft.getHeight()));
-
-		ImageView img = (ImageView) itemView.findViewById(R.id.vote_item_img);
-
-		// LayoutParams params = (LayoutParams) img.getLayoutParams();
-		// params.width = voteInfoLeft.getWidth();
-		// params.height = (int) (272/152f * params.width);
-
-		// img.setLayoutParams(params);
-
-		return itemView;
-	}
-
 	class VoteBtLeftOnClick implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
+			Log.d("test", "--------------VoteBtLeftOnClick setupViews");
+			
 			Intent intent = new Intent(getContext(), VoteAfter.class);
-			if (leftUser != null) {
+			if (leftUserData != null) {
 				try {
-					String id = leftUser.getString("id");
+					String id = leftUserData.getString("id");
 					intent.putExtra("girlId", id);
-					HttpRequestUtils.getResFromHttpUrl(false,
-							HttpRequestUtils.BASE_HTTP_CONTEXT
-									+ "Vote.shtml?userId="
-									+ BaseUtils.CUR_USER_MAP.get("id")
-									+ "&girlId=" + id, null);
+					// HttpRequestUtils.getResFromHttpUrl(false,
+					// HttpRequestUtils.BASE_HTTP_CONTEXT
+					// + "Vote.shtml?userId="
+					// + BaseUtils.CUR_USER_MAP.get("id")
+					// + "&girlId=" + id, null);
 					getContext().startActivity(intent);
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -276,17 +226,19 @@ public class VoteView extends LinearLayout {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), VoteAfter.class);
+			Log.d("test", "--------------VoteBtRightOnClick setupViews");
 			
-			if (rightUser != null) {
+			Intent intent = new Intent(getContext(), VoteAfter.class);
+
+			if (rightUserData != null) {
 				try {
-					String id = rightUser.getString("id");
+					String id = rightUserData.getString("id");
 					intent.putExtra("girlId", id);
-					HttpRequestUtils.getResFromHttpUrl(false,
-							HttpRequestUtils.BASE_HTTP_CONTEXT
-									+ "Vote.shtml?userId="
-									+ BaseUtils.CUR_USER_MAP.get("id")
-									+ "&girlId=" + id, null);
+					// HttpRequestUtils.getResFromHttpUrl(false,
+					// HttpRequestUtils.BASE_HTTP_CONTEXT
+					// + "Vote.shtml?userId="
+					// + BaseUtils.CUR_USER_MAP.get("id")
+					// + "&girlId=" + id, null);
 					getContext().startActivity(intent);
 				} catch (JSONException e) {
 					e.printStackTrace();

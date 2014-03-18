@@ -12,7 +12,10 @@
         android_custom:curTab="vote" >
     </com.app.view.WomanHeadView>
 
+    <!-- 装女郎信息 -->
+
     <com.app.view.VoteView
+        android:id="@+id/vote_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -27,13 +30,17 @@
             android:layout_weight="4"
             android:orientation="horizontal" >
 
+            <!-- 左边装女郎 -->
+
             <RelativeLayout
                 android:id="@+id/vote_info_left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="6dp"
-                android:layout_weight="1">
+                android:layout_weight="1" >
             </RelativeLayout>
+
+            <!-- 右边装女郎 -->
 
             <RelativeLayout
                 android:id="@+id/vote_info_right"
@@ -48,13 +55,17 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
-            android:paddingBottom="5dp">
-			<RelativeLayout
+            android:paddingBottom="5dp"
+            android:paddingTop="15dp" >
+
+            <!-- 左侧按钮 -->
+
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical" >
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" >
+
                 <com.app.view.VoteButtonView
                     android:id="@+id/vote_bt_left"
                     android:layout_width="70dp"
@@ -62,26 +73,32 @@
                     android:layout_alignParentRight="true" >
                 </com.app.view.VoteButtonView>
             </RelativeLayout>
-            
+
+            <!-- vs方案 -->
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical" >
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" >
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="VS"
-                    android:textSize="48sp"
-                    android:textColor="#2f2f2f" />
+                    android:textColor="#2f2f2f"
+                    android:textSize="48sp" />
             </RelativeLayout>
+
+            <!-- 左侧按钮 -->
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical" >
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" >
+
                 <com.app.view.VoteButtonView
                     android:id="@+id/vote_bt_right"
                     android:layout_width="70dp"
