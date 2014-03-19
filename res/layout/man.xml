@@ -8,33 +8,27 @@
     tools:context=".Man" >
 
     <include layout="@layout/search" />
-	
-    <ListView
-        android:id="@+id/man_list"
+
+    <ScrollView
+        android:id="@+id/man_list_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:scrollbars="none"
-        android:padding="5dp">
-        <!-- 
+        android:scrollbars="none" >
+
         <LinearLayout
             android:id="@+id/man_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <include layout="@layout/man_item" />
-
-            <include layout="@layout/man_item" />
-
-            <include layout="@layout/man_item" />
+            android:orientation="vertical"
+            android:padding="5dp" >
         </LinearLayout>
-         -->
-    </ListView>
-	
+    </ScrollView>
+
     <com.app.view.FootView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android_custom:currentTab="man">
+        android_custom:currentTab="man" >
     </com.app.view.FootView>
+
 </LinearLayout>

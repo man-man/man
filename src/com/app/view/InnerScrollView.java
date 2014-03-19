@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.app.man.R;
 
@@ -18,7 +19,7 @@ public class InnerScrollView extends HorizontalScrollView {
 	/**
 	 * 父辈滚动条
 	 */
-	private ListView parentScrollView = null;
+	private ScrollView parentScrollView = null;
 
 	public InnerScrollView(Context context) {
 		this(context, null);
@@ -165,11 +166,11 @@ public class InnerScrollView extends HorizontalScrollView {
 		parentScrollView.requestDisallowInterceptTouchEvent(!flag);
 	}
 
-	public ListView getParentScrollView() {
+	public ScrollView getParentScrollView() {
 		return parentScrollView;
 	}
 
-	public void setParentScrollView(ListView parentScrollView) {
+	public void setParentScrollView(ScrollView parentScrollView) {
 		this.parentScrollView = parentScrollView;
 	}
 

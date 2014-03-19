@@ -345,6 +345,9 @@ public class NetImageView extends ImageView {
 		// handler.sendMessage(handler.obtainMessage(21, httpServer()));
 		// }
 		// }).start();
+		if ("".equals(netUrl) || netUrl == null) {
+			return;
+		}
 		ContextUtil.COMMON_PICASSO.load(netUrl)
 				.resize(imgResizeWidth, imgResizeHeight).centerCrop()
 				.into(this);
