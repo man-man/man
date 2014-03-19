@@ -15,7 +15,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +41,6 @@ public class Login extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
 		passport = (EditText) findViewById(R.id.login_passport);
 		password = (EditText) findViewById(R.id.login_password);

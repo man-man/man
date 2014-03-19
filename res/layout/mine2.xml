@@ -239,7 +239,7 @@
                     <!-- 我关注的人 -->
 
                     <RelativeLayout
-                        android:id="@+id/mine_att_panel"
+                        android:id="@+id/mine_photo_panel"
                         style="@style/mine_container_s"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >

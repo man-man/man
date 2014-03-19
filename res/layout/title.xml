@@ -1,59 +1,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="#2f2f2f" >
-
-    <!-- 左侧返回按钮 -->
-
-    <ImageView
-        android:id="@+id/title_back"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="20dp"
-        android:src="@drawable/back" />
+    android:background="#2f2f2f">
 	
-    <!-- title标题 -->
-    <TextView
-        android:id="@+id/title_name"
-        android:layout_width="wrap_content"
+    <ImageView android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:src="@drawable/back"/>
+	
+    <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#fff"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textColor="#fff"
-        android:textSize="18sp" />
-
-    <!-- 右侧提交按钮 -->
-    <TextView
-        android:id="@+id/title_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:paddingRight="10dp"
-        android:text="@string/title_submit"
-        android:textColor="#fff"
-        android:textSize="14sp"
-        android:visibility="gone" />
+        android:text="@string/sign_title"/>
     
-    <!-- 右侧发布按钮 -->
-    <TextView
-        android:id="@+id/title_release"
-        android:layout_width="wrap_content"
+    <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:text="@string/title_release"
-        android:textColor="#fff"
         android:textSize="14sp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:layout_marginRight="6dp"
-        android:background="@drawable/release_bt_bg"
-        android:visibility="gone" />
-
+        android:textColor="#fff"
+        android:paddingRight="10dp"
+        android:text="@string/sign_submit" />
 </RelativeLayout>
