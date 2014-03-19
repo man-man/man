@@ -17,11 +17,14 @@
 
         <!-- 头像 -->
 
-        <ImageView
+        <com.app.view.NetImageView
             android:id="@+id/woman_rank_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/woman_img_corner"
+            android:scaleType="centerCrop"
+            android_custom:cornerRadius="2dp"
+            android_custom:cornerType="1"
             android:src="@drawable/default_img" />
 
         <!-- 下部信息 -->

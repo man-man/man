@@ -125,11 +125,11 @@ public class RankScrollView2 extends ScrollView {
 			View item = getItemView(i);
 
 			if (i % 2 == 0) {
-				if(firstColumn != null)
-				firstColumn.addView(item);
+				if (firstColumn != null)
+					firstColumn.addView(item);
 			} else {
-				if(secondColumn != null)
-				secondColumn.addView(item);
+				if (secondColumn != null)
+					secondColumn.addView(item);
 			}
 		}
 
@@ -139,7 +139,7 @@ public class RankScrollView2 extends ScrollView {
 		View convertView = LayoutInflater.from(getContext()).inflate(
 				R.layout.woman_rank_item, null);
 		WomanItemModel model = models.get(dataIndex);
-		ImageView imgView = null;
+		NetImageView imgView = null;
 		String imgUrl = model.getImg();
 
 		((TextView) convertView.findViewById(R.id.woman_rank_name))
@@ -148,12 +148,17 @@ public class RankScrollView2 extends ScrollView {
 				.setText(model.getRank() + "");
 		((TextView) convertView.findViewById(R.id.woman_rank_vote))
 				.setText(model.getVote() + "");
-		imgView = (ImageView) convertView.findViewById(R.id.woman_rank_img);
+		imgView = (NetImageView) convertView.findViewById(R.id.woman_rank_img);
 
 		if (!"".equals(imgUrl) && imgUrl != null) { // 异步加载图片
-			LoadImageTask task = new LoadImageTask(imgView);
-			taskCollection.add(task);
-			task.execute(imgUrl);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					columnWidth, columnWidth);
+
+			imgView.setLayoutParams(params);
+			imgView.setNetUrl(imgUrl);
+			// LoadImageTask task = new LoadImageTask(imgView);
+			// taskCollection.add(task);
+			// task.execute(imgUrl);
 		}
 		return convertView;
 	}

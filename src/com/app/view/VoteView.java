@@ -1,20 +1,14 @@
 package com.app.view;
 
-import java.io.Console;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Looper;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,8 +21,6 @@ import android.widget.Toast;
 
 import com.app.activity.VoteAfter;
 import com.app.common.BaseUtils;
-import com.app.common.HttpCallBackHandler;
-import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 
 /**
@@ -69,28 +61,22 @@ public class VoteView extends LinearLayout {
 	 */
 	private JSONObject rightUserData;
 
-	/**
-	 * 评选按钮容器
-	 */
-	private LinearLayout voteBts;
-
 	public VoteView(Context context) {
-		this(context, null);
+		super(context);
 	}
 
 	public VoteView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs);
 	}
 
 	public VoteView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		// setupViews();
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
-		if(changed){
+		if (changed) {
 			setupViews();
 		}
 	}
@@ -102,11 +88,10 @@ public class VoteView extends LinearLayout {
 		voteBtLeft = (VoteButtonView) findViewById(R.id.vote_bt_left);
 		voteBtRight = (VoteButtonView) findViewById(R.id.vote_bt_right);
 
-		// voteInfoLeft.addView(getItemView());
-		// voteInfoRight.addView(getItemView());
-
 		voteBtLeft.setOnClickListener(new VoteBtLeftOnClick());
 		voteBtRight.setOnClickListener(new VoteBtRightOnClick());
+
+		rendItems();
 	}
 
 	// private View getItemView() {
@@ -133,7 +118,7 @@ public class VoteView extends LinearLayout {
 
 	public void setData(JSONObject data) {
 		JSONArray users;
-		
+
 		Log.d("test", "-------------voteview setData");
 		try {
 			users = data.getJSONArray("users");
@@ -142,8 +127,7 @@ public class VoteView extends LinearLayout {
 			if (len == 2) {
 				leftUserData = users.getJSONObject(0);
 				rightUserData = users.getJSONObject(1);
-				voteInfoLeft.addView(getItemView(leftUserData));
-				voteInfoRight.addView(getItemView(rightUserData));
+				rendItems();
 			}
 
 		} catch (JSONException e) {
@@ -152,6 +136,20 @@ public class VoteView extends LinearLayout {
 					R.string.base_response_error, Toast.LENGTH_SHORT).show();
 		}
 
+	}
+
+	/**
+	 * 渲染元素
+	 */
+	public void rendItems() {
+		if (leftUserData == null || rightUserData == null) {
+			return;
+		}
+		if (voteInfoLeft == null || voteInfoRight == null) {
+			return;
+		}
+		voteInfoLeft.addView(getItemView(leftUserData));
+		voteInfoRight.addView(getItemView(rightUserData));
 	}
 
 	private View getItemView(JSONObject userObj) {
@@ -163,11 +161,13 @@ public class VoteView extends LinearLayout {
 		itemContent.setLayoutParams(new LinearLayout.LayoutParams(voteInfoLeft
 				.getWidth(), voteInfoLeft.getHeight()));
 
-		ImageView img = (ImageView) itemView.findViewById(R.id.vote_item_img);
+		NetImageView img = (NetImageView) itemView
+				.findViewById(R.id.vote_item_img);
 		try {
-			img.setImageDrawable(Drawable.createFromPath(BaseUtils
-					.downloadImage(userObj.getString("imageUrl"), BaseUtils
-							.getScreenWidth(VoteView.this.getContext()) / 2)));
+			img.setNetUrl(userObj.getString("imageUrl"));
+			// img.setImageDrawable(Drawable.createFromPath(BaseUtils
+			// .downloadImage(userObj.getString("imageUrl"), BaseUtils
+			// .getScreenWidth(VoteView.this.getContext()) / 2)));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -203,7 +203,7 @@ public class VoteView extends LinearLayout {
 		@Override
 		public void onClick(View v) {
 			Log.d("test", "--------------VoteBtLeftOnClick setupViews");
-			
+
 			Intent intent = new Intent(getContext(), VoteAfter.class);
 			if (leftUserData != null) {
 				try {
@@ -229,7 +229,7 @@ public class VoteView extends LinearLayout {
 		@Override
 		public void onClick(View v) {
 			Log.d("test", "--------------VoteBtRightOnClick setupViews");
-			
+
 			Intent intent = new Intent(getContext(), VoteAfter.class);
 
 			if (rightUserData != null) {

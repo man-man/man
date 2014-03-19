@@ -415,7 +415,9 @@ public class NetImageView extends ImageView {
 
 	public void setNetUrl(String netUrl) {
 		this.netUrl = netUrl;
-		startLoadImg();
+		if (netUrl != null) {
+			startLoadImg();
+		}
 	}
 
 	public boolean isRect() {
