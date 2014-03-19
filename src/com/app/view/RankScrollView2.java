@@ -105,8 +105,6 @@ public class RankScrollView2 extends ScrollView {
 			loadOnce = true;
 
 			rendItems();
-			System.out.println("-----------onLayout---firstColumn------"
-					+ firstColumn);
 		}
 	}
 
@@ -123,7 +121,6 @@ public class RankScrollView2 extends ScrollView {
 			return;
 		}
 
-		System.out.println("----------rendItems len:" + len);
 		for (int i = 0; i < len; i++) {
 			View item = getItemView(i);
 
