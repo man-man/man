@@ -46,6 +46,8 @@ public class Woman extends Activity {
 	 * 排行榜容器
 	 */
 	private RankScrollView2 rankScrollView;
+	
+	private RankListHttpHandler rankQ = new RankListHttpHandler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,6 @@ public class Woman extends Activity {
 
 			@Override
 			public void run() {
-				RankListHttpHandler rankQ = new RankListHttpHandler();
 				Message msg = rankQ.obtainMessage();
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,

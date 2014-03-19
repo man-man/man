@@ -3,9 +3,7 @@ package com.app.view;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.media.Image;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.app.activity.Sign;
-import com.app.activity.SignInfo;
-import com.app.activity.Vote;
-import com.app.activity.Woman;
 import com.app.man.R;
 
 @SuppressLint("NewApi")
@@ -37,16 +31,23 @@ public class TitleView extends LinearLayout {
 	private OnClickListener mLeftBtClickListener; // 左侧按钮点击监听
 
 	public TitleView(Context context) {
-		this(context, null);
+		super(context, null);
+		setupViews();
 	}
 
 	public TitleView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs);
+		initAttrs(context, attrs);
+		setupViews();
 	}
 
 	public TitleView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		initAttrs(context, attrs);
+		setupViews();
+	}
 
+	private void initAttrs(Context context, AttributeSet attrs) {
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
 				R.styleable.Title);
 
@@ -56,7 +57,6 @@ public class TitleView extends LinearLayout {
 		titleName = mTypedArray.getString(R.styleable.Title_titleName);
 
 		mTypedArray.recycle();
-		setupViews();
 	}
 
 	private void setupViews() {

@@ -52,15 +52,22 @@ public class FootView extends LinearLayout {
 
 	public FootView(Context context) {
 		super(context);
+		curActivity = (Activity) context;
 	}
 
 	public FootView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs);
+		initAttrs(context, attrs);
+		curActivity = (Activity) context;
 	}
 
 	public FootView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-
+		initAttrs(context, attrs);
+		curActivity = (Activity) context;
+	}
+	
+	private void initAttrs(Context context, AttributeSet attrs) {
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
 				R.styleable.FootView);
 
@@ -68,8 +75,6 @@ public class FootView extends LinearLayout {
 		currentTab = mTypedArray.getString(R.styleable.FootView_currentTab);
 
 		mTypedArray.recycle();
-
-		curActivity = (Activity) context;
 	}
 
 	@Override
