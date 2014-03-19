@@ -20,8 +20,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -44,34 +44,10 @@ public class RankScrollView2 extends ScrollView {
 	 */
 	private List<WomanItemModel> models = new ArrayList<WomanItemModel>();
 
-	public String[] imageUrlArr = null;
-
-	private int dataIndex = 0;
-
-	/**
-	 * 每页要加载的图片数量
-	 */
-	public static final int PAGE_SIZE = 15;
-
-	/**
-	 * 记录当前已加载到第几页
-	 */
-	private int page;
-
 	/**
 	 * 每一列的宽度
 	 */
 	private int columnWidth;
-
-	/**
-	 * 当前第一列的高度
-	 */
-	private int firstColumnHeight;
-
-	/**
-	 * 当前第二列的高度
-	 */
-	private int secondColumnHeight;
 
 	/**
 	 * 是否已加载过一次layout，这里onLayout中的初始化只需加载一次
@@ -99,26 +75,6 @@ public class RankScrollView2 extends ScrollView {
 	private static Set<LoadImageTask> taskCollection;
 
 	/**
-	 * MyScrollView下的直接子布局。
-	 */
-	private static View scrollLayout;
-
-	/**
-	 * MyScrollView布局的高度。
-	 */
-	private static int scrollViewHeight;
-
-	/**
-	 * 记录上垂直方向的滚动距离。
-	 */
-	private static int lastScrollY = -1;
-
-	/**
-	 * 记录所有界面上的图片，用以可以随时控制对图片的释放。
-	 */
-	private List<ImageView> imageViewList = new ArrayList<ImageView>();
-
-	/**
 	 * MyScrollView的构造函数。
 	 * 
 	 * @param context
@@ -135,8 +91,6 @@ public class RankScrollView2 extends ScrollView {
 	 */
 	public void setData(List<WomanItemModel> models, String[] imgs) {
 		this.models = models;
-		this.imageUrlArr = imgs;
-
 		rendItems();
 	}
 
@@ -144,23 +98,32 @@ public class RankScrollView2 extends ScrollView {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
 
-//		if (changed && !loadOnce) {
+		if (changed && !loadOnce) {
 			firstColumn = (LinearLayout) findViewById(R.id.rank_first_column);
 			secondColumn = (LinearLayout) findViewById(R.id.rank_second_column);
 			columnWidth = firstColumn.getWidth();
 			loadOnce = true;
-			
-			System.out.println("-----------onLayout---firstColumn------" + firstColumn);
-//		}
+
+			rendItems();
+			System.out.println("-----------onLayout---firstColumn------"
+					+ firstColumn);
+		}
 	}
 
 	/**
 	 * 渲染元素
 	 */
 	private void rendItems() {
-		System.out.println("-----------rendItems---firstColumn------" + firstColumn);
 		int len = models.size();
 
+		if (len == 0) {
+			return;
+		}
+		if (firstColumn == null || secondColumn == null) {
+			return;
+		}
+
+		System.out.println("----------rendItems len:" + len);
 		for (int i = 0; i < len; i++) {
 			View item = getItemView(i);
 
@@ -194,16 +157,6 @@ public class RankScrollView2 extends ScrollView {
 			task.execute(imgUrl);
 		}
 		return convertView;
-	}
-
-	/**
-	 * 判断手机是否有SD卡。
-	 * 
-	 * @return 有SD卡返回true，没有返回false。
-	 */
-	private boolean hasSDCard() {
-		return Environment.MEDIA_MOUNTED.equals(Environment
-				.getExternalStorageState());
 	}
 
 	/**
@@ -290,9 +243,12 @@ public class RankScrollView2 extends ScrollView {
 		 *            图片的高度
 		 */
 		private void addImage(Bitmap bitmap, int imageWidth, int imageHeight) {
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					imageWidth, imageHeight);
 			if (mImageView != null) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+						imageWidth, imageHeight);
+
+				mImageView.setLayoutParams(params);
+				mImageView.setScaleType(ScaleType.CENTER_CROP);
 				mImageView.setImageBitmap(bitmap);
 			}
 		}
