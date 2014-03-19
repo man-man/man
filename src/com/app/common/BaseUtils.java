@@ -9,13 +9,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
+import com.squareup.picasso.Picasso;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.view.WindowManager;
 
 public class BaseUtils {
-
+	
+	public static Picasso COMMON_PICASSO;
+	
 	public static Map<String, Object> CUR_USER_MAP = null;
 
 	private static ImageLoader imageLoader = ImageLoader.getInstance();

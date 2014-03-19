@@ -37,14 +37,22 @@ import android.widget.ImageView;
 import com.app.common.BaseUtils;
 import com.app.common.HandlerUtils;
 import com.app.man.R;
+import com.app.util.ContextUtil;
 
 /**
  * 自定义imageview，可显示网络图片，可定义圆角
  */
 public class NetImageView extends ImageView {
 
-	public static List<MyImgHandler> NET_IMAGE_LOOPER_LIST = new ArrayList<MyImgHandler>();
-	public static List<Bitmap> NET_IMAGE_BITMAP_LIST = new ArrayList<Bitmap>();
+	// public static List<MyImgHandler> NET_IMAGE_LOOPER_LIST = new
+	// ArrayList<MyImgHandler>();
+	// public static List<Bitmap> NET_IMAGE_BITMAP_LIST = new
+	// ArrayList<Bitmap>();
+
+	private Integer imgResizeWidth = BaseUtils
+			.getScreenWidth(this.getContext()) / 4;
+	private Integer imgResizeHeight = BaseUtils.getScreenHeight(this
+			.getContext()) / 4;
 
 	public static Object IMAGE_URL_LOCK = new Object();
 
@@ -154,7 +162,11 @@ public class NetImageView extends ImageView {
 						// * (halfScreenWidth / bitMapWidth))
 						// .intValue());
 						System.out.println(halfScreenWidth / bitMapWidth);
-						bitmap = small(bitmap, halfScreenWidth / bitMapWidth  < 1 ?halfScreenWidth / bitMapWidth :1 );
+						bitmap = small(
+								bitmap,
+								halfScreenWidth / bitMapWidth < 1 ? halfScreenWidth
+										/ bitMapWidth
+										: 1);
 						System.out.println(Thread.currentThread().getId()
 								+ "该图片压缩后： " + Bitmap2BytesPng(bitmap).length);
 						// if(!bitmap.isRecycled()){
@@ -162,7 +174,7 @@ public class NetImageView extends ImageView {
 						// System.gc();
 						// }
 					}
-					NET_IMAGE_BITMAP_LIST.add(bitmap);
+					// NET_IMAGE_BITMAP_LIST.add(bitmap);
 					mainhandler.sendMessage(handler.obtainMessage(21, bitmap));
 
 					// setImageBitmap(bitmap);
@@ -172,7 +184,7 @@ public class NetImageView extends ImageView {
 
 		};
 
-		NET_IMAGE_LOOPER_LIST.add(handler);
+		// NET_IMAGE_LOOPER_LIST.add(handler);
 
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
 				R.styleable.NetImageView);
@@ -332,11 +344,14 @@ public class NetImageView extends ImageView {
 	 * 启动加载图片线程
 	 */
 	private void startLoadImg() {
-		new Thread(new Runnable() {
-			public void run() {
-				handler.sendMessage(handler.obtainMessage(21, httpServer()));
-			}
-		}).start();
+		// new Thread(new Runnable() {
+		// public void run() {
+		// handler.sendMessage(handler.obtainMessage(21, httpServer()));
+		// }
+		// }).start();
+		ContextUtil.COMMON_PICASSO.load(netUrl)
+				.resize(imgResizeWidth, imgResizeHeight).centerCrop()
+				.into(this);
 	}
 
 	private byte[] httpServer() {
@@ -409,6 +424,22 @@ public class NetImageView extends ImageView {
 
 	public void setRect(boolean isRect) {
 		this.isRect = isRect;
+	}
+
+	public Integer getImgResizeWidth() {
+		return imgResizeWidth;
+	}
+
+	public void setImgResizeWidth(Integer imgResizeWidth) {
+		this.imgResizeWidth = imgResizeWidth;
+	}
+
+	public Integer getImgResizeHeight() {
+		return imgResizeHeight;
+	}
+
+	public void setImgResizeHeight(Integer imgResizeHeight) {
+		this.imgResizeHeight = imgResizeHeight;
 	}
 
 }
