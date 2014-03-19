@@ -22,6 +22,7 @@ import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
+import com.app.view.NetImageView;
 import com.app.view.VoteView;
 
 public class VoteAfter extends Activity {
@@ -33,7 +34,7 @@ public class VoteAfter extends Activity {
 	private TextView vote_after_more;
 	private TextView vote_after_givescore;
 	private TextView vote_after_next;
-	private ImageView vote_after_img;
+	private NetImageView vote_after_img;
 
 	GirlHttpHandler girlHttpHandler = new GirlHttpHandler();
 	String girlId = "0";
@@ -51,7 +52,7 @@ public class VoteAfter extends Activity {
 		vote_after_more = (TextView) findViewById(R.id.vote_after_more);
 		vote_after_givescore = (TextView) findViewById(R.id.vote_after_givescore);
 		vote_after_next = (TextView) findViewById(R.id.vote_after_next);
-		vote_after_img = (ImageView) findViewById(R.id.vote_after_img);
+		vote_after_img = (NetImageView) findViewById(R.id.vote_after_img);
 
 		TextViewOnClick textViewOnClick = new TextViewOnClick();
 		vote_after_next.setOnClickListener(textViewOnClick);
@@ -132,10 +133,7 @@ public class VoteAfter extends Activity {
 					vote_after_sanwei.setText(getResources().getString(
 							R.string.girlsanwei)
 							+ userObj.getString("bwh"));
-					vote_after_img
-							.setImageDrawable(Drawable.createFromPath(BaseUtils.downloadImage(
-									userObj.getString("imageUrl"),
-									BaseUtils.getScreenWidth(VoteAfter.this) / 2)));
+					vote_after_img.setNetUrl(userObj.getString("imageUrl"));
 
 					Toast.makeText(VoteAfter.this, R.string.req_vote_success,
 							Toast.LENGTH_SHORT).show();

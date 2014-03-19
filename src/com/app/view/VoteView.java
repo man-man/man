@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -229,6 +230,7 @@ public class VoteView extends LinearLayout {
 		@Override
 		public void onClick(View v) {
 			Log.d("test", "--------------VoteBtRightOnClick setupViews");
+			Activity a = (Activity) getContext();
 
 			Intent intent = new Intent(getContext(), VoteAfter.class);
 
@@ -242,6 +244,7 @@ public class VoteView extends LinearLayout {
 					// + BaseUtils.CUR_USER_MAP.get("id")
 					// + "&girlId=" + id, null);
 					getContext().startActivity(intent);
+					a.finish();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

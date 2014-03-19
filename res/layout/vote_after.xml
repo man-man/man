@@ -15,12 +15,12 @@
 
         <!-- 图片 -->
 
-        <ImageView
+        <com.app.view.NetImageView
             android:id="@+id/vote_after_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/girl" />
+            android:src="@drawable/default_img" />
 
         <!-- 信息容器 -->
 
