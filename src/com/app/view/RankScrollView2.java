@@ -16,30 +16,28 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.common.ImageLoader;
 import com.app.man.R;
 import com.app.model.WomanItemModel;
 
 /**
- * 自定义的ScrollView，在其中动态地对图片进行添加。
+ * 自定义的ScrollView2，修复ScrollView问题
+ * 1.ScrollView,根据图片去渲染item，如果某个item没有图片就不会被显示,这样是不行滴
+ * 2.排行榜，对排行要求较高，之前是哪个图片先下载下来，先把哪个图片放入容器，这样会影响排行 3.剔除瀑布流的多余逻辑
+ * 4.想在该组件中把图片加载逻辑提出来，以便公用
  * 
  */
-public class RankScrollView extends ScrollView implements OnTouchListener {
+public class RankScrollView2 extends ScrollView {
 
 	/**
 	 * 排行榜数据
@@ -121,43 +119,15 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 	private List<ImageView> imageViewList = new ArrayList<ImageView>();
 
 	/**
-	 * 在Handler中进行图片可见性检查的判断，以及加载更多图片的操作。
-	 */
-	private static Handler handler = new Handler() {
-
-		public void handleMessage(android.os.Message msg) {
-			RankScrollView myScrollView = (RankScrollView) msg.obj;
-			int scrollY = myScrollView.getScrollY();
-			// 如果当前的滚动位置和上次相同，表示已停止滚动
-			if (scrollY == lastScrollY) {
-				// 当滚动的最底部，并且当前没有正在下载的任务时，开始加载下一页的图片
-				if (scrollViewHeight + scrollY >= scrollLayout.getHeight()
-						&& taskCollection.isEmpty()) {
-					myScrollView.loadMoreImages();
-				}
-				// myScrollView.checkVisibility();
-			} else {
-				lastScrollY = scrollY;
-				Message message = new Message();
-				message.obj = myScrollView;
-				// 5毫秒后再次对滚动位置进行判断
-				handler.sendMessageDelayed(message, 5);
-			}
-		};
-
-	};
-
-	/**
 	 * MyScrollView的构造函数。
 	 * 
 	 * @param context
 	 * @param attrs
 	 */
-	public RankScrollView(Context context, AttributeSet attrs) {
+	public RankScrollView2(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		imageLoader = ImageLoader.getInstance();
 		taskCollection = new HashSet<LoadImageTask>();
-		setOnTouchListener(this);
 	}
 
 	/**
@@ -166,92 +136,64 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 	public void setData(List<WomanItemModel> models, String[] imgs) {
 		this.models = models;
 		this.imageUrlArr = imgs;
-		loadMoreImages();
+
+		rendItems();
 	}
 
-	/**
-	 * 进行一些关键性的初始化操作，获取MyScrollView的高度，以及得到第一列的宽度值。并在这里开始加载第一页的图片。
-	 */
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
-		if (changed && !loadOnce) {
-			scrollViewHeight = getHeight();
-			scrollLayout = getChildAt(0);
+
+//		if (changed && !loadOnce) {
 			firstColumn = (LinearLayout) findViewById(R.id.rank_first_column);
 			secondColumn = (LinearLayout) findViewById(R.id.rank_second_column);
 			columnWidth = firstColumn.getWidth();
 			loadOnce = true;
-		}
+			
+			System.out.println("-----------onLayout---firstColumn------" + firstColumn);
+//		}
 	}
 
 	/**
-	 * 监听用户的触屏事件，如果用户手指离开屏幕则开始进行滚动检测。
+	 * 渲染元素
 	 */
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_UP) {
-			Message message = new Message();
-			message.obj = this;
-			handler.sendMessageDelayed(message, 5);
-		}
-		return false;
-	}
+	private void rendItems() {
+		System.out.println("-----------rendItems---firstColumn------" + firstColumn);
+		int len = models.size();
 
-	/**
-	 * 开始加载下一页的图片，每张图片都会开启一个异步线程去下载。
-	 */
-	public void loadMoreImages() {
-		if (hasSDCard()) {
-			int startIndex = page * PAGE_SIZE;
-			int endIndex = page * PAGE_SIZE + PAGE_SIZE;
-			if (startIndex < imageUrlArr.length) {
-				Toast.makeText(getContext(), "正在加载...", Toast.LENGTH_SHORT)
-						.show();
-				if (endIndex > imageUrlArr.length) {
-					endIndex = imageUrlArr.length;
-				}
-				for (int i = startIndex; i < endIndex; i++) {
-					if("".equals(imageUrlArr[i]) || imageUrlArr[i] == null){
-						continue;
-					}
-					LoadImageTask task = new LoadImageTask();
-					taskCollection.add(task);
-					task.execute(imageUrlArr[i]);
-				}
-				page++;
+		for (int i = 0; i < len; i++) {
+			View item = getItemView(i);
+
+			if (i % 2 == 0) {
+				firstColumn.addView(item);
 			} else {
-				Toast.makeText(getContext(), "已没有更多图片", Toast.LENGTH_SHORT)
-						.show();
-			}
-		} else {
-			Toast.makeText(getContext(), "未发现SD卡", Toast.LENGTH_SHORT).show();
-		}
-	}
-
-	/**
-	 * 遍历imageViewList中的每张图片，对图片的可见性进行检查，如果图片已经离开屏幕可见范围，则将图片替换成一张空图。
-	 */
-	public void checkVisibility() {
-		for (int i = 0; i < imageViewList.size(); i++) {
-			ImageView imageView = imageViewList.get(i);
-			int borderTop = (Integer) imageView.getTag(R.string.border_top);
-			int borderBottom = (Integer) imageView
-					.getTag(R.string.border_bottom);
-			if (borderBottom > getScrollY()
-					&& borderTop < getScrollY() + scrollViewHeight) {
-				String imageUrl = (String) imageView.getTag(R.string.image_url);
-				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(imageUrl);
-				if (bitmap != null) {
-					imageView.setImageBitmap(bitmap);
-				} else {
-					LoadImageTask task = new LoadImageTask(imageView);
-					task.execute(imageUrl);
-				}
-			} else {
-				imageView.setImageResource(R.drawable.default_img);
+				secondColumn.addView(item);
 			}
 		}
+
+	}
+
+	private View getItemView(int dataIndex) {
+		View convertView = LayoutInflater.from(getContext()).inflate(
+				R.layout.woman_rank_item, null);
+		WomanItemModel model = models.get(dataIndex);
+		ImageView imgView = null;
+		String imgUrl = model.getImg();
+
+		((TextView) convertView.findViewById(R.id.woman_rank_name))
+				.setText(model.getName());
+		((RankNumView) convertView.findViewById(R.id.woman_rank_num))
+				.setText(model.getRank() + "");
+		((TextView) convertView.findViewById(R.id.woman_rank_vote))
+				.setText(model.getVote() + "");
+		imgView = (ImageView) convertView.findViewById(R.id.woman_rank_img);
+
+		if (!"".equals(imgUrl) && imgUrl != null) { // 异步加载图片
+			LoadImageTask task = new LoadImageTask(imgView);
+			taskCollection.add(task);
+			task.execute(imgUrl);
+		}
+		return convertView;
 	}
 
 	/**
@@ -352,58 +294,6 @@ public class RankScrollView extends ScrollView implements OnTouchListener {
 					imageWidth, imageHeight);
 			if (mImageView != null) {
 				mImageView.setImageBitmap(bitmap);
-			} else {
-				View itemView = getItemView();
-				ImageView imageView = (ImageView) itemView
-						.findViewById(R.id.woman_rank_img);
-
-				imageView.setLayoutParams(params);
-				imageView.setImageBitmap(bitmap);
-				imageView.setScaleType(ScaleType.FIT_XY);
-				imageView.setTag(R.string.image_url, mImageUrl);
-				imageViewList.add(imageView);
-
-				findColumnToAdd(imageView, imageHeight).addView(itemView);
-			}
-		}
-
-		private View getItemView() {
-			View convertView = LayoutInflater.from(getContext()).inflate(
-					R.layout.woman_rank_item, null);
-			WomanItemModel model = models.get(dataIndex);
-
-			System.out.println("dataIndex:" + (dataIndex + 1) + "--rank:"
-					+ model.getRank());
-			((TextView) convertView.findViewById(R.id.woman_rank_name))
-					.setText(model.getName());
-			((RankNumView) convertView.findViewById(R.id.woman_rank_num))
-					.setText(model.getRank() + "");
-			((TextView) convertView.findViewById(R.id.woman_rank_vote))
-					.setText(model.getVote() + "");
-
-			dataIndex++;
-			return convertView;
-		}
-
-		/**
-		 * 找到此时应该添加图片的一列。原则就是对三列的高度进行判断，当前高度最小的一列就是应该添加的一列。
-		 * 
-		 * @param imageView
-		 * @param imageHeight
-		 * @return 应该添加图片的一列
-		 */
-		private LinearLayout findColumnToAdd(ImageView imageView,
-				int imageHeight) {
-			if (firstColumnHeight <= secondColumnHeight) {
-				imageView.setTag(R.string.border_top, firstColumnHeight);
-				firstColumnHeight += imageHeight;
-				imageView.setTag(R.string.border_bottom, firstColumnHeight);
-				return firstColumn;
-			} else {
-				imageView.setTag(R.string.border_top, secondColumnHeight);
-				secondColumnHeight += imageHeight;
-				imageView.setTag(R.string.border_bottom, secondColumnHeight);
-				return secondColumn;
 			}
 		}
 

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -21,7 +22,7 @@ import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 import com.app.model.WomanItemModel;
-import com.app.view.RankScrollView;
+import com.app.view.RankScrollView2;
 
 /**
  * 装女郎 排行榜
@@ -44,7 +45,7 @@ public class Woman extends Activity {
 	/**
 	 * 排行榜容器
 	 */
-	private RankScrollView rankScrollView;
+	private RankScrollView2 rankScrollView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class Woman extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.woman);
 
-		rankScrollView = (RankScrollView) findViewById(R.id.rank_scroll_view);
+		rankScrollView = (RankScrollView2) findViewById(R.id.rank_scroll_view);
 
 		rankReqSend();
 	}
@@ -61,15 +62,21 @@ public class Woman extends Activity {
 	 * 发送http请求
 	 */
 	private void rankReqSend() {
-		RankListHttpHandler rankQ = new RankListHttpHandler();
-		Message msg = rankQ.obtainMessage();
-		Bundle bundle = new Bundle();
-		bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
-				HttpRequestUtils.BASE_HTTP_CONTEXT
-						+ "GetGirlRank.shtml?type=1&days=30");
-		bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
-		msg.setData(bundle);
-		msg.sendToTarget();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				RankListHttpHandler rankQ = new RankListHttpHandler();
+				Message msg = rankQ.obtainMessage();
+				Bundle bundle = new Bundle();
+				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+						HttpRequestUtils.BASE_HTTP_CONTEXT
+								+ "GetGirlRank.shtml?type=1&days=30");
+				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+				msg.setData(bundle);
+				msg.sendToTarget();
+			}
+		}).start();
 	}
 
 	/**
@@ -138,9 +145,6 @@ public class Woman extends Activity {
 
 						WomanItemModel model = new WomanItemModel();
 						try {
-							// Log.d("test",
-							// "--------name:" + userObj.getString("name")
-							// + userObj.getString("imageUrl"));
 							model.setImg(userObj.getString("imageUrl"));
 							model.setName(userObj.getString("name"));
 							model.setVote(userObj.getInt("votes"));
@@ -148,7 +152,6 @@ public class Woman extends Activity {
 
 						} catch (Exception e) {
 							e.printStackTrace();
-							Log.d("test", "------------catch 住 了--------");
 							continue;
 						}
 
