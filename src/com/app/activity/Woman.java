@@ -46,8 +46,8 @@ public class Woman extends Activity {
 	 * 排行榜容器
 	 */
 	private RankScrollView2 rankScrollView;
-	
-	private RankListHttpHandler rankQ = new RankListHttpHandler();
+
+	private RankListHttpHandler rankQ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class Woman extends Activity {
 		setContentView(R.layout.woman);
 
 		rankScrollView = (RankScrollView2) findViewById(R.id.rank_scroll_view);
-
+		rankQ = new RankListHttpHandler();
 		rankReqSend();
 	}
 

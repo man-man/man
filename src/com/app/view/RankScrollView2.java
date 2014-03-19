@@ -125,8 +125,10 @@ public class RankScrollView2 extends ScrollView {
 			View item = getItemView(i);
 
 			if (i % 2 == 0) {
+				if(firstColumn != null)
 				firstColumn.addView(item);
 			} else {
+				if(secondColumn != null)
 				secondColumn.addView(item);
 			}
 		}

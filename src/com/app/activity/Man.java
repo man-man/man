@@ -120,21 +120,21 @@ public class Man extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		for (int i = 0; i < NetImageView.NET_IMAGE_LOOPER_LIST.size(); i++) {
-			MyImgHandler h = NetImageView.NET_IMAGE_LOOPER_LIST.get(i);
-			h.setStart(false);
-			NetImageView.NET_IMAGE_LOOPER_LIST.remove(h);
-		}
-		for (int i = 0; i < NetImageView.NET_IMAGE_BITMAP_LIST.size(); i++) {
-			Bitmap h = NetImageView.NET_IMAGE_BITMAP_LIST.get(i);
-			if (!h.isRecycled()) {
-				h.recycle();
-				System.out.println("bitmap加入回收");
-				h = null;
-				System.gc();
-			}
-			NetImageView.NET_IMAGE_BITMAP_LIST.remove(h);
-		}
+//		for (int i = 0; i < NetImageView.NET_IMAGE_LOOPER_LIST.size(); i++) {
+//			MyImgHandler h = NetImageView.NET_IMAGE_LOOPER_LIST.get(i);
+//			h.setStart(false);
+//			NetImageView.NET_IMAGE_LOOPER_LIST.remove(h);
+//		}
+//		for (int i = 0; i < NetImageView.NET_IMAGE_BITMAP_LIST.size(); i++) {
+//			Bitmap h = NetImageView.NET_IMAGE_BITMAP_LIST.get(i);
+//			if (!h.isRecycled()) {
+//				h.recycle();
+//				System.out.println("bitmap加入回收");
+//				h = null;
+//				System.gc();
+//			}
+//			NetImageView.NET_IMAGE_BITMAP_LIST.remove(h);
+//		}
 	}
 
 	Handler mainHandler;
