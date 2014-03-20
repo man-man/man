@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView.ScaleType;
@@ -27,6 +28,7 @@ import com.app.man.R;
 import com.app.util.DensityUtil;
 import com.app.view.InnerScrollView;
 import com.app.view.NetImageView;
+import com.app.view.ViewPagerView;
 
 /**
  * 男人帮
@@ -38,6 +40,8 @@ public class Man extends Activity {
 
 	private ScrollView parentScroll; // 父scroll
 	private ViewGroup manListView; // 文章列表容器
+	private ViewGroup pagerViewContainer; // 图片切换效果 容器
+	private ViewPagerView pagerView; // 图片切换组件
 
 	ManHttpHandler manHttpHandler;
 
@@ -49,6 +53,8 @@ public class Man extends Activity {
 
 		parentScroll = (ScrollView) findViewById(R.id.man_list_scroll);
 		manListView = (ViewGroup) findViewById(R.id.man_list);
+//		pagerViewContainer = (ViewGroup) findViewById(R.id.man_pager_view_container);
+		pagerView = (ViewPagerView) findViewById(R.id.man_pager_view);
 
 		manHttpHandler = new ManHttpHandler();
 		rankReqSend();
@@ -93,8 +99,8 @@ public class Man extends Activity {
 	}
 
 	public View getView(JSONObject article) {
-		LinearLayout convertView = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.man_item,
-				null);
+		LinearLayout convertView = (LinearLayout) LayoutInflater.from(this)
+				.inflate(R.layout.man_item, null);
 
 		try {
 			((TextView) convertView.findViewById(R.id.man_item_name))
@@ -144,6 +150,14 @@ public class Man extends Activity {
 	 * 渲染每条数据图片
 	 */
 	private void rendItemImgs(JSONArray imgs, ViewGroup imagesContainer) {
+		JSONObject curImg = new JSONObject();
+
+		try {
+			curImg.put("imgs", imgs);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+
 		for (int i = 0; i < imgs.length(); i++) {
 			try {
 				JSONObject img = imgs.getJSONObject(i);
@@ -157,13 +171,36 @@ public class Man extends Activity {
 				imgView.setScaleType(ScaleType.CENTER_CROP);
 				imgView.setCornerRadius(3);
 				imgView.setNetUrl(img.getString("url"));
+
+				curImg.put("index", i);
+				imgView.setTag(curImg);
 				imagesContainer.addView(imgView);
+
+				imgView.setOnClickListener(imgOnClick);
 			} catch (Exception e) {
 				e.printStackTrace();
 				continue;
 			}
 		}
 	}
+
+	OnClickListener imgOnClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			JSONObject curImg = (JSONObject) v.getTag();
+
+			try {
+				pagerView.setData(curImg.getInt("index"),
+						curImg.getJSONArray("imgs"));
+				pagerView.setVisibility(View.VISIBLE);
+//				pagerViewContainer.setVisibility(View.VISIBLE);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
+	};
 
 	private String getDate(String dateStr) {
 		String[] arr = dateStr.split(" ");

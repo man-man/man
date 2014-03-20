@@ -1,34 +1,50 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res/com.app.man"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efefef"
-    android:orientation="vertical"
     tools:context=".Man" >
 
-    <include layout="@layout/search" />
+    <!-- 页面信息 -->
 
-    <ScrollView
-        android:id="@+id/man_list_scroll"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:scrollbars="none" >
+        android:layout_height="match_parent"
+        android:background="#efefef"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/man_list"
+        <include layout="@layout/search" />
+
+        <ScrollView
+            android:id="@+id/man_list_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:id="@+id/man_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp" >
+            </LinearLayout>
+        </ScrollView>
+
+        <com.app.view.FootView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp" >
-        </LinearLayout>
-    </ScrollView>
+            android_custom:currentTab="man" >
+        </com.app.view.FootView>
+    </LinearLayout>
 
-    <com.app.view.FootView
+    <!-- 大图展示 -->
+
+    <com.app.view.ViewPagerView
+        android:id="@+id/man_pager_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android_custom:currentTab="man" >
-    </com.app.view.FootView>
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+    </com.app.view.ViewPagerView>
 
-</LinearLayout>
+</RelativeLayout>
