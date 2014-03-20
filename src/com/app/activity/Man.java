@@ -22,6 +22,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
@@ -40,7 +41,6 @@ public class Man extends Activity {
 
 	private ScrollView parentScroll; // 父scroll
 	private ViewGroup manListView; // 文章列表容器
-	private ViewGroup pagerViewContainer; // 图片切换效果 容器
 	private ViewPagerView pagerView; // 图片切换组件
 
 	ManHttpHandler manHttpHandler;
@@ -53,7 +53,8 @@ public class Man extends Activity {
 
 		parentScroll = (ScrollView) findViewById(R.id.man_list_scroll);
 		manListView = (ViewGroup) findViewById(R.id.man_list);
-//		pagerViewContainer = (ViewGroup) findViewById(R.id.man_pager_view_container);
+		// pagerViewContainer = (ViewGroup)
+		// findViewById(R.id.man_pager_view_container);
 		pagerView = (ViewPagerView) findViewById(R.id.man_pager_view);
 
 		manHttpHandler = new ManHttpHandler();
@@ -72,8 +73,8 @@ public class Man extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
-								+ "GetArticle.shtml?userId=22"
-								// + BaseUtils.CUR_USER_MAP.get("id")
+								+ "GetArticle.shtml?userId="
+								+ BaseUtils.CUR_USER_MAP.get("id")
 								+ "&pageNumber=1&pageLine=15");
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				msg.setData(bundle);
@@ -194,7 +195,7 @@ public class Man extends Activity {
 				pagerView.setData(curImg.getInt("index"),
 						curImg.getJSONArray("imgs"));
 				pagerView.setVisibility(View.VISIBLE);
-//				pagerViewContainer.setVisibility(View.VISIBLE);
+				// pagerViewContainer.setVisibility(View.VISIBLE);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

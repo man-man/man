@@ -27,7 +27,7 @@ public class Welcome extends Activity implements Callback {
 	private static final long DELAY = 1000;
 
 	private Handler handler;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class Welcome extends Activity implements Callback {
 
 		handler.sendEmptyMessageDelayed(GO_MAIN, DELAY);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -49,7 +49,7 @@ public class Welcome extends Activity implements Callback {
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Man.class);
+		Intent intent = new Intent(this, Login.class);
 		startActivity(intent);
 		finish();
 	}
