@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     >
     
 	<com.app.view.NetImageView 
@@ -10,7 +12,6 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:scaleType="centerInside"
-	    android:background="#ccc"
 	    />
 	
 	<TextView

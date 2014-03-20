@@ -1,15 +1,11 @@
 package com.app.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.util.AttributeSet;
 import android.view.Menu;
-import android.view.View;
 import android.view.Window;
 
 import com.app.man.R;
@@ -21,7 +17,7 @@ import com.app.util.DensityUtil;
  * @author 王灵
  * 
  */
-public class Welcome extends Activity implements Callback {
+public class Welcome extends BaseActivity implements Callback {
 
 	private static final int GO_MAIN = 1;
 	private static final long DELAY = 1000;

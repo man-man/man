@@ -23,6 +23,7 @@
                 android:id="@+id/mine_user_info_panel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical" >
 
                 <!-- 背景banner -->
@@ -156,12 +157,12 @@
 
             <!-- 功能列表 -->
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content" >
 
                 <LinearLayout
+                    android:id="@+id/mine_group_1"
                     style="@style/mine_container_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -261,9 +262,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/mine_group_2"
                     style="@style/mine_container_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_group_1"
                     android:orientation="vertical" >
 
                     <!-- 树洞 -->
@@ -291,9 +294,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/mine_group_3"
                     style="@style/mine_container_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_group_2"
                     android:orientation="vertical" >
 
                     <!-- fm电台 -->
@@ -303,6 +308,12 @@
                         style="@style/mine_container_s"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >
+
+                        <com.app.view.NetImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:scaleType="centerCrop"
+                            app:netUrl="http://b248.photo.store.qq.com/psb?/V11mc5aH1jEnan/D8z2lWj6NUccCqsJwZxjHk7Fnu2Af8d498Yx6txKoao!/b/dAMN3pMkDQAA&amp;bo=QABIAAAAAAADAC0!" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -318,7 +329,79 @@
                             android:src="@drawable/mine_redio_play" />
                     </RelativeLayout>
                 </LinearLayout>
-            </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mine_group_4"
+                    style="@style/mine_container_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/mine_group_3"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="vertical" >
+
+                    <!-- fm电台 -->
+
+                    <RelativeLayout
+                        android:id="@+id/mine_fm_panel"
+                        style="@style/mine_container_s_noborder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <com.app.view.NetImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:scaleType="centerCrop"
+                            app:netUrl="http://b248.photo.store.qq.com/psb?/V11mc5aH1jEnan/D8z2lWj6NUccCqsJwZxjHk7Fnu2Af8d498Yx6txKoao!/b/dAMN3pMkDQAA&amp;bo=QABIAAAAAAADAC0!" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="44dp"
+                            android:text="FM电台"
+                            android:textSize="16dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/mine_fm_panel"
+                        style="@style/mine_container_s_noborder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <com.app.view.NetImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:scaleType="centerCrop"
+                            app:netUrl="http://b248.photo.store.qq.com/psb?/V11mc5aH1jEnan/D8z2lWj6NUccCqsJwZxjHk7Fnu2Af8d498Yx6txKoao!/b/dAMN3pMkDQAA&amp;bo=QABIAAAAAAADAC0!" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="44dp"
+                            android:text="FM电台"
+                            android:textSize="16dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/mine_fm_panel"
+                        style="@style/mine_container_s_noborder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <com.app.view.NetImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:scaleType="centerCrop"
+                            app:netUrl="http://b248.photo.store.qq.com/psb?/V11mc5aH1jEnan/D8z2lWj6NUccCqsJwZxjHk7Fnu2Af8d498Yx6txKoao!/b/dAMN3pMkDQAA&amp;bo=QABIAAAAAAADAC0!" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="44dp"
+                            android:text="FM电台"
+                            android:textSize="16dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

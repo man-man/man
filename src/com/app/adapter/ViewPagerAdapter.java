@@ -14,34 +14,23 @@ import android.view.View;
 
 import com.app.view.ViewPagerItemView;
 
-/**
- * @author frankiewei
- * ����������.
- */
 public class ViewPagerAdapter extends PagerAdapter {
 
-	/**
-	 * ������
-	 */
 	private Context mContext;
 	
-	/**
-	 * ���Դ,������JSONARRAY
-	 */
 	private JSONArray mJsonArray;
 	
-	/**
-	 * Hashmap������Ƭ��λ���Լ�ItemView.
-	 */
+	private int curIndex = 0;
+	
 	private HashMap<Integer, ViewPagerItemView> mHashMap;
 	
-	public ViewPagerAdapter(Context context,JSONArray arrays) {
+	public ViewPagerAdapter(Context context,JSONArray arrays, int curIndex) {
 		this.mContext = context;
 		this.mJsonArray = arrays;
+		this.curIndex = curIndex;
 		mHashMap = new HashMap<Integer, ViewPagerItemView>();
 	}
 	
-	//������л��գ����������һ�����ʱ�򣬻�����ڵ�ͼƬ���յ�.
 	@Override
 	public void destroyItem(View container, int position, Object object) {
 		ViewPagerItemView itemView = (ViewPagerItemView)object;
@@ -53,17 +42,21 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	}
 
-	//���ﷵ������ж�����,��BaseAdapterһ��.
 	@Override
 	public int getCount() {
 		return mJsonArray.length();
 	}
-
-	//������ǳ�ʼ��ViewPagerItemView.���ViewPagerItemView�Ѿ�����,
-	//����reload��������newһ������������.
+	
+	@Override
+	public int getItemPosition(Object object) {
+		return super.getItemPosition(object);
+	}
+	
 	@Override
 	public Object instantiateItem(View container, int position) {	
 		ViewPagerItemView itemView;
+		
+//		position = curIndex;
 		if(mHashMap.containsKey(position)){
 			itemView = mHashMap.get(position);
 			itemView.reload();

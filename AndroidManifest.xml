@@ -14,9 +14,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.app.activity.Welcome"
+            android:name="com.app.activity.LoginB"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
@@ -30,36 +31,61 @@
             android:name="com.app.activity.Woman"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Login" >
+        <activity
+            android:name="com.app.activity.Login"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Man" >
+        <activity
+            android:name="com.app.activity.Man"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Mine" >
+        <activity
+            android:name="com.app.activity.Mine"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Vote" >
+        <activity
+            android:name="com.app.activity.Vote"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Sign" >
+        <activity
+            android:name="com.app.activity.Sign"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.VoteAfter" >
+        <activity
+            android:name="com.app.activity.VoteAfter"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.SignInfo" >
+        <activity
+            android:name="com.app.activity.SignInfo"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Test" >
+        <activity
+            android:name="com.app.activity.Test"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.app.activity.SignSanwei"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <!-- 
         <activity
             android:name="com.app.activity.LoginB"
-            android:label="@string/title_activity_login_b" >
+            android:label="@string/title_activity_login_b"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.app.activity.Task" >
-        </activity>
-        <activity android:name="com.app.activity.Tree" >
+         -->
+        <activity
+            android:name="com.app.activity.Task"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.app.activity.TreeInfo" >
+            android:name="com.app.activity.Tree"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.TreeInfo"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

@@ -1,6 +1,5 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,7 +16,7 @@ import com.app.man.R;
  * @author 王灵
  * 
  */
-public class Mine extends Activity {
+public class Mine extends BaseActivity {
 
 	private ViewGroup taskBt; // 我的任务
 	private ViewGroup photosBt; // 我的相册

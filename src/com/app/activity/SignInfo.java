@@ -1,6 +1,5 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import com.app.man.R;
 import com.app.view.TitleView;
 
-public class SignInfo extends Activity {
+public class SignInfo extends BaseActivity {
 	
 	private TitleView titleView; //页头
 	private LinearLayout dateLinear;

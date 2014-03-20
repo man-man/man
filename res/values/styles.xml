@@ -124,5 +124,11 @@
         <item name="android:paddingRight">18dp</item>
         <item name="android:background">@drawable/mine_container_s_corner</item>
     </style>
+    <style name="mine_container_s_noborder">
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingRight">18dp</item>
+    </style>
 	<!-- 我的页面end -->
 </resources>

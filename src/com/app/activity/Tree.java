@@ -1,20 +1,17 @@
 package com.app.activity;
 
-import com.app.man.R;
-import com.app.man.R.layout;
-import com.app.man.R.menu;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.Window;
+
+import com.app.man.R;
 
 /**
  * 树洞
  * @author 王灵
  *
  */
-public class Tree extends Activity {
+public class Tree extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

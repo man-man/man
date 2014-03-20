@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -22,7 +21,7 @@ import com.app.view.VoteView;
  * @author 王灵
  * 
  */
-public class Vote extends Activity {
+public class Vote extends BaseActivity {
 
 	private VoteView voteContainer;
 

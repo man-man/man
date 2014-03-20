@@ -32,8 +32,8 @@ import com.app.man.R;
  * @author 王灵
  * 
  */
-public class Login extends Activity {
-	
+public class Login extends BaseActivity {
+
 	final String userName = "18611128524";
 	final String pwd = "123456";
 
@@ -49,10 +49,10 @@ public class Login extends Activity {
 		setContentView(R.layout.login);
 		passport = (EditText) findViewById(R.id.login_passport);
 		password = (EditText) findViewById(R.id.login_password);
-		
+
 		passport.setText(userName);
 		password.setText(pwd);
-		
+
 		loginBt = (Button) findViewById(R.id.login_bt);
 		loginBt.setOnClickListener(loginOnclickListener);
 
@@ -154,6 +154,7 @@ public class Login extends Activity {
 					BaseUtils.CUR_USER_MAP = resultMap;
 					Intent intent = new Intent(Login.this, Woman.class);
 					Login.this.startActivity(intent);
+					Login.this.finish();
 				} else {
 					Toast.makeText(Login.this,
 							resultObj.getString("errorMessage"),

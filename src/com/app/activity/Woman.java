@@ -8,8 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -30,7 +28,7 @@ import com.app.view.RankScrollView2;
  * @author 王灵
  * 
  */
-public class Woman extends Activity {
+public class Woman extends BaseActivity {
 
 	/**
 	 * 排行榜数据

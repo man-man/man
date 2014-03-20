@@ -5,7 +5,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -37,7 +36,7 @@ import com.app.view.ViewPagerView;
  * @author 王灵
  * 
  */
-public class Man extends Activity {
+public class Man extends BaseActivity {
 
 	private ScrollView parentScroll; // 父scroll
 	private ViewGroup manListView; // 文章列表容器

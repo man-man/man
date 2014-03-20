@@ -18,6 +18,8 @@ public class ViewPagerView extends ViewPager {
 
 	private JSONArray mJsonArray;
 
+	private int curIndex;
+
 	public ViewPagerView(Context context) {
 		super(context);
 	}
@@ -28,6 +30,7 @@ public class ViewPagerView extends ViewPager {
 
 	public void setData(int index, JSONArray arr) {
 		this.mJsonArray = arr;
+		this.curIndex = index;
 		setupViews();
 	}
 
@@ -48,7 +51,8 @@ public class ViewPagerView extends ViewPager {
 		// }
 		//
 		// }
-		mViewPagerAdapter = new ViewPagerAdapter(getContext(), mJsonArray);
+		mViewPagerAdapter = new ViewPagerAdapter(getContext(), mJsonArray,
+				curIndex);
 		this.setAdapter(mViewPagerAdapter);
 	}
 

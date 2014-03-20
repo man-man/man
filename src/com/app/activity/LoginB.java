@@ -1,6 +1,5 @@
 package com.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +10,7 @@ import android.widget.Button;
 
 import com.app.man.R;
 
-public class LoginB extends Activity implements OnClickListener {
+public class LoginB extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +25,14 @@ public class LoginB extends Activity implements OnClickListener {
 		loginBt.setOnClickListener(this);
 		weiboBt.setOnClickListener(this);
 		registerBt.setOnClickListener(this);
+
+		goMain();
+	}
+
+	private void goMain() {
+		Intent intent = new Intent(this, Mine.class);
+		startActivity(intent);
+		finish();
 	}
 
 	@Override
@@ -43,7 +50,7 @@ public class LoginB extends Activity implements OnClickListener {
 			cls = Login.class;
 			break;
 		}
-		if(cls != null){
+		if (cls != null) {
 			startActivity(new Intent(this, cls));
 		}
 	}

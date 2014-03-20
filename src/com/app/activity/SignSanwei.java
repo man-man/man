@@ -2,7 +2,6 @@ package com.app.activity;
 
 import java.util.LinkedList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,7 +20,7 @@ import com.app.man.R;
  * @author 王灵
  * 
  */
-public class SignSanwei extends Activity {
+public class SignSanwei extends BaseActivity {
 
 	private Spinner sanwei_1;
 	private Spinner sanwei_2;

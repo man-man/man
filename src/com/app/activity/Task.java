@@ -1,15 +1,12 @@
 package com.app.activity;
 
-import com.app.man.R;
-import com.app.man.R.layout;
-import com.app.man.R.menu;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.Window;
 
-public class Task extends Activity {
+import com.app.man.R;
+
+public class Task extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

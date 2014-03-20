@@ -37,7 +37,6 @@ public class ViewPagerItemView extends FrameLayout {
 		setupViews();
 	}
 
-	// ��ʼ��View.
 	private void setupViews() {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View view = inflater.inflate(R.layout.viewpager_itemview, null);

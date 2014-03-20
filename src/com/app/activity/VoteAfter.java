@@ -4,28 +4,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 import com.app.view.NetImageView;
-import com.app.view.VoteView;
 
-public class VoteAfter extends Activity {
+public class VoteAfter extends BaseActivity {
 
 	private TextView vote_after_name;
 	private TextView vote_after_age;

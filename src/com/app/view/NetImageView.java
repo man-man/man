@@ -88,6 +88,8 @@ public class NetImageView extends ImageView {
 
 	MyImgHandler handler;
 
+	private boolean hasLayout = false;
+
 	public class MyImgHandler extends Handler {
 		private boolean isStart = true;
 
@@ -197,27 +199,31 @@ public class NetImageView extends ImageView {
 
 		mTypedArray.recycle();
 
-		if (netUrl != null) {
-			startLoadImg();
-		}
+		startLoadImg();
 	}
 
 	@Override
 	public void layout(int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
 		super.layout(l, t, r, b);
-		LayoutParams params = (LayoutParams) this.getLayoutParams();
+		if (!hasLayout) {
+			LayoutParams params = (LayoutParams) this.getLayoutParams();
 
-		// 图片为矩形
-		if (isRect) {
-			params.height = getWidth();
+			// 图片为矩形
+			if (isRect) {
+				params.height = getWidth();
+			}
+
+			if (heightOfWidth != 0) {
+				params.height = (int) (getWidth() * heightOfWidth + 0.5);
+			}
+
+			this.setLayoutParams(params);
+			System.out.println("------------NetImg layout");
+			startLoadImg();
+
+			hasLayout = true;
 		}
-
-		if (heightOfWidth != 0) {
-			params.height = (int) (getWidth() * heightOfWidth + 0.5);
-		}
-
-		this.setLayoutParams(params);
 	}
 
 	@Override
@@ -348,8 +354,12 @@ public class NetImageView extends ImageView {
 		if ("".equals(netUrl) || netUrl == null) {
 			return;
 		}
+		if (getWidth() <= 0) {
+			return;
+		}
+		System.out.println("------------NetImg width:" + this.getWidth());
 		ContextUtil.COMMON_PICASSO.load(netUrl)
-				.resize(imgResizeWidth, imgResizeHeight).centerCrop()
+//				.resize(this.getWidth(), this.getHeight()).centerCrop()
 				.into(this);
 	}
 
@@ -414,9 +424,7 @@ public class NetImageView extends ImageView {
 
 	public void setNetUrl(String netUrl) {
 		this.netUrl = netUrl;
-		if (netUrl != null) {
-			startLoadImg();
-		}
+		startLoadImg();
 	}
 
 	public boolean isRect() {
