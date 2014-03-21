@@ -52,8 +52,6 @@ public class Man extends BaseActivity {
 
 		parentScroll = (ScrollView) findViewById(R.id.man_list_scroll);
 		manListView = (ViewGroup) findViewById(R.id.man_list);
-		// pagerViewContainer = (ViewGroup)
-		// findViewById(R.id.man_pager_view_container);
 		pagerView = (ViewPagerView) findViewById(R.id.man_pager_view);
 
 		manHttpHandler = new ManHttpHandler();

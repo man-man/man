@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.app.man"
+    android:id="@+id/mine_fm_item_panel"
+    style="@style/mine_container_s_noborder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.app.view.NetImageView
+        android:id="@+id/fm_item_icon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/fm_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="44dp"
+        android:text="FM电台"
+        android:textSize="16dp" />
+
+</RelativeLayout>

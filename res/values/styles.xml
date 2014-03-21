@@ -112,7 +112,7 @@
 	<style name="mine_container_b">
 	    <item name="android:layout_marginLeft">5dp</item>
 	    <item name="android:layout_marginRight">5dp</item>
-	    <item name="android:layout_marginTop">10dp</item>
+	    <item name="android:layout_marginBottom">10dp</item>
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@drawable/mine_container_b_corner</item>
