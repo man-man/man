@@ -58,7 +58,7 @@ public class Mine extends BaseActivity {
 		attBt.setOnClickListener(btClickListener);
 		treeBt.setOnClickListener(btClickListener);
 
-		fmView = new FmView(curFmContainer, fmListContainer); // 初始化电台
+		fmView = new FmView(this, curFmContainer, fmListContainer); // 初始化电台
 		
 		setFmData();
 	}
@@ -66,7 +66,7 @@ public class Mine extends BaseActivity {
 	private void setFmData() {
 		JSONArray datas = new JSONArray();
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 3; i++) {
 			JSONObject obj = new JSONObject();
 
 			try {

@@ -219,7 +219,6 @@ public class NetImageView extends ImageView {
 			}
 
 			this.setLayoutParams(params);
-			System.out.println("------------NetImg layout");
 			startLoadImg();
 
 			hasLayout = true;
@@ -357,7 +356,6 @@ public class NetImageView extends ImageView {
 		if (getWidth() <= 0) {
 			return;
 		}
-		System.out.println("------------NetImg width:" + this.getWidth());
 		ContextUtil.COMMON_PICASSO.load(netUrl)
 //				.resize(this.getWidth(), this.getHeight()).centerCrop()
 				.into(this);
