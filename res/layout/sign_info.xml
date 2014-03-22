@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     style="@style/sign_info_item"
+                    android:id="@+id/sign_info_sanwei"
                     android:background="@drawable/sign_info_bottom">
                     <TextView android:layout_width="0dp"
                         android:layout_weight="1"

@@ -30,6 +30,54 @@ public class TextChangeView extends LinearLayout {
 		return arr;
 	}
 
+	public TypedArray getTypedArray() {
+		return typedArray;
+	}
+
+	public void setTypedArray(TypedArray typedArray) {
+		this.typedArray = typedArray;
+	}
+
+	public int getArrSize() {
+		return arrSize;
+	}
+
+	public void setArrSize(int arrSize) {
+		this.arrSize = arrSize;
+	}
+
+	public Button getText_change_up() {
+		return text_change_up;
+	}
+
+	public void setText_change_up(Button text_change_up) {
+		this.text_change_up = text_change_up;
+	}
+
+	public Button getText_change_down() {
+		return text_change_down;
+	}
+
+	public void setText_change_down(Button text_change_down) {
+		this.text_change_down = text_change_down;
+	}
+
+	public TextView getText_change_text() {
+		return text_change_text;
+	}
+
+	public void setText_change_text(TextView text_change_text) {
+		this.text_change_text = text_change_text;
+	}
+
+	public TextView getText_change_label() {
+		return text_change_label;
+	}
+
+	public void setText_change_label(TextView text_change_label) {
+		this.text_change_label = text_change_label;
+	}
+
 	public void setArr(String[] arr) {
 		this.arr = arr;
 		if (arr != null) {

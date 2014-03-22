@@ -65,7 +65,7 @@ public class SignSanwei extends BaseActivity {
 
 		// 将adapter 添加到spinner中
 		sanwei_1.setAdapter(adapter1);
-		sanwei_1.setSelection(20,true);
+		sanwei_1.setSelection(20, true);
 
 		// 添加事件Spinner事件监听
 		sanwei_1.setOnItemSelectedListener(new SpinnerXMLSelectedListener(

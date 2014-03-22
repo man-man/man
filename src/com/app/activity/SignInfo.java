@@ -26,6 +26,9 @@ public class SignInfo extends BaseActivity {
 	private ImageView sign_info_photo;
 	private ImageView sign_info_bigimg;
 
+	private LinearLayout sign_info_sanwei;
+	private TextView sign_info_sanwei_text;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,10 +44,13 @@ public class SignInfo extends BaseActivity {
 		dateLinear = (LinearLayout) findViewById(R.id.sign_info_date_linear);
 		sign_info_photo = (ImageView) findViewById(R.id.sign_info_photo);
 		sign_info_bigimg = (ImageView) findViewById(R.id.sign_info_bigimg);
+		sign_info_sanwei = (LinearLayout) findViewById(R.id.sign_info_sanwei);
+		sign_info_sanwei_text = (TextView) findViewById(R.id.sign_info_sanwei_text);
 
 		PhotoOnlickListener listener = new PhotoOnlickListener();
 		sign_info_photo.setOnClickListener(listener);
 		sign_info_bigimg.setOnClickListener(listener);
+		sign_info_sanwei.setOnClickListener(listener);
 
 		dateLinear.setOnClickListener(new OnClickListener() {
 
@@ -87,6 +93,10 @@ public class SignInfo extends BaseActivity {
 				Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				startActivityForResult(intent2, 2);
 				break;
+			case R.id.sign_info_sanwei:
+				Intent intent3 = new Intent(SignInfo.this, SignSanweiB.class);
+				startActivityForResult(intent3, 3);
+				break;
 			default:
 				break;
 			}
@@ -116,6 +126,15 @@ public class SignInfo extends BaseActivity {
 					big_img = bitmap;
 					sign_info_bigimg.setImageBitmap(bitmap);
 				}
+			}
+		}
+		if (requestCode == 3) {
+			if (data != null && data.getExtras() != null) {
+				String sanwei1 = data.getExtras().getString("sanwei1");
+				String sanwei2 = data.getExtras().getString("sanwei2");
+				String sanwei3 = data.getExtras().getString("sanwei3");
+				sign_info_sanwei_text.setText(sanwei1 + " " + sanwei2 + " "
+						+ sanwei3);
 			}
 		}
 		// if (requestCode == 2) {
