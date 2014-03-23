@@ -253,12 +253,16 @@ public class Mine extends BaseActivity {
 				cls = Task.class;
 				break;
 			case R.id.mine_photo_panel:
+				cls = Photo.class;
 				break;
 			case R.id.mine_collect_panel:
+				cls = Collect.class;
 				break;
 			case R.id.mine_att_panel:
+				cls = Attention.class;
 				break;
 			case R.id.mine_tree_panel:
+				cls = Tree.class;
 				break;
 			default:
 				break;

@@ -21,26 +21,27 @@ import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 
-public class Tree extends BaseActivity {
+public class Photo extends BaseActivity {
 
-	AttHttpHandler AttHttpHandler = new AttHttpHandler();
+	PhotoHttpHandler PhotoHttpHandler = new PhotoHttpHandler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.tree);
+		setContentView(R.layout.task);
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				// 登陆的例子，get
-				Message msg = AttHttpHandler.obtainMessage();
+				Message msg = PhotoHttpHandler.obtainMessage();
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
-								+ "GetQuestion.shtml?pageNumber=1&pageLine=15");
+								+ "GetUserInfo.shtml?userId="
+								+ BaseUtils.CUR_USER_MAP.get("userId"));
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				msg.setData(bundle);
 				msg.sendToTarget();
@@ -48,13 +49,13 @@ public class Tree extends BaseActivity {
 		}).start();
 	}
 
-	class AttHttpHandler extends HttpCallBackHandler {
+	class PhotoHttpHandler extends HttpCallBackHandler {
 
-		public AttHttpHandler(Looper looper) {
+		public PhotoHttpHandler(Looper looper) {
 			super(looper);
 		}
 
-		public AttHttpHandler() {
+		public PhotoHttpHandler() {
 		}
 
 		@Override
@@ -73,17 +74,17 @@ public class Tree extends BaseActivity {
 						Object resultTmp = map.get(key);
 						resultMap.put(key, resultTmp);
 					}
-					JSONArray questions = map.getJSONArray("questions");
+					JSONArray albums = map.getJSONArray("albums");
 
 					// fmView.setData(channels);
 				} else {
-					Toast.makeText(Tree.this,
+					Toast.makeText(Photo.this,
 							resultObj.getString("errorMessage"),
 							Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
-				Toast.makeText(Tree.this, R.string.base_response_error,
+				Toast.makeText(Photo.this, R.string.base_response_error,
 						Toast.LENGTH_SHORT).show();
 			}
 		}

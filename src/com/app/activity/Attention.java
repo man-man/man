@@ -21,7 +21,7 @@ import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 
-public class Tree extends BaseActivity {
+public class Attention extends BaseActivity {
 
 	AttHttpHandler AttHttpHandler = new AttHttpHandler();
 
@@ -29,7 +29,7 @@ public class Tree extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.tree);
+		setContentView(R.layout.task);
 
 		new Thread(new Runnable() {
 
@@ -40,7 +40,8 @@ public class Tree extends BaseActivity {
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
-								+ "GetQuestion.shtml?pageNumber=1&pageLine=15");
+								+ "GetFollowUser.shtml?userId="
+								+ BaseUtils.CUR_USER_MAP.get("userId"));
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				msg.setData(bundle);
 				msg.sendToTarget();
@@ -73,17 +74,17 @@ public class Tree extends BaseActivity {
 						Object resultTmp = map.get(key);
 						resultMap.put(key, resultTmp);
 					}
-					JSONArray questions = map.getJSONArray("questions");
+					JSONArray users = map.getJSONArray("users");
 
 					// fmView.setData(channels);
 				} else {
-					Toast.makeText(Tree.this,
+					Toast.makeText(Attention.this,
 							resultObj.getString("errorMessage"),
 							Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
-				Toast.makeText(Tree.this, R.string.base_response_error,
+				Toast.makeText(Attention.this, R.string.base_response_error,
 						Toast.LENGTH_SHORT).show();
 			}
 		}

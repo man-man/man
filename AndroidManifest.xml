@@ -85,6 +85,18 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.app.activity.Attention"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Collect"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Photo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.app.activity.Tree"
             android:screenOrientation="portrait" >
         </activity>
