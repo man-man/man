@@ -30,7 +30,7 @@ public class LoginB extends BaseActivity implements OnClickListener {
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Mine.class);
+		Intent intent = new Intent(this, Login.class);
 		startActivity(intent);
 		finish();
 	}

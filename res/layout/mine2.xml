@@ -29,6 +29,7 @@
                 <!-- 背景banner -->
 
                 <com.app.view.NetImageView
+                    android:id="@+id/mine_bg_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -59,21 +60,23 @@
                             <!-- 姓名 性别 -->
 
                             <TextView
+                                android:id="@+id/mine_username"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
                                 android:drawableRight="@drawable/sex_girl"
-                                android:text="张小豆"
+                                android:text=""
                                 android:textColor="#fff"
                                 android:textSize="18sp" />
 
                             <!-- 积分 -->
 
                             <TextView
+                                android:id="@+id/mine_score"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="积分：1415"
+                                android:text="积分："
                                 android:textColor="#fff"
                                 android:textSize="16sp" />
                         </RelativeLayout>
@@ -125,7 +128,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/mine_age"
                                 android:layout_toRightOf="@id/mine_city_title"
-                                android:text="北京"
+                                android:text=""
                                 android:textColor="#565656"
                                 android:textSize="14sp" />
 
@@ -145,6 +148,7 @@
                     </LinearLayout>
 
                     <com.app.view.NetImageView
+                        android:id="@+id/mine_user_img"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_alignParentLeft="true"
