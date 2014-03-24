@@ -24,10 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.activity.SignInfo;
+import com.app.common.Base64Utils;
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.common.JSONObjectSerializalble;
+import com.app.common.MyDateUtils;
 import com.app.man.R;
 
 @SuppressLint("NewApi")
