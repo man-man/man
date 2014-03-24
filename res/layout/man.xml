@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/abs_container"
     xmlns:android_custom="http://schemas.android.com/apk/res/com.app.man"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -46,5 +47,11 @@
         android:layout_height="match_parent"
         android:visibility="gone" >
     </com.app.view.ViewPagerView>
+    
+    <com.app.view.MenuView
+        android:id="@+id/man_menu_vew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"></com.app.view.MenuView>
 
-</RelativeLayout>
+</AbsoluteLayout>

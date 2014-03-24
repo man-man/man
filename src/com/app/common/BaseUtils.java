@@ -17,9 +17,9 @@ import android.os.Environment;
 import android.view.WindowManager;
 
 public class BaseUtils {
-	
+
 	public static Picasso COMMON_PICASSO;
-	
+
 	public static Map<String, Object> CUR_USER_MAP = null;
 
 	private static ImageLoader imageLoader = ImageLoader.getInstance();

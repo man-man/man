@@ -10,10 +10,14 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsoluteLayout;
+import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -21,12 +25,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 import com.app.util.DensityUtil;
 import com.app.view.InnerScrollView;
+import com.app.view.MenuView;
 import com.app.view.NetImageView;
 import com.app.view.ViewPagerView;
 
@@ -38,9 +42,12 @@ import com.app.view.ViewPagerView;
  */
 public class Man extends BaseActivity {
 
+	private AbsoluteLayout absContainer; // 绝对布局容器
 	private ScrollView parentScroll; // 父scroll
 	private ViewGroup manListView; // 文章列表容器
 	private ViewPagerView pagerView; // 图片切换组件
+
+	private MenuView menuView; // 更多菜单
 
 	ManHttpHandler manHttpHandler;
 
@@ -50,13 +57,27 @@ public class Man extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.man);
 
+		absContainer = (AbsoluteLayout) findViewById(R.id.abs_container);
 		parentScroll = (ScrollView) findViewById(R.id.man_list_scroll);
 		manListView = (ViewGroup) findViewById(R.id.man_list);
 		pagerView = (ViewPagerView) findViewById(R.id.man_pager_view);
 
+		menuView = (MenuView) findViewById(R.id.man_menu_vew);
+
+		absContainer.setOnTouchListener(absCOnTouch);
+		
 		manHttpHandler = new ManHttpHandler();
 		rankReqSend();
 	}
+	
+	OnTouchListener absCOnTouch = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			menuView.hide();
+			return false;
+		}
+	};
 
 	/**
 	 * 发送http请求
@@ -70,8 +91,8 @@ public class Man extends BaseActivity {
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
-								+ "GetArticle.shtml?userId="
-								+ BaseUtils.CUR_USER_MAP.get("id")
+								+ "GetArticle.shtml?userId=22"
+								// + BaseUtils.CUR_USER_MAP.get("id")
 								+ "&pageNumber=1&pageLine=15");
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				msg.setData(bundle);
@@ -136,11 +157,45 @@ public class Man extends BaseActivity {
 		// 设置父scroll，避免子scroll与父scroll冲突
 		((InnerScrollView) convertView.findViewById(R.id.man_item_imgs_scroll))
 				.setParentScrollView(parentScroll);
-
+		
+		// 为more按钮添加侦听
+		ImageView moreBt = (ImageView) convertView.findViewById(R.id.man_item_more);
+		try {
+			moreBt.setTag(article.getString("articleId"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		moreBt.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				menuView.show(v, absContainer);
+			}
+		});
+		
+		
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 0, 0, 10);
 		convertView.setLayoutParams(params);
+		
+		convertView.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				menuView.hide();
+				System.out.println("-----------------------setOnTouchListener");
+				return false;
+			}
+		});
+		convertView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				System.out.println("-----------------------setOnClickListener");
+				menuView.hide();
+			}
+		});
 		return convertView;
 	}
 

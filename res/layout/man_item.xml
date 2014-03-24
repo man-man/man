@@ -48,18 +48,20 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-        <!-- 关注按钮 -->
+        <!-- 更多按钮 -->
+	
+		<ImageView
+		    android:id="@+id/man_item_more"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingBottom="8dp"
+		    android:paddingLeft="8dp"
+		    android:paddingRight="5dp"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentTop="true"
+		    android:contentDescription="@string/default_img_des"
+		    android:src="@drawable/more_icon" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:drawableLeft="@drawable/mine_att_icon"
-            android:drawablePadding="3dp"
-            android:text="@string/attention_txt"
-            android:textColor="#565656"
-            android:textSize="12sp" />
     </RelativeLayout>
 
     <!-- 图片展示 -->

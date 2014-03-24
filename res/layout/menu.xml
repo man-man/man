@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="95dp"
+    android:layout_height="wrap_content" >
+	
+    <!-- 背景小三角 -->
+    <ImageView
+        android:id="@+id/menu_sj_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/menu_sanj_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menu_sj_bg"
+        android:background="@drawable/menu_content_bg"
+        android:orientation="vertical"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp" >
+		
+        <!-- 评论 -->
+        <TextView
+            android:id="@+id/menu_comment"
+            style="@style/menu_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_item_bg"
+            android:drawableLeft="@drawable/menu_comment_icon"
+            android:text="评论" />
+		
+        <!-- 关注 -->
+        <TextView
+            android:id="@+id/menu_atten"
+            style="@style/menu_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_item_bg"
+            android:drawableLeft="@drawable/menu_att_icon"
+            android:text="关注" />
+		
+        <!-- 收藏 -->
+        <TextView
+            android:id="@+id/menu_collect"
+            style="@style/menu_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_item_bg"
+            android:drawableLeft="@drawable/menu_collect_icon"
+            android:text="收藏" />
+		
+        <!-- 分享 -->
+        <TextView
+            android:id="@+id/menu_share"
+            style="@style/menu_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/menu_item_bg"
+            android:drawableLeft="@drawable/menu_share_iocn"
+            android:text="分享" />
+    </LinearLayout>
+
+</RelativeLayout>

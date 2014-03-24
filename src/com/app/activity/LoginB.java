@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.Window;
 import android.widget.Button;
 
 import com.app.man.R;
+import com.app.util.DensityUtil;
 
 public class LoginB extends BaseActivity implements OnClickListener {
 
@@ -16,7 +20,36 @@ public class LoginB extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.login_b);
+		// setContentView(R.layout.login_b);
+
+		DensityUtil.initWindow(getWindowManager());
+
+		final View startView = View.inflate(this, R.layout.login_b, null);
+		setContentView(startView);
+		// 渐变
+		AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
+		aa.setDuration(2000);
+		startView.setAnimation(aa);
+		aa.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub
+				 goMain();
+			}
+		});
 
 		Button loginBt = (Button) findViewById(R.id.goddess_bt);
 		Button weiboBt = (Button) findViewById(R.id.weibo_bt);
@@ -25,12 +58,10 @@ public class LoginB extends BaseActivity implements OnClickListener {
 		loginBt.setOnClickListener(this);
 		weiboBt.setOnClickListener(this);
 		registerBt.setOnClickListener(this);
-
-		goMain();
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Mine.class);
+		Intent intent = new Intent(this, Man.class);
 		startActivity(intent);
 		finish();
 	}

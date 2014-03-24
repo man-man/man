@@ -12,12 +12,13 @@ public class DensityUtil {
 	public static void initWindow(WindowManager wm){
 		DisplayMetrics metric = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(metric);
-        SCREEN_WIDTH = metric.widthPixels;  // ÆÁÄ»¿í¶È£¨ÏñËØ£©
-        SCREEN_HEIGHT = metric.heightPixels;  // ÆÁÄ»¸ß¶È£¨ÏñËØ£©
-        SCREEN_DENSITY = metric.density;  // ÆÁÄ»ÃÜ¶È£¨0.75 / 1.0 / 1.5£©
+        SCREEN_WIDTH = metric.widthPixels;  // ï¿½ï¿½Ä»ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½Ø£ï¿½
+        SCREEN_HEIGHT = metric.heightPixels;  // ï¿½ï¿½Ä»ï¿½ß¶È£ï¿½ï¿½ï¿½ï¿½Ø£ï¿½
+        SCREEN_DENSITY = metric.density;  // ï¿½ï¿½Ä»ï¿½Ü¶È£ï¿½0.75 / 1.0 / 1.5ï¿½ï¿½
 	}
 	
 	public static int dip2px(float dpValue) {
+		System.out.println("----------------SCREEN_DENSITY:" + SCREEN_DENSITY);
 		return (int) (dpValue * SCREEN_DENSITY);
 	}
 	
