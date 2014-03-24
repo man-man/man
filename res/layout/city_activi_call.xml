@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.app.man"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <com.app.view.CityChangeView
+        android:id="@+id/city_change_v1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:textArrays="@array/city_arrays" >
+    </com.app.view.CityChangeView>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/city_change_btn_ok"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/btn_ok" />
+         <Button
+            android:id="@+id/city_change_btn_cancel"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/btn_cancel" />
+    </RelativeLayout>
+
+</LinearLayout>
