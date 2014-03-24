@@ -17,9 +17,13 @@ import android.os.Environment;
 import android.view.WindowManager;
 
 public class BaseUtils {
+
+	public static Boolean IS_PLAY_MP3 = false;
 	
+	public static String CUR_PLAY_MP3_URL = "";
+
 	public static Picasso COMMON_PICASSO;
-	
+
 	public static Map<String, Object> CUR_USER_MAP = null;
 
 	private static ImageLoader imageLoader = ImageLoader.getInstance();

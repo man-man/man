@@ -5,12 +5,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.app.common.BaseUtils;
 import com.app.man.R;
 
 public class FmView {
@@ -50,6 +53,8 @@ public class FmView {
 		dataList = datas;
 		try {
 			curDataObj = datas.getJSONObject(0);
+			//String url = curDataObj.getString("url");
+			//BaseUtils.CUR_PLAY_MP3_URL = url;
 			resetOtherData();
 		} catch (JSONException e) {
 			e.printStackTrace();
