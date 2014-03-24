@@ -94,7 +94,7 @@
                         android:layout_gravity="right"
                         android:gravity="center_horizontal"
                         style="@style/sign_info_text"
-                        android:text="上海"/>
+                        android:text="北京"/>
                     <ImageView android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/right_arrow"/>

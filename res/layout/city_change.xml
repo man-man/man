@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/city_change_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/select_city" >
+    </TextView>
+
+    <Button
+        android:id="@+id/city_change_btn_before"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/city_next" />
+
+    <TextView
+        android:id="@+id/city_change_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+    </TextView>
+
+    <Button
+        android:id="@+id/city_change_btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/city_before" />
+
+</LinearLayout>

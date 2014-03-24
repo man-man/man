@@ -76,6 +76,14 @@ public class Mine extends BaseActivity {
 		mine_age = (TextView) findViewById(R.id.mine_age);
 		mine_city = (TextView) findViewById(R.id.mine_city);
 		mine_username = (TextView) findViewById(R.id.mine_username);
+		
+		mine_city.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 
 		taskBt = (ViewGroup) findViewById(R.id.mine_task_panel);
 		photosBt = (ViewGroup) findViewById(R.id.mine_photo_panel);

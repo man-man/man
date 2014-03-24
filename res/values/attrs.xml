@@ -30,7 +30,6 @@
         <attr name="textArraysStartIndex" format="integer" />
         <attr name="textArraysStartValue" format="integer" />
     </declare-styleable>
-    
     <!-- title -->
     <declare-styleable name="Title">
         <attr name="isSubmit" format="boolean" />

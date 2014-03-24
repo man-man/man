@@ -72,19 +72,36 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity
+            android:name="com.app.activity.SignSanweiB"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.app.activity.CityChange"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
         <!--
         <activity
             android:name="com.app.activity.LoginB"
             android:label="@string/title_activity_login_b"
             android:screenOrientation="portrait" >
-        </activity>
-        -->
+        </activity>        -->
         <activity
             android:name="com.app.activity.Task"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.app.activity.Tree"
+            android:name="com.app.activity.Attention"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Collect"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Photo"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -98,5 +115,4 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 操作sd card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    
 </manifest>

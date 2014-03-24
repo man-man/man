@@ -28,6 +28,7 @@ public class SignInfo extends BaseActivity {
 
 	private LinearLayout sign_info_sanwei;
 	private TextView sign_info_sanwei_text;
+	private TextView sign_info_diqu_text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,16 @@ public class SignInfo extends BaseActivity {
 		sign_info_bigimg = (ImageView) findViewById(R.id.sign_info_bigimg);
 		sign_info_sanwei = (LinearLayout) findViewById(R.id.sign_info_sanwei);
 		sign_info_sanwei_text = (TextView) findViewById(R.id.sign_info_sanwei_text);
+		sign_info_diqu_text = (TextView) findViewById(R.id.sign_info_diqu_text);
+		sign_info_diqu_text.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(SignInfo.this, CityChange.class);
+				startActivityForResult(intent, 4);
+
+			}
+		});
 
 		PhotoOnlickListener listener = new PhotoOnlickListener();
 		sign_info_photo.setOnClickListener(listener);
@@ -137,7 +148,13 @@ public class SignInfo extends BaseActivity {
 						+ sanwei3);
 			}
 		}
-		// if (requestCode == 2) {
+		if (requestCode == 4) {
+			if (data != null && data.getExtras() != null) {
+				String city = data.getExtras().getString("city");
+				sign_info_diqu_text.setText(city);
+			}
+		}
+		// if (requestCode == 2) {相册
 		// // 获取图片并显示
 		// // Picasso.with(this).load(getPathBUri(data.getData()))
 		// // .into(imageView);
