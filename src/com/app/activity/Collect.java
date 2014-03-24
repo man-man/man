@@ -24,7 +24,7 @@ import com.app.man.R;
 public class Collect extends BaseActivity {
 
 	CollectHttpHandler CollectHttpHandler = new CollectHttpHandler();
-
+ 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

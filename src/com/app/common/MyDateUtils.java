@@ -17,7 +17,7 @@ import java.util.Locale;
  * @since 2011-06-24
  */
 public class MyDateUtils {
-
+ 
 	public static int[] weekArray = { 1, 2, 3, 4, 5, 6, 7 };
 
 	public static String[] weekDescArray = { "星期一", "星期二", "星期三", "星期四", "星期五",

@@ -3,7 +3,6 @@ package com.app.view;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -25,12 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.activity.SignInfo;
-import com.app.common.Base64Utils;
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.common.JSONObjectSerializalble;
-import com.app.common.MyDateUtils;
 import com.app.man.R;
 
 @SuppressLint("NewApi")
