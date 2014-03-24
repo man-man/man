@@ -24,7 +24,7 @@ import com.app.man.R;
 public class Attention extends BaseActivity {
 
 	AttHttpHandler AttHttpHandler = new AttHttpHandler();
-
+ 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -24,7 +24,7 @@ import com.app.man.R;
 public class Photo extends BaseActivity {
 
 	PhotoHttpHandler PhotoHttpHandler = new PhotoHttpHandler();
-
+ 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
