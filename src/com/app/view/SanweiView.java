@@ -27,8 +27,8 @@ public class SanweiView extends LinearLayout {
 		LayoutInflater.from(getContext()).inflate(R.layout.sanwei_change, this);
 		LinearLayout linearLayout = (LinearLayout) this.getChildAt(0);
 		xiongweiView = (TextChangeView) linearLayout.getChildAt(0);
-		yaoweiView = (TextChangeView) linearLayout.getChildAt(0);
-		tunweiView = (TextChangeView) linearLayout.getChildAt(0);
+		yaoweiView = (TextChangeView) linearLayout.getChildAt(1);
+		tunweiView = (TextChangeView) linearLayout.getChildAt(2);
 	}
 
 	public TextChangeView getXiongweiView() {

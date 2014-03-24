@@ -98,5 +98,5 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 操作sd card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    
 </manifest>

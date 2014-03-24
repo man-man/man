@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="#efefef"
+    android:orientation="vertical"
     tools:context=".Task" >
 
     <com.app.view.TitleView
@@ -14,6 +14,7 @@
     </com.app.view.TitleView>
 
     <ScrollView
+        android:id="@+id/task_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -24,9 +25,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:paddingBottom="10dp"
-            android:orientation="vertical" >
+            android:paddingTop="10dp" >
 
             <include layout="@layout/task_item" />
 
@@ -35,7 +36,7 @@
             <include layout="@layout/task_item" />
 
             <include layout="@layout/task_item" />
-            
+
             <include layout="@layout/task_item" />
         </LinearLayout>
     </ScrollView>

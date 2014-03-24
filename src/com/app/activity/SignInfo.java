@@ -1,12 +1,16 @@
 package com.app.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,10 +18,16 @@ import com.app.man.R;
 import com.app.view.TitleView;
 
 public class SignInfo extends BaseActivity {
-	
-	private TitleView titleView; //页头
+
+	private TitleView titleView; // 页头
 	private LinearLayout dateLinear;
 	private TextView dateText;
+
+	private ImageView sign_info_photo;
+	private ImageView sign_info_bigimg;
+
+	private LinearLayout sign_info_sanwei;
+	private TextView sign_info_sanwei_text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +42,16 @@ public class SignInfo extends BaseActivity {
 		titleView = (TitleView) findViewById(R.id.sign_info_title);
 		dateText = (TextView) findViewById(R.id.sign_info_date_text);
 		dateLinear = (LinearLayout) findViewById(R.id.sign_info_date_linear);
-		
-		
+		sign_info_photo = (ImageView) findViewById(R.id.sign_info_photo);
+		sign_info_bigimg = (ImageView) findViewById(R.id.sign_info_bigimg);
+		sign_info_sanwei = (LinearLayout) findViewById(R.id.sign_info_sanwei);
+		sign_info_sanwei_text = (TextView) findViewById(R.id.sign_info_sanwei_text);
+
+		PhotoOnlickListener listener = new PhotoOnlickListener();
+		sign_info_photo.setOnClickListener(listener);
+		sign_info_bigimg.setOnClickListener(listener);
+		sign_info_sanwei.setOnClickListener(listener);
+
 		dateLinear.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -62,11 +80,80 @@ public class SignInfo extends BaseActivity {
 		});
 	}
 
+	class PhotoOnlickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.sign_info_photo:
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, 1);
+				break;
+			case R.id.sign_info_bigimg:
+				Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent2, 2);
+				break;
+			case R.id.sign_info_sanwei:
+				Intent intent3 = new Intent(SignInfo.this, SignSanweiB.class);
+				startActivityForResult(intent3, 3);
+				break;
+			default:
+				break;
+			}
+
+		}
+
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1) {
+			if (data != null && data.getExtras() != null) {
+				Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+				if (bitmap != null) {
+					// sign_info_photo.setDrawingCacheEnabled(true);
+					small_img = bitmap;
+					sign_info_photo.setImageBitmap(bitmap);
+				}
+			}
+		}
+		if (requestCode == 2) {
+			if (data != null && data.getExtras() != null) {
+				Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+				if (bitmap != null) {
+					// sign_info_bigimg.setDrawingCacheEnabled(true);
+					big_img = bitmap;
+					sign_info_bigimg.setImageBitmap(bitmap);
+				}
+			}
+		}
+		if (requestCode == 3) {
+			if (data != null && data.getExtras() != null) {
+				String sanwei1 = data.getExtras().getString("sanwei1");
+				String sanwei2 = data.getExtras().getString("sanwei2");
+				String sanwei3 = data.getExtras().getString("sanwei3");
+				sign_info_sanwei_text.setText(sanwei1 + " " + sanwei2 + " "
+						+ sanwei3);
+			}
+		}
+		// if (requestCode == 2) {
+		// // 获取图片并显示
+		// // Picasso.with(this).load(getPathBUri(data.getData()))
+		// // .into(imageView);
+		// imageView.setImageURI(data.getData());
+		// }
+
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.sign_info, menu);
 		return true;
 	}
+
+	public static Bitmap small_img = null;
+	public static Bitmap big_img = null;
 
 }

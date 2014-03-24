@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     style="@style/sign_info_item"
+                    android:id="@+id/sign_info_sanwei"
                     android:background="@drawable/sign_info_bottom">
                     <TextView android:layout_width="0dp"
                         android:layout_weight="1"
@@ -68,6 +69,7 @@
                         style="@style/sign_info_text_gray"
                         android:text="三围" />
                     <TextView android:layout_width="95dp"
+                        android:id="@+id/sign_info_sanwei_text"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:gravity="center_horizontal"
@@ -87,6 +89,7 @@
                         style="@style/sign_info_text_gray"
                         android:text="参赛地区" />
                     <TextView android:layout_width="95dp"
+                        android:id="@+id/sign_info_diqu_text"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:gravity="center_horizontal"
@@ -100,6 +103,7 @@
             <ImageView android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/default_img"
+                android:id="@+id/sign_info_photo"
                 android:background="#ccc" />
         </LinearLayout>
         <!-- 上部信息end -->
@@ -109,6 +113,7 @@
             android:layout_weight="1"
             android:layout_marginBottom="20dp">
             <ImageView android:layout_width="match_parent"
+                android:id="@+id/sign_info_bigimg"
                 android:layout_height="match_parent"
                 android:src="@drawable/default_img"
                 android:background="#ccc" />
