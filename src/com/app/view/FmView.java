@@ -32,6 +32,15 @@ public class FmView {
 	private ImageView curFmState;
 
 	private Context context;
+	private Intent intent;
+
+	public Intent getIntent() {
+		return intent;
+	}
+
+	public void setIntent(Intent intent) {
+		this.intent = intent;
+	}
 
 	public FmView(Context context, ViewGroup curFmContainer,
 			ViewGroup fmListContainer) {
@@ -54,8 +63,8 @@ public class FmView {
 		dataList = datas;
 		try {
 			curDataObj = datas.getJSONObject(0);
-			//String url = curDataObj.getString("url");
-			//BaseUtils.CUR_PLAY_MP3_URL = url;
+			// String url = curDataObj.getString("url");
+			// BaseUtils.CUR_PLAY_MP3_URL = url;
 			resetOtherData();
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -167,14 +176,18 @@ public class FmView {
 	 * @param state
 	 */
 	private void controlMp3(String state) {
-		Intent intent = new Intent(context, Mp3Service.class);
+		intent = new Intent(context, Mp3Service.class);
 
 		context.stopService(intent);
 
 		if (Mp3Service.STATE_STOP.equals(state)) {
 			switchPlayBt(false);
 		} else if (Mp3Service.STATE_PLAY.equals(state)) {
-			intent.putExtra("url", "");
+			try {
+				intent.putExtra("url", curDataObj.getString("url"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 			intent.putExtra("MSG", state);
 			context.startService(intent); // 启动服务
 			switchPlayBt(true);

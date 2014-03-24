@@ -3,6 +3,7 @@ package com.app.service;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.IBinder;
 
@@ -17,18 +18,19 @@ public class Mp3Service extends Service {
 	private MediaPlayer mediaPlayer = new MediaPlayer(); // 媒体播放器对象
 	private String path; // 音乐文件路径
 	private boolean isPause; // 暂停状态
+	private int percent = 0;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
 		return null;
 	}
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		System.out.println("---------service create--------");
 	}
-	
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (mediaPlayer.isPlaying()) {
@@ -38,14 +40,31 @@ public class Mp3Service extends Service {
 		String msg = intent.getStringExtra("MSG");
 
 		if (STATE_PLAY.equals(msg)) {
-//			play(0);
-			playLocal();
+			play(0);
+			// playLocal();
 		} else if (STATE_PAUSE.equals(msg)) {
 			pause();
 		} else if (STATE_STOP.equals(msg)) {
 			stop();
 		}
 		return super.onStartCommand(intent, flags, startId);
+	}
+
+	public void playMusic() {
+		mediaPlayer.start();
+	}
+
+	public void pauseMusic() {
+		mediaPlayer.pause();
+	}
+
+	public void stopMusic() {
+		mediaPlayer.stop();
+		try {
+			mediaPlayer.prepare(); // 在调用stop后如果需要再次通过start进行播放,需要之前调用prepare函数
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -63,7 +82,7 @@ public class Mp3Service extends Service {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 播放本地音乐
 	 * 
@@ -71,9 +90,9 @@ public class Mp3Service extends Service {
 	 */
 	private void playLocal() {
 		try {
-			mediaPlayer=MediaPlayer.create(this,R.raw.yhyl);
-//			mediaPlayer.reset();// 把各项参数恢复到初始状态
-			
+			mediaPlayer = MediaPlayer.create(this, R.raw.yhyl);
+			// mediaPlayer.reset();// 把各项参数恢复到初始状态
+
 			if (mediaPlayer != null) {
 				mediaPlayer.stop();
 			}
