@@ -47,7 +47,7 @@ public class LoginB extends BaseActivity implements OnClickListener {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				// TODO Auto-generated method stub
-				 goMain();
+//				 goMain();
 			}
 		});
 
