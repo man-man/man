@@ -25,6 +25,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
@@ -91,8 +92,8 @@ public class Man extends BaseActivity {
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
-								+ "GetArticle.shtml?userId=22"
-								// + BaseUtils.CUR_USER_MAP.get("id")
+								+ "GetArticle.shtml?userId="
+								 + BaseUtils.CUR_USER_MAP.get("id")
 								+ "&pageNumber=1&pageLine=15");
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				msg.setData(bundle);
@@ -101,6 +102,9 @@ public class Man extends BaseActivity {
 		}).start();
 	}
 
+	/**
+	 * 渲染数据
+	 */
 	private void rendItems(JSONArray articles) {
 
 		for (int i = 0; i < articles.length(); i++) {
@@ -161,7 +165,7 @@ public class Man extends BaseActivity {
 		// 为more按钮添加侦听
 		ImageView moreBt = (ImageView) convertView.findViewById(R.id.man_item_more);
 		try {
-			moreBt.setTag(article.getString("articleId"));
+			moreBt.setTag(article.getString("id"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

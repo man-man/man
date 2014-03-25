@@ -23,7 +23,6 @@
     <string name="title_choice">评选</string>
     <string name="title_signup">报名</string>
     <string name="title_activity_login">Login</string>
-    
     <string name="default_img_des">图片</string>
 
     <!-- 登陆注册 -->
@@ -86,5 +85,10 @@
     <string name="tree_info_title">TA的小秘密</string>
     <string name="tree_repeat_hint">回复楼主</string>
     <string name="tree_repeat_submit">发布</string>
+    <string name="title_activity_comment">Comment</string>
+    
+    <!-- 评论 -->
+    <string name="comment_txt">评论</string>
+    <string name="comment_reply_txt">发表</string>
 
 </resources>

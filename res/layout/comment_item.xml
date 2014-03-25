@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/corner5_white"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <TextView
+        android:id="@+id/comment_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:lineSpacingMultiplier="1.2"
+        android:text="右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥右右奔跑村遥"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/comment_item_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="陈浩南"
+            android:textColor="#b1b1b1" />
+
+        <TextView
+            android:id="@+id/comment_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2013-4-10"
+            android:textColor="#b1b1b1" />
+    </LinearLayout>
+
+</LinearLayout>

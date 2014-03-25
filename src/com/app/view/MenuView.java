@@ -6,6 +6,7 @@ import org.json.JSONTokener;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.activity.Comment;
 import com.app.common.BubbleUtil;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
@@ -70,8 +72,8 @@ public class MenuView extends RelativeLayout {
 	 * @param targetView
 	 */
 	public void show(View v, ViewGroup pv) {
-		this.targetView = v;
-		this.parentView = pv;
+		targetView = v;
+		parentView = pv;
 
 		if (v != null && pv != null) {
 			this.dataId = (String) targetView.getTag();
@@ -103,6 +105,11 @@ public class MenuView extends RelativeLayout {
 		attenView = (TextView) findViewById(R.id.menu_atten);
 		collectView = (TextView) findViewById(R.id.menu_collect);
 		shareView = (TextView) findViewById(R.id.menu_share);
+
+		commentView.setOnClickListener(menuItemOnClick);
+		attenView.setOnClickListener(menuItemOnClick);
+		collectView.setOnClickListener(menuItemOnClick);
+		shareView.setOnClickListener(menuItemOnClick);
 	}
 
 	/**
@@ -134,6 +141,9 @@ public class MenuView extends RelativeLayout {
 
 			switch (v.getId()) {
 			case R.id.menu_comment: // 评论
+				Intent intent = new Intent(context, Comment.class);
+				intent.putExtra("articleId", dataId);
+				context.startActivity(intent);
 				break;
 			case R.id.menu_collect: // 收藏或取消收藏
 				isHttp = true;
@@ -158,6 +168,7 @@ public class MenuView extends RelativeLayout {
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				reqSend();
 			}
+			hide();
 		}
 	};
 
@@ -200,8 +211,7 @@ public class MenuView extends RelativeLayout {
 				Boolean success = resultObj.getBoolean("success");
 
 				if (success) {
-					BubbleUtil.alertMsg(context,
-							OPT_SUCCESS);
+					BubbleUtil.alertMsg(context, OPT_SUCCESS);
 				} else {
 					BubbleUtil.alertMsg(context,
 							resultObj.getString("errorMessage"));

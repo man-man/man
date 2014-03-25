@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Comment" >
+
+    <com.app.view.TitleView
+        android:id="@+id/sign_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:titleName="@string/comment_txt" >
+    </com.app.view.TitleView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" >
+
+        <LinearLayout
+            android:id="@+id/comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <EditText
+            android:id="@+id/comment_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/tree_input_bg"
+            android:hint="@string/tree_repeat_hint"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/comment_submit"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:background="@drawable/tree_repeat_submit_bg"
+            android:text="@string/comment_reply_txt"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
