@@ -72,7 +72,10 @@ public class SignInfo extends BaseActivity {
 					startActivityForResult(intent, 1);
 				}
 				if (v.getId() == R.id.bottom_menu_albums) {
-
+					Intent picture = new Intent(
+							Intent.ACTION_PICK,
+							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					startActivityForResult(picture, 5);
 				}
 				if (v.getId() == R.id.bottom_menu_exit) {
 					alertDialogWindowSmall.getDialog().hide();
@@ -88,10 +91,13 @@ public class SignInfo extends BaseActivity {
 					startActivityForResult(intent2, 2);
 				}
 				if (v.getId() == R.id.bottom_menu_albums) {
-
+					Intent picture = new Intent(
+							Intent.ACTION_PICK,
+							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					startActivityForResult(picture, 6);
 				}
 				if (v.getId() == R.id.bottom_menu_exit) {
-					alertDialogWindowSmall.getDialog().hide();
+					alertDialogWindowBig.getDialog().hide();
 				}
 			}
 		};
@@ -219,6 +225,24 @@ public class SignInfo extends BaseActivity {
 				sign_info_diqu_text.setText(city);
 			}
 		}
+		if (requestCode == 5) {
+			if (data != null && data.getData() != null) {
+				if (data.getData() != null) {
+					sign_info_photo.setImageURI(data.getData());
+					System.gc();
+				}
+				alertDialogWindowSmall.getDialog().hide();
+			}
+		}
+		if (requestCode == 6) {
+			if (data != null && data.getData() != null) {
+				if (data.getData() != null) {
+					sign_info_bigimg.setImageURI(data.getData());
+					System.gc();
+				}
+				alertDialogWindowBig.getDialog().hide();
+			}
+		}
 		// if (requestCode == 2) {相册
 		// // 获取图片并显示
 		// // Picasso.with(this).load(getPathBUri(data.getData()))
@@ -237,5 +261,18 @@ public class SignInfo extends BaseActivity {
 
 	public static Bitmap small_img = null;
 	public static Bitmap big_img = null;
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (alertDialogWindowBig != null
+				&& alertDialogWindowBig.getDialog() != null) {
+			alertDialogWindowBig.getDialog().dismiss();
+		}
+		if (alertDialogWindowSmall != null
+				&& alertDialogWindowSmall.getDialog() != null) {
+			alertDialogWindowSmall.getDialog().dismiss();
+		}
+	}
 
 }
