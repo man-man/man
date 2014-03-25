@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -16,7 +16,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
+
     <!-- 登陆注册 -->
     <style name="loginb_txt">
         <item name="android:textSize">20sp</item>
@@ -27,6 +27,7 @@
         <item name="android:paddingRight">60dp</item>
         <item name="android:background">@drawable/loginb_txt_bg</item>
     </style>
+
     <style name="register_txt">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#fff</item>
@@ -37,6 +38,7 @@
         <item name="android:background">@drawable/loginb_txt_bg</item>
     </style>
     <!-- 登陆注册end -->
+
 
     <!-- 装女郎 排行榜 -->
     <style name="woman_rank_name">
@@ -107,16 +109,18 @@
         <item name="android:layout_marginRight">0dp</item>
     </style>
     <!-- 装女郎 报名详情页end -->
-	
-	<!-- 我的页面 -->
-	<style name="mine_container_b">
-	    <item name="android:layout_marginLeft">5dp</item>
-	    <item name="android:layout_marginRight">5dp</item>
-	    <item name="android:layout_marginBottom">10dp</item>
+
+
+    <!-- 我的页面 -->
+    <style name="mine_container_b">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@drawable/mine_container_b_corner</item>
     </style>
+
     <style name="mine_container_s">
         <item name="android:paddingBottom">8dp</item>
         <item name="android:paddingTop">12dp</item>
@@ -124,23 +128,25 @@
         <item name="android:paddingRight">18dp</item>
         <item name="android:background">@drawable/mine_container_s_corner</item>
     </style>
+
     <style name="mine_container_s_noborder">
         <item name="android:paddingBottom">8dp</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingLeft">14dp</item>
         <item name="android:paddingRight">18dp</item>
     </style>
-	<!-- 我的页面end -->
-	
-	<!-- 菜单文字 -->
-	<style name="menu_txt">
-	    <item name="android:paddingBottom">8dp</item>
+    <!-- 我的页面end -->
+
+
+    <!-- 菜单文字 -->
+    <style name="menu_txt">
+        <item name="android:paddingBottom">8dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">14sp</item>
         <item name="android:drawablePadding">15dp</item>
-	</style>
-	
-	
+    </style>
+
+
 </resources>

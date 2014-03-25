@@ -16,7 +16,6 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
-        
         <service android:name="com.app.service.Mp3Service" >
         </service>
 
@@ -87,7 +86,8 @@
             android:name="com.app.activity.LoginB"
             android:label="@string/title_activity_login_b"
             android:screenOrientation="portrait" >
-        </activity>        -->
+        </activity>
+        -->
         <activity
             android:name="com.app.activity.Task"
             android:screenOrientation="portrait" >
@@ -115,4 +115,5 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 操作sd card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 </manifest>
