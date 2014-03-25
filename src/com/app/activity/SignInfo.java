@@ -1,5 +1,10 @@
 package com.app.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.common.AlertDialogWindow;
 import com.app.man.R;
 import com.app.view.TitleView;
 
@@ -30,6 +36,9 @@ public class SignInfo extends BaseActivity {
 	private TextView sign_info_sanwei_text;
 	private TextView sign_info_diqu_text;
 
+	AlertDialogWindow alertDialogWindowSmall;
+	AlertDialogWindow alertDialogWindowBig;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,6 +46,62 @@ public class SignInfo extends BaseActivity {
 		setContentView(R.layout.sign_info);
 
 		initView();
+		initBottomMenu();
+	}
+
+	private void initBottomMenu() {
+		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
+		Map<String, Object> btn1 = new HashMap<String, Object>();
+		btn1.put("name", getResources().getString(R.string.bottom_menu_photo));
+		btn1.put("id", R.id.bottom_menu_photo);
+		params.add(btn1);
+		Map<String, Object> btn2 = new HashMap<String, Object>();
+		btn2.put("name", getResources().getString(R.string.bottom_menu_albums));
+		btn2.put("id", R.id.bottom_menu_albums);
+		params.add(btn2);
+		Map<String, Object> btn3 = new HashMap<String, Object>();
+		btn3.put("name", getResources().getString(R.string.bottom_menu_exit));
+		btn3.put("id", R.id.bottom_menu_exit);
+		params.add(btn3);
+		OnClickListener iclSmall = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (v.getId() == R.id.bottom_menu_photo) {
+					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					startActivityForResult(intent, 1);
+				}
+				if (v.getId() == R.id.bottom_menu_albums) {
+
+				}
+				if (v.getId() == R.id.bottom_menu_exit) {
+					alertDialogWindowSmall.getDialog().hide();
+				}
+			}
+		};
+		OnClickListener iclBig = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (v.getId() == R.id.bottom_menu_photo) {
+					Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					startActivityForResult(intent2, 2);
+				}
+				if (v.getId() == R.id.bottom_menu_albums) {
+
+				}
+				if (v.getId() == R.id.bottom_menu_exit) {
+					alertDialogWindowSmall.getDialog().hide();
+				}
+			}
+		};
+		if (alertDialogWindowSmall == null) {
+			alertDialogWindowSmall = new AlertDialogWindow(params, this,
+					iclSmall);
+		}
+		if (alertDialogWindowBig == null) {
+			alertDialogWindowBig = new AlertDialogWindow(params, this, iclBig);
+		}
 	}
 
 	private void initView() {
@@ -97,12 +162,10 @@ public class SignInfo extends BaseActivity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.sign_info_photo:
-				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				startActivityForResult(intent, 1);
+				alertDialogWindowSmall.getDialog().show();
 				break;
 			case R.id.sign_info_bigimg:
-				Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				startActivityForResult(intent2, 2);
+				alertDialogWindowBig.getDialog().show();
 				break;
 			case R.id.sign_info_sanwei:
 				Intent intent3 = new Intent(SignInfo.this, SignSanweiB.class);
@@ -127,6 +190,7 @@ public class SignInfo extends BaseActivity {
 					small_img = bitmap;
 					sign_info_photo.setImageBitmap(bitmap);
 				}
+				alertDialogWindowSmall.getDialog().hide();
 			}
 		}
 		if (requestCode == 2) {
@@ -138,6 +202,7 @@ public class SignInfo extends BaseActivity {
 					sign_info_bigimg.setImageBitmap(bitmap);
 				}
 			}
+			alertDialogWindowBig.getDialog().hide();
 		}
 		if (requestCode == 3) {
 			if (data != null && data.getExtras() != null) {
