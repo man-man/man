@@ -28,7 +28,7 @@ public class LoginB extends BaseActivity implements OnClickListener {
 		setContentView(startView);
 		// 渐变
 		AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
-		aa.setDuration(2000);
+		aa.setDuration(1000);
 		startView.setAnimation(aa);
 		aa.setAnimationListener(new AnimationListener() {
 
@@ -47,7 +47,7 @@ public class LoginB extends BaseActivity implements OnClickListener {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				// TODO Auto-generated method stub
-//				 goMain();
+				 goMain();
 			}
 		});
 
@@ -61,7 +61,7 @@ public class LoginB extends BaseActivity implements OnClickListener {
 	}
 
 	private void goMain() {
-		Intent intent = new Intent(this, Man.class);
+		Intent intent = new Intent(this, Login.class);
 		startActivity(intent);
 		finish();
 	}

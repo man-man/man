@@ -105,8 +105,16 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.app.activity.Tree"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.app.activity.TreeInfo"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.Comment"
+            android:label="@string/title_activity_comment" >
         </activity>
     </application>
 
