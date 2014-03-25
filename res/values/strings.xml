@@ -86,12 +86,17 @@
     <string name="tree_repeat_hint">回复楼主</string>
     <string name="tree_repeat_submit">发布</string>
     <string name="title_activity_comment">Comment</string>
-    
+
     <!-- 评论 -->
     <string name="comment_txt">评论</string>
     <string name="comment_reply_txt">发表</string>
     
     <!-- 关注的人 -->
     <string name="atten_title">我关注的人</string>
+
+    <!-- 底部菜单按钮 -->
+    <string name="bottom_menu_photo">拍照</string>
+    <string name="bottom_menu_albums">相册</string>
+    <string name="bottom_menu_exit">退出</string>
 
 </resources>

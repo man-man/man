@@ -86,7 +86,7 @@
             android:name="com.app.activity.LoginB"
             android:label="@string/title_activity_login_b"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.app.activity.Task"

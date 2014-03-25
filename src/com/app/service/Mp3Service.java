@@ -89,18 +89,18 @@ public class Mp3Service extends Service {
 	 * @param position
 	 */
 	private void playLocal() {
-		try {
-			mediaPlayer = MediaPlayer.create(this, R.raw.yhyl);
-			// mediaPlayer.reset();// 把各项参数恢复到初始状态
-
-			if (mediaPlayer != null) {
-				mediaPlayer.stop();
-			}
-			mediaPlayer.prepare(); // 进行缓冲
-			mediaPlayer.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// try {
+		// mediaPlayer = MediaPlayer.create(this, R.raw.yhyl);
+		// // mediaPlayer.reset();// 把各项参数恢复到初始状态
+		//
+		// if (mediaPlayer != null) {
+		// mediaPlayer.stop();
+		// }
+		// mediaPlayer.prepare(); // 进行缓冲
+		// mediaPlayer.start();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 	}
 
 	/**

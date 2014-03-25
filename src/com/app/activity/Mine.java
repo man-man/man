@@ -1,7 +1,9 @@
 package com.app.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -23,6 +25,7 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.common.AlertDialogWindow;
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
@@ -99,6 +102,8 @@ public class Mine extends BaseActivity {
 		collectBt.setOnClickListener(btClickListener);
 		attBt.setOnClickListener(btClickListener);
 		treeBt.setOnClickListener(btClickListener);
+		
+		
 
 		fmView = new FmView(this, curFmContainer, fmListContainer); // 初始化电台
 
