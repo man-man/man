@@ -7,7 +7,6 @@
     tools:context=".Comment" >
 
     <com.app.view.TitleView
-        android:id="@+id/sign_info_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         man:titleName="@string/comment_txt" >

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.activity.Comment;
+import com.app.common.BaseUtils;
 import com.app.common.BubbleUtil;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
@@ -36,14 +37,14 @@ public class MenuView extends RelativeLayout {
 	private ViewGroup parentView; // 放menu的父容器
 	private ViewGroup menuView; // 菜单view
 
-	private String dataId; // 数据id
+	private JSONObject targetData; // 目标数据
 
 	private TextView commentView; // 评论
 	private TextView attenView; // 关注
 	private TextView collectView; // 收藏
 	private TextView shareView; // 分享
 
-	HttpHandler httpHandler; // http请求
+	HttpHandler httpHandler = new HttpHandler(); // http请求
 	Bundle bundle; // http请求数据
 	String OPT_SUCCESS; // 操作成功提示
 
@@ -76,7 +77,7 @@ public class MenuView extends RelativeLayout {
 		parentView = pv;
 
 		if (v != null && pv != null) {
-			this.dataId = (String) targetView.getTag();
+			targetData = (JSONObject) targetView.getTag();
 
 			hide();
 
@@ -87,6 +88,17 @@ public class MenuView extends RelativeLayout {
 					+ targetView.getWidth());
 			this.setY(pos[1] - parentPos[1] + targetView.getHeight()
 					- DensityUtil.dip2px(5));
+
+			// 关注或取消关注
+			attenView.setText(true ? "关注" : "取消关注");
+
+			// 收藏或取消收藏
+			collectView.setText(true ? "收藏" : "取消收藏");
+
+			// 男性则显示收藏,女性不显示收藏
+			collectView.setVisibility(Integer.valueOf(BaseUtils.CUR_USER_MAP
+					.get("gender").toString()) == 1 ? View.VISIBLE : View.GONE);
+
 			this.setVisibility(View.VISIBLE);
 		}
 	}
@@ -138,24 +150,45 @@ public class MenuView extends RelativeLayout {
 			bundle = new Bundle();
 			String params = null;
 			boolean isHttp = false;
+			String articleId = null;
+			String fllowUserId = null;
+			int value = 0; // 收藏，关注默认取消状态
+
+			try {
+				articleId = targetData.getString("id");
+				fllowUserId = targetData.getString("authorId");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 
 			switch (v.getId()) {
 			case R.id.menu_comment: // 评论
 				Intent intent = new Intent(context, Comment.class);
-				intent.putExtra("articleId", dataId);
+				intent.putExtra("articleId", articleId);
 				context.startActivity(intent);
 				break;
 			case R.id.menu_collect: // 收藏或取消收藏
 				isHttp = true;
-				params = "Favorite.shtml?articleId=" + dataId + "&value=true"
-						+ "&userId=22";
-				OPT_SUCCESS = "收藏成功";
+				OPT_SUCCESS = "取消收藏成功";
+
+				if ("收藏".equals(((TextView) v).getText().toString())) {
+					value = 1;
+					OPT_SUCCESS = "收藏成功";
+				}
+				params = "Favorite.shtml?articleId=" + articleId + "&value="
+						+ value + "&userId=" + BaseUtils.CUR_USER_MAP.get("id");
 				break;
 			case R.id.menu_atten: // 关注
 				isHttp = true;
-				params = "FollowUser.shtml?followUserId=" + dataId
-						+ "&value=true" + "&userId=22";
-				OPT_SUCCESS = "关注成功";
+				OPT_SUCCESS = "取消关注成功";
+
+				if ("关注".equals(((TextView) v).getText().toString())) {
+					value = 1;
+					OPT_SUCCESS = "关注成功";
+				}
+				params = "FollowUser.shtml?followUserId=" + fllowUserId
+						+ "&value=" + value + "&userId="
+						+ BaseUtils.CUR_USER_MAP.get("id");
 				break;
 			case R.id.menu_share:
 				break;
@@ -211,6 +244,9 @@ public class MenuView extends RelativeLayout {
 				Boolean success = resultObj.getBoolean("success");
 
 				if (success) {
+
+					// 更新当前 target数据 TODO
+
 					BubbleUtil.alertMsg(context, OPT_SUCCESS);
 				} else {
 					BubbleUtil.alertMsg(context,

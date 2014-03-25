@@ -12,24 +12,35 @@ import org.json.JSONTokener;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
+import com.app.util.DensityUtil;
+import com.app.view.NetImageView;
 
 public class Attention extends BaseActivity {
 
+	private ViewGroup attList; // 关注的人列表
+
 	AttHttpHandler AttHttpHandler = new AttHttpHandler();
- 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.task);
+		setContentView(R.layout.attention);
+
+		attList = (ViewGroup) findViewById(R.id.atten_list);
 
 		new Thread(new Runnable() {
 
@@ -47,6 +58,48 @@ public class Attention extends BaseActivity {
 				msg.sendToTarget();
 			}
 		}).start();
+	}
+
+	private void rendItems(JSONArray datas) {
+
+		attList.removeAllViews();
+
+		for (int i = 0; i < datas.length(); i++) {
+			try {
+				View item = getView(datas.getJSONObject(i));
+				attList.addView(item);
+
+				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) item
+						.getLayoutParams();
+				params.setMargins(0, 0, 0, DensityUtil.dip2px(10));
+				item.setLayoutParams(params);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private View getView(JSONObject obj) {
+		LinearLayout convertView = (LinearLayout) LayoutInflater.from(this)
+				.inflate(R.layout.attention_item, null);
+
+		NetImageView headImg = (NetImageView) convertView
+				.findViewById(R.id.atten_item_img);
+		TextView name = (TextView) convertView
+				.findViewById(R.id.atten_item_name);
+
+		try {
+			headImg.setNetUrl(obj.getString("imageUrl"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		try {
+			name.setText(obj.getString("name"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return convertView;
 	}
 
 	class AttHttpHandler extends HttpCallBackHandler {
@@ -67,16 +120,11 @@ public class Attention extends BaseActivity {
 				Boolean success = resultObj.getBoolean("success");
 				Map<String, Object> resultMap = new HashMap<String, Object>();
 				if (success) {
-					JSONObject map = (JSONObject) resultObj.get("data");
-					Iterator<String> it = map.keys();
-					while (it.hasNext()) {
-						String key = it.next();
-						Object resultTmp = map.get(key);
-						resultMap.put(key, resultTmp);
-					}
-					JSONArray users = map.getJSONArray("users");
+					JSONObject data = (JSONObject) resultObj.get("data");
+					JSONArray users = data.getJSONArray("users");
 
-					// fmView.setData(channels);
+					rendItems(users);
+
 				} else {
 					Toast.makeText(Attention.this,
 							resultObj.getString("errorMessage"),

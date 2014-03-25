@@ -66,13 +66,13 @@ public class Man extends BaseActivity {
 		menuView = (MenuView) findViewById(R.id.man_menu_vew);
 
 		absContainer.setOnTouchListener(absCOnTouch);
-		
+
 		manHttpHandler = new ManHttpHandler();
 		rankReqSend();
 	}
-	
+
 	OnTouchListener absCOnTouch = new OnTouchListener() {
-		
+
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
 			menuView.hide();
@@ -93,7 +93,7 @@ public class Man extends BaseActivity {
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
 								+ "GetArticle.shtml?userId="
-								 + BaseUtils.CUR_USER_MAP.get("id")
+								+ BaseUtils.CUR_USER_MAP.get("id")
 								+ "&pageNumber=1&pageLine=15");
 				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
 				msg.setData(bundle);
@@ -161,30 +161,26 @@ public class Man extends BaseActivity {
 		// 设置父scroll，避免子scroll与父scroll冲突
 		((InnerScrollView) convertView.findViewById(R.id.man_item_imgs_scroll))
 				.setParentScrollView(parentScroll);
-		
+
 		// 为more按钮添加侦听
-		ImageView moreBt = (ImageView) convertView.findViewById(R.id.man_item_more);
-		try {
-			moreBt.setTag(article.getString("id"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		ImageView moreBt = (ImageView) convertView
+				.findViewById(R.id.man_item_more);
+		moreBt.setTag(article);
 		moreBt.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				menuView.show(v, absContainer);
 			}
 		});
-		
-		
+
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 0, 0, 10);
 		convertView.setLayoutParams(params);
-		
+
 		convertView.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				menuView.hide();
@@ -193,7 +189,7 @@ public class Man extends BaseActivity {
 			}
 		});
 		convertView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				System.out.println("-----------------------setOnClickListener");

@@ -90,5 +90,8 @@
     <!-- 评论 -->
     <string name="comment_txt">评论</string>
     <string name="comment_reply_txt">发表</string>
+    
+    <!-- 关注的人 -->
+    <string name="atten_title">我关注的人</string>
 
 </resources>
