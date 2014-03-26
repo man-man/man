@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -87,8 +88,21 @@ public class HttpRequestUtils {
 			StrictMode.setThreadPolicy(policy);
 		}
 		if (isPost) {
+			try {
+				JSONObject jsonObject = (JSONObject) params;
+				jsonObject
+						.put("curUserId",
+								Long.valueOf(BaseUtils.CUR_USER_MAP
+										.get("userId") + ""));
+			} catch (Exception e) {
+			}
 			resultStr = HttpRequestUtils.sendPost(httpUrl, params);
 		} else {
+			if (httpUrl.contains("?")) {
+				httpUrl += "&curUserId=" + BaseUtils.CUR_USER_MAP.get("userId");
+			} else {
+				httpUrl += "?curUserId=" + BaseUtils.CUR_USER_MAP.get("userId");
+			}
 			resultStr = HttpRequestUtils.sendGet(httpUrl);
 		}
 		return resultStr;
