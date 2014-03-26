@@ -88,20 +88,28 @@ public class HttpRequestUtils {
 			StrictMode.setThreadPolicy(policy);
 		}
 		if (isPost) {
-			try {
-				JSONObject jsonObject = (JSONObject) params;
-				jsonObject
-						.put("curUserId",
-								Long.valueOf(BaseUtils.CUR_USER_MAP
-										.get("userId") + ""));
-			} catch (Exception e) {
+			if (BaseUtils.CUR_USER_MAP != null) {
+				try {
+					JSONObject jsonObject = (JSONObject) params;
+					jsonObject.put(
+							"curUserId",
+							Long.valueOf(BaseUtils.CUR_USER_MAP.get("userId")
+									+ ""));
+				} catch (Exception e) {
+				}
 			}
 			resultStr = HttpRequestUtils.sendPost(httpUrl, params);
 		} else {
 			if (httpUrl.contains("?")) {
-				httpUrl += "&curUserId=" + BaseUtils.CUR_USER_MAP.get("userId");
+				if (BaseUtils.CUR_USER_MAP != null) {
+					httpUrl += "&curUserId="
+							+ BaseUtils.CUR_USER_MAP.get("userId");
+				}
 			} else {
-				httpUrl += "?curUserId=" + BaseUtils.CUR_USER_MAP.get("userId");
+				if (BaseUtils.CUR_USER_MAP != null) {
+					httpUrl += "?curUserId="
+							+ BaseUtils.CUR_USER_MAP.get("userId");
+				}
 			}
 			resultStr = HttpRequestUtils.sendGet(httpUrl);
 		}
