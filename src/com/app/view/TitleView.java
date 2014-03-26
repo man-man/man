@@ -47,7 +47,7 @@ public class TitleView extends LinearLayout {
 
 	private String titleName; // 标题
 
-	private OnClickListener mLeftBtClickListener; // 左侧按钮点击监听
+	private OnClickListener mRightBtClickListener; // 左侧按钮点击监听
 
 	SignInfoHttpHandler signInfoHttpHandler = new SignInfoHttpHandler();
 
@@ -136,8 +136,8 @@ public class TitleView extends LinearLayout {
 					small = (ImageView) parentView
 							.findViewById(R.id.sign_info_photo);
 					if (big == null) {
-						if (mLeftBtClickListener != null) {
-							mLeftBtClickListener.onClick(v);
+						if (mRightBtClickListener != null) {
+							mRightBtClickListener.onClick(v);
 						}
 					} else {
 						birthday = (TextView) parentView
@@ -254,8 +254,8 @@ public class TitleView extends LinearLayout {
 
 				@Override
 				public void onClick(View v) {
-					if (mLeftBtClickListener != null) {
-						mLeftBtClickListener.onClick(v);
+					if (mRightBtClickListener != null) {
+						mRightBtClickListener.onClick(v);
 					}
 				}
 			});
@@ -314,12 +314,12 @@ public class TitleView extends LinearLayout {
 		this.isRelease = isRelease;
 	}
 
-	public OnClickListener getmLeftBtClickListener() {
-		return mLeftBtClickListener;
+	public OnClickListener getmRightBtClickListener() {
+		return mRightBtClickListener;
 	}
 
-	public void setmLeftBtClickListener(OnClickListener mLeftBtClickListener) {
-		this.mLeftBtClickListener = mLeftBtClickListener;
+	public void setmRightBtClickListener(OnClickListener mRightBtClickListener) {
+		this.mRightBtClickListener = mRightBtClickListener;
 	}
 
 	public String getTitleName() {

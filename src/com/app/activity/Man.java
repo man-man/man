@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.common.BaseUtils;
+import com.app.common.Constant;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
@@ -33,6 +34,7 @@ import com.app.util.DensityUtil;
 import com.app.view.InnerScrollView;
 import com.app.view.MenuView;
 import com.app.view.NetImageView;
+import com.app.view.SearchView;
 import com.app.view.ViewPagerView;
 
 /**
@@ -47,6 +49,7 @@ public class Man extends BaseActivity {
 	private ScrollView parentScroll; // 父scroll
 	private ViewGroup manListView; // 文章列表容器
 	private ViewPagerView pagerView; // 图片切换组件
+	private SearchView searchView; // 搜索框
 
 	private MenuView menuView; // 更多菜单
 
@@ -62,6 +65,11 @@ public class Man extends BaseActivity {
 		parentScroll = (ScrollView) findViewById(R.id.man_list_scroll);
 		manListView = (ViewGroup) findViewById(R.id.man_list);
 		pagerView = (ViewPagerView) findViewById(R.id.man_pager_view);
+		searchView = (SearchView) findViewById(R.id.man_seach_title);
+
+		if (Integer.valueOf(BaseUtils.CUR_USER_MAP.get("groupId").toString()) == Constant.USER_TYPE_MAN) { // 达人
+			searchView.setWrite(true);
+		}
 
 		menuView = (MenuView) findViewById(R.id.man_menu_vew);
 

@@ -36,7 +36,10 @@ import com.app.man.R;
  */
 public class Login extends BaseActivity {
 
-	final String userName = "18611128524";
+//	final String userName = "18611128524";
+//	final String pwd = "123456";
+	
+	final String userName = "daren";
 	final String pwd = "123456";
 
 	private Button loginBt = null;
