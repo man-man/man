@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical" >
+
+    <!-- title -->
+
+    <TextView
+        android:id="@+id/win_menu_title"
+        style="@style/win_menu_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#979797"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/win_menu_bt_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <!-- 取消 -->
+
+    <TextView
+        android:id="@+id/win_menu_cancle"
+        style="@style/win_menu_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bottom_menu_exit" />
+
+</LinearLayout>

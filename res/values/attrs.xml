@@ -36,5 +36,4 @@
         <attr name="isRelease" format="boolean" />
         <attr name="titleName" format="string"/>
     </declare-styleable>
-
 </resources>

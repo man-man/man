@@ -114,11 +114,11 @@
         </activity>
         <activity
             android:name="com.app.activity.Comment"
-            android:label="@string/title_activity_comment" >
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name="com.app.activity.WriteArticle"
-            android:label="@string/title_activity_write_article" >
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

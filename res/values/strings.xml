@@ -41,6 +41,7 @@
 
     <!-- 装女郎报名 -->
     <string name="sign_title">装女郎报名</string>
+    <string name="sign_submite_success">报名成功</string>
 
     <!-- title -->
     <string name="title_submit">提交</string>
@@ -101,8 +102,8 @@
 	
     <!-- 底部菜单按钮 -->
     <string name="bottom_menu_photo">拍照</string>
-    <string name="bottom_menu_albums">相册</string>
-    <string name="bottom_menu_exit">退出</string>
-    <string name="title_activity_write_article">WriteArticle</string>
-
+    <string name="bottom_menu_albums">图库相册</string>
+    <string name="bottom_menu_exit">取消</string>
+	<string name="bottom_menu_editTxt">编辑描述文字</string>
+	
 </resources>

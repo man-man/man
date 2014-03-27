@@ -1,27 +1,86 @@
 package com.app.common;
 
-import java.util.List;
 import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.app.man.R;
 
 public class AlertDialogWindow {
-	private List<Map<String, Object>> params;
+	//数据
+	private String titleData; //标题数据
+	private String[] menuDatas; //动态menu数据
+	
 	private Context context;
 	private Map<String, Object> cacheObj;
 	private OnClickListener clickListener;
 
 	private AlertDialog.Builder builder;
 	private AlertDialog dialog;
+
+	// 控件
+	private LinearLayout winMenuViewGroup; // winMenu最外层容器
+	private LinearLayout btnsContainer; // 动态button容器
+	private TextView titleView; // 标题
+	private TextView cancleView; // 取消按钮
+
+	public AlertDialogWindow(String title, String[] strs, Context context,
+			OnClickListener clickListener) {
+		super();
+		this.titleData = title;
+		this.menuDatas = strs;
+		this.context = context;
+		this.clickListener = clickListener;
+
+		setupViews();
+	}
+
+	private void setupViews() {
+		winMenuViewGroup = (LinearLayout) LayoutInflater.from(context).inflate(
+				R.layout.win_menu, null);
+		btnsContainer = (LinearLayout) winMenuViewGroup
+				.findViewById(R.id.win_menu_bt_container);
+		titleView = (TextView) winMenuViewGroup.findViewById(R.id.win_menu_title);
+		cancleView = (TextView) winMenuViewGroup.findViewById(R.id.win_menu_cancle);
+		
+		titleView.setText(titleData);
+		createMenuWin();
+		cancleView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				getDialog().hide();
+			}
+		});
+		
+		builder = new AlertDialog.Builder(context);
+		dialog = builder.setView(winMenuViewGroup).create();
+
+		Window window = dialog.getWindow();
+		window.setGravity(Gravity.BOTTOM); // 此处可以设置dialog显示的位置
+		window.setWindowAnimations(R.style.mystyle); // 添加动画
+	}
+
+	/**
+	 * 构造出菜单并显示
+	 */
+	private void createMenuWin() {
+		for (int i = 0; i < menuDatas.length; i++) {
+			TextView btn = (TextView) LayoutInflater.from(context).inflate(
+					R.layout.win_menu_item_bt, null);
+			btn.setText(menuDatas[i]);
+			btnsContainer.addView(btn);
+			btn.setOnClickListener(clickListener);
+		}
+	}
 
 	public AlertDialog.Builder getBuilder() {
 		return builder;
@@ -37,14 +96,6 @@ public class AlertDialogWindow {
 
 	public void setDialog(AlertDialog dialog) {
 		this.dialog = dialog;
-	}
-
-	public List<Map<String, Object>> getParams() {
-		return params;
-	}
-
-	public void setParams(List<Map<String, Object>> params) {
-		this.params = params;
 	}
 
 	public Map<String, Object> getCacheObj() {
@@ -69,49 +120,5 @@ public class AlertDialogWindow {
 
 	public void setClickListener(OnClickListener clickListener) {
 		this.clickListener = clickListener;
-	}
-
-	public AlertDialogWindow(List<Map<String, Object>> params, Context context,
-			OnClickListener clickListener) {
-		super();
-		this.params = params;
-		this.context = context;
-		this.clickListener = clickListener;
-		createMenuWin();
-	}
-
-	/**
-	 * 构造出菜单并显示
-	 */
-	public void createMenuWin() {
-		// 高度的基准值，这里没法用自动适应，所以设置了一个值。
-		int baseHeight = 80;
-		LayoutParams layoutParams2 = new LayoutParams(
-				BaseUtils.getScreenWidth(context), baseHeight * params.size());
-		LinearLayout linearLayout = new LinearLayout(context);
-		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setLayoutParams(layoutParams2);
-
-		LayoutParams layoutParams = new LayoutParams(new Float(
-				BaseUtils.getScreenWidth(context) * 0.9f).intValue(),
-				baseHeight);
-
-		for (int i = 0; i < params.size(); i++) {
-			Map<String, Object> param = params.get(i);
-			Button btn = new Button(context);
-			btn.setText(param.get("name").toString());
-			btn.setId(Integer.valueOf(param.get("id").toString()));
-			btn.setLayoutParams(layoutParams);
-			linearLayout.addView(btn);
-			btn.setOnClickListener(clickListener);
-		}
-
-		builder = new AlertDialog.Builder(context);
-		dialog = builder.setView(linearLayout).create();
-
-		Window window = dialog.getWindow();
-		window.setGravity(Gravity.BOTTOM); // 此处可以设置dialog显示的位置
-		window.setWindowAnimations(R.style.mystyle); // 添加动画
-		// dialog.show();
 	}
 }

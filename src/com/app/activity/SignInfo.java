@@ -1,14 +1,21 @@
 package com.app.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
@@ -19,25 +26,42 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.activity.WriteArticle.SubmitHttpHandler;
 import com.app.common.AlertDialogWindow;
+import com.app.common.Base64Utils;
+import com.app.common.BaseUtils;
+import com.app.common.BubbleUtil;
+import com.app.common.HttpCallBackHandler;
+import com.app.common.HttpRequestUtils;
+import com.app.common.JSONObjectSerializalble;
+import com.app.common.MyDateUtils;
 import com.app.man.R;
 import com.app.view.TitleView;
 
 public class SignInfo extends BaseActivity {
 
+	final String WIN_MENU_TITLE = "设置报名图片";
+	final String[] WIN_MENU_DATAS = new String[] { "图库相册", "拍照" };
+
+	Context context = this;
+
+	// 控件
 	private TitleView titleView; // 页头
-	private LinearLayout dateLinear;
-	private TextView dateText;
-
-	private ImageView sign_info_photo;
-	private ImageView sign_info_bigimg;
-
+	private ImageView sign_info_photo; // 头像
+	private ImageView sign_info_bigimg; // 大图
 	private LinearLayout sign_info_sanwei;
-	private TextView sign_info_sanwei_text;
-	private TextView sign_info_diqu_text;
+	private TextView sign_info_sanwei_text; // 三围
+	private TextView sign_info_diqu_text; // 地区
+	private LinearLayout dateLinear;
+	private TextView dateText; // 日期
 
 	AlertDialogWindow alertDialogWindowSmall;
 	AlertDialogWindow alertDialogWindowBig;
+
+	private Bitmap small_img = null;
+	private Bitmap big_img = null;
+
+	private SubmitHttpHandler submitHttpHandle = new SubmitHttpHandler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,35 +74,20 @@ public class SignInfo extends BaseActivity {
 	}
 
 	private void initBottomMenu() {
-		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
-		Map<String, Object> btn1 = new HashMap<String, Object>();
-		btn1.put("name", getResources().getString(R.string.bottom_menu_photo));
-		btn1.put("id", R.id.bottom_menu_photo);
-		params.add(btn1);
-		Map<String, Object> btn2 = new HashMap<String, Object>();
-		btn2.put("name", getResources().getString(R.string.bottom_menu_albums));
-		btn2.put("id", R.id.bottom_menu_albums);
-		params.add(btn2);
-		Map<String, Object> btn3 = new HashMap<String, Object>();
-		btn3.put("name", getResources().getString(R.string.bottom_menu_exit));
-		btn3.put("id", R.id.bottom_menu_exit);
-		params.add(btn3);
 		OnClickListener iclSmall = new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (v.getId() == R.id.bottom_menu_photo) {
-					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-					startActivityForResult(intent, 1);
-				}
-				if (v.getId() == R.id.bottom_menu_albums) {
+				String txt = ((TextView) v).getText().toString();
+
+				if (WIN_MENU_DATAS[0].equals(txt)) {
 					Intent picture = new Intent(
 							Intent.ACTION_PICK,
 							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 					startActivityForResult(picture, 5);
-				}
-				if (v.getId() == R.id.bottom_menu_exit) {
-					alertDialogWindowSmall.getDialog().hide();
+				} else if (WIN_MENU_DATAS[1].equals(txt)) {
+					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					startActivityForResult(intent, 1);
 				}
 			}
 		};
@@ -86,27 +95,26 @@ public class SignInfo extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				if (v.getId() == R.id.bottom_menu_photo) {
-					Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-					startActivityForResult(intent2, 2);
-				}
-				if (v.getId() == R.id.bottom_menu_albums) {
+				String txt = ((TextView) v).getText().toString();
+
+				if (WIN_MENU_DATAS[0].equals(txt)) {
 					Intent picture = new Intent(
 							Intent.ACTION_PICK,
 							android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 					startActivityForResult(picture, 6);
-				}
-				if (v.getId() == R.id.bottom_menu_exit) {
-					alertDialogWindowBig.getDialog().hide();
+				} else if (WIN_MENU_DATAS[1].equals(txt)) {
+					Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					startActivityForResult(intent2, 2);
 				}
 			}
 		};
 		if (alertDialogWindowSmall == null) {
-			alertDialogWindowSmall = new AlertDialogWindow(params, this,
-					iclSmall);
+			alertDialogWindowSmall = new AlertDialogWindow(WIN_MENU_TITLE,
+					WIN_MENU_DATAS, this, iclSmall);
 		}
 		if (alertDialogWindowBig == null) {
-			alertDialogWindowBig = new AlertDialogWindow(params, this, iclBig);
+			alertDialogWindowBig = new AlertDialogWindow(WIN_MENU_TITLE,
+					WIN_MENU_DATAS, this, iclBig);
 		}
 	}
 
@@ -126,6 +134,14 @@ public class SignInfo extends BaseActivity {
 				Intent intent = new Intent(SignInfo.this, CityChange.class);
 				startActivityForResult(intent, 4);
 
+			}
+		});
+
+		titleView.setmRightBtClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				submitReq();
 			}
 		});
 
@@ -252,15 +268,136 @@ public class SignInfo extends BaseActivity {
 
 	}
 
+	/**
+	 * 报名提交
+	 */
+	private void submitReq() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String imgs = null;
+				if (big_img != null) {
+					byte[] bytes = getByteByBitmap(big_img);
+					imgs = Base64Utils.encode(bytes);
+					big_img = null;
+				} else {
+					// Toast.makeText(parentView.getContext(),
+					// "请拍一张大图", Toast.LENGTH_SHORT)
+					// .show();
+					return;
+				}
+
+				String imgs2 = null;
+				if (small_img != null) {
+					byte[] bytes2 = getByteByBitmap(small_img);
+					imgs2 = Base64Utils.encode(bytes2);
+					small_img = null;
+				} else {
+					// Toast.makeText(parentView.getContext(),
+					// "请拍一张小图", Toast.LENGTH_SHORT)
+					// .show();
+					return;
+				}
+
+				Message msg = submitHttpHandle.obtainMessage();
+				Bundle bundle = new Bundle();
+				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+						HttpRequestUtils.BASE_HTTP_CONTEXT + "ApplyGirl.shtml");
+				JSONObjectSerializalble jsonObject = new JSONObjectSerializalble();
+				try {
+					// BaseUtils.CUR_USER_MAP.get("userId");
+					// 8
+					jsonObject.put("userId",
+							BaseUtils.CUR_USER_MAP.get("userId"));
+					jsonObject.put("image", imgs);
+					jsonObject.put("icon", imgs2);
+					jsonObject.put("bwh", sign_info_sanwei_text.getText()
+							.toString());
+					jsonObject.put("age", MyDateUtils.getAge(MyDateUtils
+							.parseStrToDate(dateText.getText().toString(),
+									"yyyy-MM-dd")));
+					jsonObject.put("constellation", MyDateUtils
+							.getConstellation(dateText.getText().toString()));
+					jsonObject.put("girlCity", sign_info_diqu_text.getText()
+							.toString());
+					jsonObject.put("birthday", dateText.getText().toString());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				bundle.putSerializable(HttpRequestUtils.BUNDLE_KEY_PARAMS,
+						jsonObject);
+				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, true);
+				msg.setData(bundle);
+				msg.sendToTarget();
+
+				imgs = null;
+				imgs2 = null;
+			}
+		}).start();
+	}
+
+	class SubmitHttpHandler extends HttpCallBackHandler {
+
+		public SubmitHttpHandler(Looper looper) {
+			super(looper);
+		}
+
+		public SubmitHttpHandler() {
+		}
+
+		@Override
+		public void callAfterResponseStr(String resultStr) {
+			JSONTokener jsonParser = new JSONTokener(resultStr);
+			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
+			try {
+				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
+				Boolean success = resultObj.getBoolean("success");
+				if (success) {
+					BubbleUtil.alertMsg(context,
+							R.string.write_article_submite_success);
+					redirect();
+				} else {
+					BubbleUtil.alertMsg(context,
+							resultObj.getString("errorMessage"));
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				BubbleUtil.alertMsg(context, R.string.base_response_error);
+			}
+		}
+
+	}
+
+	private byte[] getByteByBitmap(Bitmap bmp) {
+		byte[] compressData = null;
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		bmp.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+		// bmp.
+		compressData = outStream.toByteArray();
+		try {
+			outStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return compressData;
+	}
+
+	/**
+	 * 转换到其它activity
+	 */
+	private void redirect() {
+		finish();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.sign_info, menu);
 		return true;
 	}
-
-	public static Bitmap small_img = null;
-	public static Bitmap big_img = null;
 
 	@Override
 	protected void onDestroy() {
