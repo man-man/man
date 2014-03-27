@@ -2,8 +2,6 @@ package com.app.activity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +11,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -26,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.app.activity.WriteArticle.SubmitHttpHandler;
 import com.app.common.AlertDialogWindow;
 import com.app.common.Base64Utils;
 import com.app.common.BaseUtils;
@@ -244,8 +242,9 @@ public class SignInfo extends BaseActivity {
 		if (requestCode == 5) {
 			if (data != null && data.getData() != null) {
 				if (data.getData() != null) {
-					sign_info_photo.setImageURI(data.getData());
-					System.gc();
+					Bitmap bitmap = getBitmapFromUri(data.getData());
+					small_img = bitmap;
+					sign_info_photo.setImageBitmap(bitmap);
 				}
 				alertDialogWindowSmall.getDialog().hide();
 			}
@@ -253,8 +252,9 @@ public class SignInfo extends BaseActivity {
 		if (requestCode == 6) {
 			if (data != null && data.getData() != null) {
 				if (data.getData() != null) {
-					sign_info_bigimg.setImageURI(data.getData());
-					System.gc();
+					Bitmap bitmap = getBitmapFromUri(data.getData());
+					big_img = bitmap;
+					sign_info_bigimg.setImageBitmap(bitmap);
 				}
 				alertDialogWindowBig.getDialog().hide();
 			}
@@ -266,6 +266,18 @@ public class SignInfo extends BaseActivity {
 		// imageView.setImageURI(data.getData());
 		// }
 
+	}
+
+	private Bitmap getBitmapFromUri(Uri uri) {
+		try {
+			// 读取uri所在的图片
+			Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+					this.getContentResolver(), uri);
+			return bitmap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**
