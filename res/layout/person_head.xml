@@ -1,0 +1,147 @@
+<!-- 用户信息 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.app.man"
+    android:id="@+id/mine_user_info_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical" >
+
+    <!-- 背景banner -->
+
+    <com.app.view.NetImageView
+        android:id="@+id/person_bg_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg"
+        app:heightOfWidth="0.5" />
+
+    <!-- 信息 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-45dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingLeft="97dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp" >
+
+                <!-- 姓名 性别 -->
+
+                <TextView
+                    android:id="@+id/person_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/sex_girl"
+                    android:text=""
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <!-- 积分 -->
+
+                <TextView
+                    android:id="@+id/person_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="积分："
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:paddingBottom="18dp"
+                android:paddingLeft="97dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp" >
+
+                <!-- 年龄 -->
+
+                <TextView
+                    android:id="@+id/mine_age_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="年龄："
+                    android:textColor="#b1b1b1"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/person_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/mine_age_title"
+                    android:text="18"
+                    android:textColor="#565656"
+                    android:textSize="14sp" />
+                <!-- 城市 -->
+
+                <TextView
+                    android:id="@+id/mine_city_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_age_title"
+                    android:text="城市："
+                    android:textColor="#b1b1b1"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/person_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/person_age"
+                    android:layout_toRightOf="@id/mine_city_title"
+                    android:text=""
+                    android:textColor="#565656"
+                    android:textSize="14sp" />
+
+                <!-- 签到 -->
+
+                <Button
+                    android:id="@+id/person_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/sign_in_corner"
+                    android:drawableLeft="@drawable/sign_in_icon"
+                    android:drawablePadding="2dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:text="签到"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- head logo -->
+
+        <com.app.view.NetImageView
+            android:id="@+id/person_user_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl2" />
+    </RelativeLayout>
+
+</LinearLayout>

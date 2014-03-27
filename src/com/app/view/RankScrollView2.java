@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -25,7 +26,10 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.app.activity.PersonMan;
+import com.app.activity.Woman;
 import com.app.common.ImageLoader;
 import com.app.man.R;
 import com.app.model.WomanItemModel;
@@ -38,6 +42,8 @@ import com.app.model.WomanItemModel;
  * 
  */
 public class RankScrollView2 extends ScrollView {
+
+	private Context context;
 
 	/**
 	 * 排行榜数据
@@ -82,6 +88,7 @@ public class RankScrollView2 extends ScrollView {
 	 */
 	public RankScrollView2(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.context = context;
 		imageLoader = ImageLoader.getInstance();
 		taskCollection = new HashSet<LoadImageTask>();
 	}
@@ -160,6 +167,18 @@ public class RankScrollView2 extends ScrollView {
 			// taskCollection.add(task);
 			// task.execute(imgUrl);
 		}
+
+		convertView.setTag(model.getId());
+
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, PersonMan.class);
+				intent.putExtra("userId", v.getTag().toString());
+				context.startActivity(intent);
+			}
+		});
 		return convertView;
 	}
 

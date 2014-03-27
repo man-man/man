@@ -93,17 +93,19 @@
 
     <!-- 关注的人 -->
     <string name="atten_title">关注的人</string>
-    
+
     <!-- 撰写文章 -->
     <string name="write_article_title">撰写文章</string>
     <string name="write_article_title_hint">请输入文章标题</string>
     <string name="write_article_hint">在这里写文章内容</string>
     <string name="write_article_submite_success">您撰写的文章发布成功</string>
-	
+
     <!-- 底部菜单按钮 -->
     <string name="bottom_menu_photo">拍照</string>
     <string name="bottom_menu_albums">图库相册</string>
     <string name="bottom_menu_exit">取消</string>
-	<string name="bottom_menu_editTxt">编辑描述文字</string>
-	
+    <string name="bottom_menu_editTxt">编辑描述文字</string>
+    
+    <!-- 个人中心 -->
+	<string name="person_title">TA的主页</string>
 </resources>

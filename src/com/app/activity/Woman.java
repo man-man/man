@@ -144,6 +144,7 @@ public class Woman extends BaseActivity {
 
 						WomanItemModel model = new WomanItemModel();
 						try {
+							model.setId(userObj.getString("id"));
 							model.setImg(userObj.getString("imageUrl"));
 							model.setName(userObj.getString("name"));
 							model.setVote(userObj.getInt("votes"));

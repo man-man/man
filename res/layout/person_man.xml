@@ -1,10 +1,10 @@
 <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android_custom="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/abs_container"
+    android:id="@+id/person_man_abs_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Man" >
+    tools:context=".PersonMan" >
 
     <!-- 页面信息 -->
 
@@ -14,46 +14,53 @@
         android:background="#efefef"
         android:orientation="vertical" >
 
-        <com.app.view.SearchView
-            android:id="@+id/man_seach_title"
+        <com.app.view.TitleView
+            android:id="@+id/sign_info_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </com.app.view.SearchView>
+            android:layout_height="wrap_content"
+            man:titleName="@string/person_title" >
+        </com.app.view.TitleView>
 
         <ScrollView
-            android:id="@+id/man_list_scroll"
+            android:id="@+id/person_man_list_scroll"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:scrollbars="none" >
 
-            <com.app.view.ManListView
-                android:id="@+id/man_list"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp" >
-            </com.app.view.ManListView>
-        </ScrollView>
+                android:orientation="vertical" >
 
-        <com.app.view.FootView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android_custom:currentTab="man" >
-        </com.app.view.FootView>
+                <com.app.view.PersonHeadView
+                    android:id="@+id/person_man_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </com.app.view.PersonHeadView>
+
+                <com.app.view.ManListView
+                    android:id="@+id/person_man_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+                </com.app.view.ManListView>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <!-- 大图展示 -->
 
     <com.app.view.ViewPagerView
-        android:id="@+id/man_pager_view"
+        android:id="@+id/person_man_pager_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" >
     </com.app.view.ViewPagerView>
 
     <com.app.view.MenuView
-        android:id="@+id/man_menu_vew"
+        android:id="@+id/person_man_menu_vew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" >

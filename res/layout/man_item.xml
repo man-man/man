@@ -16,6 +16,7 @@
         <!-- 头像 -->
 
         <RelativeLayout
+            android:id="@+id/man_item_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 

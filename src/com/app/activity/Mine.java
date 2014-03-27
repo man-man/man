@@ -1,9 +1,7 @@
 package com.app.activity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -12,8 +10,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -22,17 +18,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.common.AlertDialogWindow;
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
-import com.app.util.ContextUtil;
 import com.app.view.FmView;
-import com.app.view.NetImageView;
+import com.app.view.PersonHeadView;
 
 /**
  * 我的
@@ -52,14 +45,8 @@ public class Mine extends BaseActivity {
 	private ViewGroup fmListContainer; // 节目单容器
 	private FmView fmView;
 
-	private NetImageView mine_user_img;
-	private NetImageView mine_bg_img;
-	private TextView mine_score;
-	private TextView mine_age;
-	private TextView mine_city;
-	private TextView mine_username;
+	private PersonHeadView personHeadView;
 
-	// mine_username android:drawableRight="@drawable/sex_girl"
 	UserInfoHttpHandler userInfoHttpHandler = new UserInfoHttpHandler();
 	FmHttpHandler fmHttpHandler = new FmHttpHandler();
 
@@ -73,20 +60,7 @@ public class Mine extends BaseActivity {
 	}
 
 	private void setupViews() {
-		mine_user_img = (NetImageView) findViewById(R.id.mine_user_img);
-		mine_bg_img = (NetImageView) findViewById(R.id.mine_bg_img);
-		mine_score = (TextView) findViewById(R.id.mine_score);
-		mine_age = (TextView) findViewById(R.id.mine_age);
-		mine_city = (TextView) findViewById(R.id.mine_city);
-		mine_username = (TextView) findViewById(R.id.mine_username);
-		
-		mine_city.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-			}
-		});
+		personHeadView = (PersonHeadView) findViewById(R.id.mine_person_head);
 
 		taskBt = (ViewGroup) findViewById(R.id.mine_task_panel);
 		photosBt = (ViewGroup) findViewById(R.id.mine_photo_panel);
@@ -102,8 +76,6 @@ public class Mine extends BaseActivity {
 		collectBt.setOnClickListener(btClickListener);
 		attBt.setOnClickListener(btClickListener);
 		treeBt.setOnClickListener(btClickListener);
-		
-		
 
 		fmView = new FmView(this, curFmContainer, fmListContainer); // 初始化电台
 
@@ -143,44 +115,10 @@ public class Mine extends BaseActivity {
 			try {
 				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
 				Boolean success = resultObj.getBoolean("success");
-				Map<String, Object> resultMap = new HashMap<String, Object>();
 				if (success) {
-					JSONObject map = (JSONObject) resultObj.get("data");
-					Iterator<String> it = map.keys();
-					while (it.hasNext()) {
-						String key = it.next();
-						Object resultTmp = map.get(key);
-						resultMap.put(key, resultTmp);
-					}
-					mine_score.setText(resultMap.get("score") + "");
-					mine_age.setText(resultMap.get("age") + "");
-					mine_city.setText(resultMap.get("girlCity") + "");
-					if (resultMap.get("imageUrl") != null
-							&& resultMap.get("imageUrl").toString().length() > 0) {
-						ContextUtil.COMMON_PICASSO.load(
-								resultMap.get("imageUrl") + "").into(
-								mine_user_img);
-					}
-					if (resultMap.get("backgroundImageUrl") != null
-							&& resultMap.get("backgroundImageUrl").toString()
-									.length() > 0) {
-						ContextUtil.COMMON_PICASSO.load(
-								resultMap.get("backgroundImageUrl") + "").into(
-								mine_bg_img);
-					}
-					Drawable sexImg;
-					Resources res = getResources();
-					if ((resultMap.get("gender") + "").equals("1")) {
-						sexImg = res.getDrawable(R.drawable.sex_boy);
-					} else {
-						sexImg = res.getDrawable(R.drawable.sex_girl);
-					}
-					// 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
-					sexImg.setBounds(0, 0, sexImg.getMinimumWidth(),
-							sexImg.getMinimumHeight());
-					mine_username
-							.setCompoundDrawables(null, null, sexImg, null);
-					mine_username.setText(resultMap.get("name") + "");
+					JSONObject data = (JSONObject) resultObj.get("data");
+
+					personHeadView.setData(data);
 				} else {
 					Toast.makeText(Mine.this,
 							resultObj.getString("errorMessage"),

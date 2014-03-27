@@ -86,7 +86,7 @@
             android:name="com.app.activity.LoginB"
             android:label="@string/title_activity_login_b"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.app.activity.Task"
@@ -114,10 +114,14 @@
         </activity>
         <activity
             android:name="com.app.activity.Comment"
-            android:screenOrientation="portrait"  >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.app.activity.WriteArticle"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.PersonMan"
             android:screenOrientation="portrait" >
         </activity>
     </application>

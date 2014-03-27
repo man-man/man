@@ -32,6 +32,7 @@ import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 import com.app.util.DensityUtil;
 import com.app.view.InnerScrollView;
+import com.app.view.ManListView;
 import com.app.view.MenuView;
 import com.app.view.NetImageView;
 import com.app.view.SearchView;
@@ -47,7 +48,7 @@ public class Man extends BaseActivity {
 
 	private AbsoluteLayout absContainer; // 绝对布局容器
 	private ScrollView parentScroll; // 父scroll
-	private ViewGroup manListView; // 文章列表容器
+	private ManListView manListView; // 文章列表容器
 	private ViewPagerView pagerView; // 图片切换组件
 	private SearchView searchView; // 搜索框
 
@@ -63,7 +64,7 @@ public class Man extends BaseActivity {
 
 		absContainer = (AbsoluteLayout) findViewById(R.id.abs_container);
 		parentScroll = (ScrollView) findViewById(R.id.man_list_scroll);
-		manListView = (ViewGroup) findViewById(R.id.man_list);
+		manListView = (ManListView) findViewById(R.id.man_list);
 		pagerView = (ViewPagerView) findViewById(R.id.man_pager_view);
 		searchView = (SearchView) findViewById(R.id.man_seach_title);
 
@@ -111,164 +112,6 @@ public class Man extends BaseActivity {
 	}
 
 	/**
-	 * 渲染数据
-	 */
-	private void rendItems(JSONArray articles) {
-
-		for (int i = 0; i < articles.length(); i++) {
-			View itemView = null;
-			try {
-				itemView = getView(articles.getJSONObject(i));
-			} catch (JSONException e) {
-				e.printStackTrace();
-				continue;
-			}
-			if (itemView != null) {
-				manListView.addView(itemView);
-			}
-		}
-	}
-
-	public View getView(JSONObject article) {
-		LinearLayout convertView = (LinearLayout) LayoutInflater.from(this)
-				.inflate(R.layout.man_item, null);
-
-		try {
-			((TextView) convertView.findViewById(R.id.man_item_name))
-					.setText(article.getString("userName"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			((NetImageView) convertView.findViewById(R.id.man_item_head))
-					.setNetUrl(article.getString("authorImageUrl"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			((TextView) convertView.findViewById(R.id.man_item_date))
-					.setText(getDate(article.getString("createDate")));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		try {
-			((TextView) convertView.findViewById(R.id.man_item_summary))
-					.setText(article.getString("summary"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		// 渲染图片
-		try {
-			rendItemImgs(article.getJSONArray("images"),
-					(LinearLayout) convertView.findViewById(R.id.man_item_imgs));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		// 设置父scroll，避免子scroll与父scroll冲突
-		((InnerScrollView) convertView.findViewById(R.id.man_item_imgs_scroll))
-				.setParentScrollView(parentScroll);
-
-		// 为more按钮添加侦听
-		ImageView moreBt = (ImageView) convertView
-				.findViewById(R.id.man_item_more);
-		moreBt.setTag(article);
-		moreBt.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				menuView.show(v, absContainer);
-			}
-		});
-
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(0, 0, 0, 10);
-		convertView.setLayoutParams(params);
-
-		convertView.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				menuView.hide();
-				System.out.println("-----------------------setOnTouchListener");
-				return false;
-			}
-		});
-		convertView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				System.out.println("-----------------------setOnClickListener");
-				menuView.hide();
-			}
-		});
-		return convertView;
-	}
-
-	/**
-	 * 渲染每条数据图片
-	 */
-	private void rendItemImgs(JSONArray imgs, ViewGroup imagesContainer) {
-		JSONObject curImg = new JSONObject();
-
-		try {
-			curImg.put("imgs", imgs);
-		} catch (JSONException e1) {
-			e1.printStackTrace();
-		}
-
-		for (int i = 0; i < imgs.length(); i++) {
-			try {
-				JSONObject img = imgs.getJSONObject(i);
-				NetImageView imgView = new NetImageView(this);
-
-				LayoutParams params = new LayoutParams(DensityUtil.dip2px(90),
-						DensityUtil.dip2px(90));
-				params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-				imgView.setLayoutParams(params);
-
-				imgView.setScaleType(ScaleType.CENTER_CROP);
-				imgView.setCornerRadius(3);
-				imgView.setNetUrl(img.getString("url"));
-
-				curImg.put("index", i);
-				imgView.setTag(curImg);
-				imagesContainer.addView(imgView);
-
-				imgView.setOnClickListener(imgOnClick);
-			} catch (Exception e) {
-				e.printStackTrace();
-				continue;
-			}
-		}
-	}
-
-	OnClickListener imgOnClick = new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			JSONObject curImg = (JSONObject) v.getTag();
-
-			try {
-				pagerView.setData(curImg.getInt("index"),
-						curImg.getJSONArray("imgs"));
-				pagerView.setVisibility(View.VISIBLE);
-				// pagerViewContainer.setVisibility(View.VISIBLE);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		}
-	};
-
-	private String getDate(String dateStr) {
-		String[] arr = dateStr.split(" ");
-		return arr != null && arr.length >= 2 ? arr[0] : dateStr;
-	}
-
-	/**
 	 * 请求数据内部类
 	 * 
 	 * @author XH
@@ -301,7 +144,9 @@ public class Man extends BaseActivity {
 								.show();
 						return;
 					}
-					rendItems(articles);
+
+					manListView.setupViews(absContainer, parentScroll,
+							menuView, pagerView, true).setData(articles);
 
 				} else {
 					Toast.makeText(Man.this,
