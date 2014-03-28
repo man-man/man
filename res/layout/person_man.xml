@@ -36,7 +36,8 @@
                 <com.app.view.PersonHeadView
                     android:id="@+id/person_man_head"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    man:curType="2" >
                 </com.app.view.PersonHeadView>
 
                 <com.app.view.ManListView

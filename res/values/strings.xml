@@ -111,4 +111,6 @@
 
     <!-- 个人中心 -->
 	<string name="person_title">TA的主页</string>
+	<string name="upload_img_success">上传图片成功</string>
+	<string name="sign_txt">签到</string>
 </resources>

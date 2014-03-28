@@ -36,4 +36,7 @@
         <attr name="isRelease" format="boolean" />
         <attr name="titleName" format="string"/>
     </declare-styleable>
+    <declare-styleable name="PersonHeadView">
+        <attr name="curType" format="integer" />
+    </declare-styleable>
 </resources>

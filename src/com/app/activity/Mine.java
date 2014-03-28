@@ -98,6 +98,12 @@ public class Mine extends BaseActivity {
 
 		setFmData();
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		personHeadView.activityResult(requestCode, resultCode, data);
+	}
 
 	class UserInfoHttpHandler extends HttpCallBackHandler {
 

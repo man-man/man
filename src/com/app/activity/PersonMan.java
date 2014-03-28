@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -59,6 +60,12 @@ public class PersonMan extends Activity {
 		pagerView = (ViewPagerView) findViewById(R.id.person_man_pager_view);
 
 		sendReq();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		personHeadView.activityResult(requestCode, resultCode, data);
 	}
 
 	private void sendReq() {
