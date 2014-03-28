@@ -358,6 +358,7 @@ public class NetImageView extends ImageView {
 		}
 		ContextUtil.COMMON_PICASSO.load(netUrl)
 				.error(R.drawable.default_err_img)
+				.placeholder(R.drawable.default_img)
 				// .resize(this.getWidth(), this.getHeight()).centerCrop()
 				.into(this);
 	}
