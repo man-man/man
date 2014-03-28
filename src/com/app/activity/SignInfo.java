@@ -281,7 +281,7 @@ public class SignInfo extends BaseActivity {
 			if (data != null && data.getData() != null) {
 				if (data.getData() != null) {
 					Uri uri = data.getData();
-					int tmparr[] = { 480, 800 };
+					int tmparr[] = { 960, 1600 };
 					Bitmap tmp = createNewBitmapAndCompressByFile(
 							getFilePath(uri), tmparr);
 					System.out.println(tmp.getWidth());
