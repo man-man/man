@@ -17,6 +17,10 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="Theme.NoTitleBar.Fullscreen" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/welcome</item>
+    </style>
     <!-- 登陆注册 -->
     <style name="loginb_txt">
         <item name="android:textSize">20sp</item>

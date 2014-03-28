@@ -100,12 +100,15 @@
     <string name="write_article_hint">在这里写文章内容</string>
     <string name="write_article_submite_success">您撰写的文章发布成功</string>
 
+    <!-- 装女郎申请 -->
+    <string name="girl_apply_submit_success">您已成功提交申请</string>
+
     <!-- 底部菜单按钮 -->
     <string name="bottom_menu_photo">拍照</string>
     <string name="bottom_menu_albums">图库相册</string>
     <string name="bottom_menu_exit">取消</string>
     <string name="bottom_menu_editTxt">编辑描述文字</string>
-    
+
     <!-- 个人中心 -->
 	<string name="person_title">TA的主页</string>
 </resources>
