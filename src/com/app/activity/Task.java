@@ -9,11 +9,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.common.BaseUtils;
@@ -21,7 +26,15 @@ import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 
+/**
+ * 任务
+ * 
+ * @author XH
+ * 
+ */
 public class Task extends BaseActivity {
+
+	private ViewGroup taskList;
 
 	TaskHttpHandler taskHttpHandler = new TaskHttpHandler();
 
@@ -30,6 +43,8 @@ public class Task extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.task);
+
+		setupViews();
 
 		new Thread(new Runnable() {
 
@@ -47,6 +62,58 @@ public class Task extends BaseActivity {
 				msg.sendToTarget();
 			}
 		}).start();
+	}
+
+	private void setupViews() {
+		taskList = (ViewGroup) findViewById(R.id.task_list);
+	}
+
+	/**
+	 * 渲染列表
+	 * 
+	 * @param arr
+	 */
+	private void rendItems(JSONArray arr) {
+		taskList.removeAllViews();
+
+		for (int i = 0; i < arr.length(); i++) {
+			try {
+				taskList.addView(getView(arr.getJSONObject(i)));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 得到一个任务 view
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	private View getView(JSONObject obj) {
+		View view = LayoutInflater.from(this).inflate(R.layout.task_item, null);
+		TextView title = (TextView) view.findViewById(R.id.task_item_title);
+		TextView summary = (TextView) view.findViewById(R.id.task_item_des);
+		TextView step = (TextView) view.findViewById(R.id.task_item_num);
+
+		try {
+			title.setText(obj.getString("title"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		try {
+			summary.setText(obj.getString("summary"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		try {
+			step.setText(obj.getString("currentStep") + "/"
+					+ obj.getString("needStep"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return view;
 	}
 
 	class TaskHttpHandler extends HttpCallBackHandler {
@@ -76,6 +143,7 @@ public class Task extends BaseActivity {
 					}
 					JSONArray quests = map.getJSONArray("quests");
 
+					rendItems(quests);
 					// fmView.setData(channels);
 				} else {
 					Toast.makeText(Task.this,

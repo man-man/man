@@ -335,7 +335,7 @@ public class PersonHeadView extends LinearLayout {
 			e.printStackTrace();
 		}
 		try {
-			signBtn.setText(data.getBoolean("isSign") ? R.string.sign_has_txt
+			signBtn.setText(data.getBoolean("isSigned") ? R.string.sign_has_txt
 					: R.string.sign_txt);
 		} catch (JSONException e1) {
 			e1.printStackTrace();
