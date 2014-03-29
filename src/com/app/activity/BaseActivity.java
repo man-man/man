@@ -16,13 +16,19 @@ public class BaseActivity extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			doDoubleClickExist();
+		if (this.getClass() == Woman.class || this.getClass() == Man.class
+				|| this.getClass() == Mine.class) {
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				doDoubleClickExist();
+				return false;
+			}
 		}
-		return false;
+		super.onKeyDown(keyCode, event);
+		return true;
 	}
 
 	public void doDoubleClickExist() {
+
 		if (System.currentTimeMillis() - waitForExitLastClickTs < WAIT_FOR_EXIT_DURATION
 				&& waitForExitFlag) {
 			this.finish();

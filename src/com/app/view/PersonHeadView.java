@@ -1,5 +1,8 @@
 package com.app.view;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -66,14 +69,9 @@ public class PersonHeadView extends LinearLayout {
 	public static final int TYPE_MINE = 1;
 
 	/**
-	 * 我的
+	 * 他人
 	 */
 	public static final int TYPE_MAN = 2;
-
-	/**
-	 * 我的
-	 */
-	public static final int TYPE_WOMAN = 3;
 
 	Context context;
 
@@ -88,7 +86,7 @@ public class PersonHeadView extends LinearLayout {
 	private NetImageView bigBgView; // 大背景图
 	private NetImageView headLogoView; // 用户头像
 	private Button signBtn; // 签到
-	private TextView attenBtn; //关注
+	private TextView attenBtn; // 关注
 	private TextView nameView; // 姓名 性别
 	private TextView scoreView; // 积分
 	private TextView ageView; // 年龄
@@ -102,7 +100,11 @@ public class PersonHeadView extends LinearLayout {
 	private String small_img_base64 = "";
 	private String big_img_base64 = "";
 
-	private UploadHttpHandler submitHttpHandle = new UploadHttpHandler();
+	private UploadHttpHandler submitHttpHandle = new UploadHttpHandler(); // 上传图片
+	private SignHttpHandler signHttpHandler = new SignHttpHandler(); // 签到
+	private AttenHttpHandler attenHttpHandler = new AttenHttpHandler(); // 关注
+
+	private int attenStatus = 1; // 1关注 0取消关注
 
 	public PersonHeadView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -162,8 +164,28 @@ public class PersonHeadView extends LinearLayout {
 						WIN_MENU_DATAS, context, iclBig);
 			}
 			signBtn.setVisibility(View.VISIBLE);
-		}else{
+			signBtn.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					signReq();
+				}
+			});
+		} else {
 			attenBtn.setVisibility(View.VISIBLE);
+			attenBtn.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					if (attenBtn.getText().equals(
+							getResources().getString(R.string.atten_has_txt))) { // 已关注
+						attenStatus = 0; // 取消关注
+					} else {
+						attenStatus = 1; // 关注
+					}
+					attenReq();
+				}
+			});
 		}
 	}
 
@@ -313,6 +335,18 @@ public class PersonHeadView extends LinearLayout {
 			e.printStackTrace();
 		}
 		try {
+			signBtn.setText(data.getBoolean("isSign") ? R.string.sign_has_txt
+					: R.string.sign_txt);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			attenBtn.setText(data.getBoolean("isAttention") ? R.string.atten_has_txt
+					: R.string.atten_txt);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		try {
 			scoreView.setText(data.getString("score"));
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -456,4 +490,127 @@ public class PersonHeadView extends LinearLayout {
 
 	}
 
+	/**
+	 * 签到请求
+	 */
+	private void signReq() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = signHttpHandler.obtainMessage();
+				Bundle bundle = new Bundle();
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(HttpRequestUtils.BASE_HTTP_CONTEXT);
+				stringBuilder.append("Sign.shtml?userId="
+						+ BaseUtils.CUR_USER_MAP.get("id"));
+				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+						stringBuilder.toString());
+				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+				msg.setData(bundle);
+				msg.sendToTarget();
+			}
+		}).start();
+	}
+
+	class SignHttpHandler extends HttpCallBackHandler {
+
+		public SignHttpHandler(Looper looper) {
+			super(looper);
+		}
+
+		public SignHttpHandler() {
+		}
+
+		@Override
+		public void callAfterResponseStr(String resultStr) {
+			JSONTokener jsonParser = new JSONTokener(resultStr);
+			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
+			try {
+				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
+				Boolean success = resultObj.getBoolean("success");
+				if (success) {
+					signBtn.setText(R.string.sign_has_txt);
+					BubbleUtil.alertMsg(context, R.string.sign_req_success);
+				} else {
+					BubbleUtil.alertMsg(context,
+							resultObj.getString("errorMessage"));
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				BubbleUtil.alertMsg(context, R.string.base_response_error);
+			}
+		}
+
+	}
+
+	/**
+	 * 关注请求
+	 */
+	private void attenReq() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = attenHttpHandler.obtainMessage();
+				Bundle bundle = new Bundle();
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(HttpRequestUtils.BASE_HTTP_CONTEXT);
+				stringBuilder.append("FollowUser.shtml?userId=");
+				stringBuilder.append(BaseUtils.CUR_USER_MAP.get("id"));
+				stringBuilder.append("&followUserId=");
+				try {
+					stringBuilder.append(data.getString("id"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				stringBuilder.append("&value=");
+				stringBuilder.append(attenStatus);
+				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+						stringBuilder.toString());
+				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+				msg.setData(bundle);
+				msg.sendToTarget();
+			}
+		}).start();
+	}
+
+	class AttenHttpHandler extends HttpCallBackHandler {
+
+		public AttenHttpHandler(Looper looper) {
+			super(looper);
+		}
+
+		public AttenHttpHandler() {
+		}
+
+		@Override
+		public void callAfterResponseStr(String resultStr) {
+			JSONTokener jsonParser = new JSONTokener(resultStr);
+			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
+			try {
+				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
+				Boolean success = resultObj.getBoolean("success");
+				if (success) {
+
+					if (attenStatus == 1) { // 关注请求
+						attenBtn.setText(R.string.atten_has_txt);
+						BubbleUtil
+								.alertMsg(context, R.string.atten_req_success);
+					} else { // 取消关注请求
+						attenBtn.setText(R.string.atten_txt);
+						BubbleUtil.alertMsg(context,
+								R.string.atten_cancel_req_success);
+					}
+				} else {
+					BubbleUtil.alertMsg(context,
+							resultObj.getString("errorMessage"));
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				BubbleUtil.alertMsg(context, R.string.base_response_error);
+			}
+		}
+
+	}
 }

@@ -32,6 +32,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:textSize="18sp"
+            android:drawableLeft="@drawable/login_name_icon"
+            android:drawablePadding="15dp"
             android:background="@drawable/login_input_bg"
             android:hint="@string/login_username_hint" />
 
@@ -46,6 +48,8 @@
             android:layout_marginLeft="10dp"
             android:textSize="18sp"
             android:hint="@string/login_pwd_hint"
+            android:drawableLeft="@drawable/login_pwd_icon"
+            android:drawablePadding="15dp"
             android:background="@drawable/login_input_bg"
             android:inputType="textPassword" />
 

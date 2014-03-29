@@ -125,9 +125,9 @@
                     android:drawablePadding="2dp"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:text="@string/sign_txt"
                     android:textColor="#fff"
                     android:textSize="16sp"
+                    android:text="@string/sign_txt"
                     android:visibility="gone" />
 
                 <!-- 关注 -->
@@ -141,7 +141,6 @@
                     android:drawablePadding="5dp"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:text="@string/attention_txt"
                     android:textSize="16sp"
                     android:visibility="gone" />
             </RelativeLayout>

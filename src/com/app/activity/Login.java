@@ -1,9 +1,7 @@
 package com.app.activity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -22,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.app.common.AlertDialogWindow;
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;

@@ -113,4 +113,10 @@
 	<string name="person_title">TA的主页</string>
 	<string name="upload_img_success">上传图片成功</string>
 	<string name="sign_txt">签到</string>
+	<string name="sign_has_txt">已签到</string>
+	<string name="sign_req_success">签到成功</string>
+	<string name="atten_txt">关注</string>
+	<string name="atten_has_txt">已关注</string>
+	<string name="atten_req_success">关注成功</string>
+	<string name="atten_cancel_req_success">取消关注成功</string>
 </resources>
