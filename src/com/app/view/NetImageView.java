@@ -28,6 +28,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
@@ -206,23 +207,26 @@ public class NetImageView extends ImageView {
 	public void layout(int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
 		super.layout(l, t, r, b);
-		if (!hasLayout) {
-			LayoutParams params = (LayoutParams) this.getLayoutParams();
+		// if (!hasLayout) {
+		LayoutParams params = (LayoutParams) this.getLayoutParams();
 
-			// 图片为矩形
-			if (isRect) {
-				params.height = getWidth();
-			}
-
-			if (heightOfWidth != 0) {
-				params.height = (int) (getWidth() * heightOfWidth + 0.5);
-			}
-
-			this.setLayoutParams(params);
-			startLoadImg();
-
-			hasLayout = true;
+		// 图片为矩形
+		if (isRect) {
+			params.height = getWidth();
 		}
+		System.out.println("===================width:" + getWidth());
+		System.out.println("===================parent width:"
+				+ ((View) this.getParent()).getWidth());
+
+		if (heightOfWidth != 0) {
+			params.height = (int) (getWidth() * heightOfWidth + 0.5);
+		}
+
+		this.setLayoutParams(params);
+		startLoadImg();
+
+		// hasLayout = true;
+		// }
 	}
 
 	@Override

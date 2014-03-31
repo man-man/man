@@ -105,14 +105,14 @@ public class RankScrollView2 extends ScrollView {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
 
-		if (changed && !loadOnce) {
+//		if (changed && !loadOnce) {
 			firstColumn = (LinearLayout) findViewById(R.id.rank_first_column);
 			secondColumn = (LinearLayout) findViewById(R.id.rank_second_column);
 			columnWidth = firstColumn.getWidth();
 			loadOnce = true;
 
 			rendItems();
-		}
+//		}
 	}
 
 	/**

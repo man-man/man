@@ -25,6 +25,7 @@
             android:scaleType="centerCrop"
             android_custom:cornerRadius="2dp"
             android_custom:cornerType="1"
+            android_custom:isRect="true"
             android:src="@drawable/default_img" />
 
         <!-- 下部信息 -->

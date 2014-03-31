@@ -145,18 +145,27 @@ public class Woman extends BaseActivity {
 						WomanItemModel model = new WomanItemModel();
 						try {
 							model.setId(userObj.getString("id"));
-							model.setImg(userObj.getString("imageUrl"));
-							model.setName(userObj.getString("name"));
-							model.setVote(userObj.getInt("votes"));
-							model.setRank(i + 1);
-
 						} catch (Exception e) {
 							e.printStackTrace();
-							continue;
 						}
-
+						try {
+							model.setImg(userObj.getString("imageUrl"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						try {
+							model.setName(userObj.getString("name"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						try {
+							model.setVote(userObj.getInt("votes"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						model.setRank(i + 1);
+						
 						imageUrlArr[i] = model.getImg();
-
 						models.add(model);
 					}
 
