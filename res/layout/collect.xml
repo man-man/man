@@ -1,0 +1,56 @@
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/collect_abs_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Collect" >
+
+    <!-- 页面信息 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#efefef"
+        android:orientation="vertical" >
+
+        <com.app.view.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            man:titleName="@string/collect_title" >
+        </com.app.view.TitleView>
+
+        <ScrollView
+            android:id="@+id/collect_list_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:scrollbars="none" >
+
+            <com.app.view.ManListView
+                android:id="@+id/collect_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp" >
+            </com.app.view.ManListView>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- 大图展示 -->
+
+    <com.app.view.ViewPagerView
+        android:id="@+id/collect_pager_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+    </com.app.view.ViewPagerView>
+
+    <com.app.view.MenuView
+        android:id="@+id/collect_menu_vew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </com.app.view.MenuView>
+
+</AbsoluteLayout>

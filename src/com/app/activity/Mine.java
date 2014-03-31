@@ -98,7 +98,7 @@ public class Mine extends BaseActivity {
 
 		setFmData();
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -210,7 +210,7 @@ public class Mine extends BaseActivity {
 				cls = Task.class;
 				break;
 			case R.id.mine_photo_panel:
-				cls = Photo.class;
+				cls = PhotoAlbum.class;
 				break;
 			case R.id.mine_collect_panel:
 				cls = Collect.class;

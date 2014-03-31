@@ -45,9 +45,9 @@ public class ViewPagerItemView extends FrameLayout {
 		mALbumNameTextView = (TextView) view.findViewById(R.id.album_name);
 
 		addView(view);
-		
+
 		setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ViewGroup parent = (ViewGroup) v.getParent();
@@ -59,9 +59,17 @@ public class ViewPagerItemView extends FrameLayout {
 	public void setData(JSONObject object) {
 		this.mObject = object;
 		try {
-			String imgUrl = object.getString("url");
-			String summary = object.getString("summary");
-			
+			String imgUrl = null;
+			String summary = null;
+			try {
+				imgUrl = object.getString("url");
+			} catch (Exception e) {
+				imgUrl = object.getString("imageUrl");
+			}
+			try {
+				summary = object.getString("summary");
+			} catch (JSONException e) {
+			}
 			mAlbumImageView.setNetUrl(imgUrl);
 			mALbumNameTextView.setText(summary);
 		} catch (JSONException e) {

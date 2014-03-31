@@ -1,19 +1,22 @@
 package com.app.activity;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
-import android.view.Menu;
+import android.view.LayoutInflater;
+import android.view.View.OnClickListener;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.common.BaseUtils;
@@ -23,7 +26,13 @@ import com.app.man.R;
 
 public class Tree extends BaseActivity {
 
-	AttHttpHandler AttHttpHandler = new AttHttpHandler();
+	Context context = this;
+
+	JSONObject curTreeData;
+
+	private ViewGroup treeList;
+
+	TreeHttpHandler treeHttpHandler = new TreeHttpHandler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +40,85 @@ public class Tree extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.tree);
 
+		setupViews();
+		getTreeReq();
+	}
+
+	private void setupViews() {
+		treeList = (ViewGroup) findViewById(R.id.tree_list);
+	}
+
+	private void rendItems(JSONArray arr) {
+		treeList.removeAllViews();
+
+		for (int i = 0; i < arr.length(); i++) {
+			try {
+				LinearLayout view = (LinearLayout) BaseUtils.addMarginBottom(
+						getView(arr.getJSONObject(i)), 10);
+
+				treeList.addView(view);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private LinearLayout getView(JSONObject obj) {
+		LinearLayout view = (LinearLayout) LayoutInflater.from(this).inflate(
+				R.layout.tree_item, null);
+
+		TextView summaryView = (TextView) view
+				.findViewById(R.id.tree_item_summary);
+		TextView dateView = (TextView) view.findViewById(R.id.tree_item_date);
+		TextView commentNumView = (TextView) view
+				.findViewById(R.id.tree_item_comment_num);
+
+		try {
+			summaryView.setText(obj.getString("content"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		try {
+			dateView.setText(obj.getString("createDate"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		try {
+			commentNumView.setText(obj.getString("replys"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		view.setTag(obj);
+		view.setOnClickListener(itemOnClick);
+
+		return view;
+	}
+
+	OnClickListener itemOnClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			curTreeData = (JSONObject) v.getTag();
+
+			Intent intent = new Intent(context, TreeInfo.class);
+			Bundle b = new Bundle();
+			b.putString("question", curTreeData.toString());
+			intent.putExtras(b);
+			context.startActivity(intent);
+		}
+	};
+
+	/**
+	 * 获取树洞
+	 */
+	private void getTreeReq() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				// 登陆的例子，get
-				Message msg = AttHttpHandler.obtainMessage();
+				Message msg = treeHttpHandler.obtainMessage();
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
 						HttpRequestUtils.BASE_HTTP_CONTEXT
@@ -48,13 +130,13 @@ public class Tree extends BaseActivity {
 		}).start();
 	}
 
-	class AttHttpHandler extends HttpCallBackHandler {
+	class TreeHttpHandler extends HttpCallBackHandler {
 
-		public AttHttpHandler(Looper looper) {
+		public TreeHttpHandler(Looper looper) {
 			super(looper);
 		}
 
-		public AttHttpHandler() {
+		public TreeHttpHandler() {
 		}
 
 		@Override
@@ -64,18 +146,12 @@ public class Tree extends BaseActivity {
 			try {
 				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
 				Boolean success = resultObj.getBoolean("success");
-				Map<String, Object> resultMap = new HashMap<String, Object>();
 				if (success) {
 					JSONObject map = (JSONObject) resultObj.get("data");
-					Iterator<String> it = map.keys();
-					while (it.hasNext()) {
-						String key = it.next();
-						Object resultTmp = map.get(key);
-						resultMap.put(key, resultTmp);
-					}
 					JSONArray questions = map.getJSONArray("questions");
 
-					// fmView.setData(channels);
+					rendItems(questions);
+
 				} else {
 					Toast.makeText(Tree.this,
 							resultObj.getString("errorMessage"),
@@ -88,13 +164,6 @@ public class Tree extends BaseActivity {
 			}
 		}
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.task, menu);
-		return true;
 	}
 
 }

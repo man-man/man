@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context=".PhotoAlbum" >
+
+    <com.app.view.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:titleName="@string/photo_album_title" >
+    </com.app.view.TitleView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/album_left_col"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/album_right_col"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/album_name_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:padding="5dp" >
+
+        <EditText
+            android:id="@+id/album_name_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/tree_input_bg"
+            android:hint="@string/album_name_hint"
+            android:textSize="16sp" />
+        
+        <Button
+            android:id="@+id/album_name_submit"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:background="@drawable/tree_repeat_submit_bg"
+            android:text="@string/album_name_submit"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

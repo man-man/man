@@ -50,7 +50,6 @@ public class Task extends BaseActivity {
 
 			@Override
 			public void run() {
-				// 登陆的例子，get
 				Message msg = taskHttpHandler.obtainMessage();
 				Bundle bundle = new Bundle();
 				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,

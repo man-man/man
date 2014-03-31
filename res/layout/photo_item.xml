@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/border_df_whitebg" >
+
+    <com.app.view.NetImageView
+        android:id="@+id/photo_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_img"
+        man:isRect="true" />
+
+</RelativeLayout>

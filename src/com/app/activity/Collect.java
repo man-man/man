@@ -13,24 +13,71 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.AbsoluteLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
+import com.app.view.ManListView;
+import com.app.view.MenuView;
+import com.app.view.ViewPagerView;
 
+/**
+ * 我的收藏
+ * 
+ * @author XH
+ * 
+ */
 public class Collect extends BaseActivity {
 
+	private AbsoluteLayout absContainer; // 绝对布局容器
+	private ScrollView parentScroll; // 父scroll
+	private ManListView manListView; // 文章列表容器
+	private ViewPagerView pagerView; // 图片切换组件
+	private MenuView menuView; // 更多菜单
+
 	CollectHttpHandler CollectHttpHandler = new CollectHttpHandler();
- 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.task);
+		setContentView(R.layout.collect);
 
+		setupViews();
+		getCollectReq();
+	}
+
+	private void setupViews() {
+		absContainer = (AbsoluteLayout) findViewById(R.id.collect_abs_container);
+		parentScroll = (ScrollView) findViewById(R.id.collect_list_scroll);
+		manListView = (ManListView) findViewById(R.id.collect_list);
+		pagerView = (ViewPagerView) findViewById(R.id.collect_pager_view);
+		menuView = (MenuView) findViewById(R.id.collect_menu_vew);
+
+		absContainer.setOnTouchListener(absCOnTouch);
+	}
+
+	OnTouchListener absCOnTouch = new OnTouchListener() {
+
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			menuView.hide();
+			return false;
+		}
+	};
+
+	/**
+	 * 获取收藏列表
+	 */
+	private void getCollectReq() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -77,7 +124,8 @@ public class Collect extends BaseActivity {
 					}
 					JSONArray articles = map.getJSONArray("articles");
 
-					// fmView.setData(channels);
+					manListView.setupViews(absContainer, parentScroll,
+							menuView, pagerView, true).setData(articles);
 				} else {
 					Toast.makeText(Collect.this,
 							resultObj.getString("errorMessage"),
@@ -91,12 +139,4 @@ public class Collect extends BaseActivity {
 		}
 
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.task, menu);
-		return true;
-	}
-
 }

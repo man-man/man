@@ -86,7 +86,7 @@
             android:name="com.app.activity.LoginB"
             android:label="@string/title_activity_login_b"
             android:screenOrientation="portrait" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.app.activity.Task"
@@ -123,6 +123,10 @@
         <activity
             android:name="com.app.activity.PersonMan"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.app.activity.PhotoAlbum"
+            android:label="@string/title_activity_photo_album" >
         </activity>
     </application>
 

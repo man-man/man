@@ -9,17 +9,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+
+import com.app.util.DensityUtil;
+import com.squareup.picasso.Picasso;
 
 public class BaseUtils {
 
 	public static Boolean IS_PLAY_MP3 = false;
-	
+
 	public static String CUR_PLAY_MP3_URL = "";
 
 	public static Picasso COMMON_PICASSO;
@@ -134,6 +138,19 @@ public class BaseUtils {
 		}
 		String imagePath = imageDir + imageName;
 		return imagePath;
+	}
+
+	/**
+	 * 为view添加marginBottom
+	 */
+	public static ViewGroup addMarginBottom(ViewGroup view, float dp) {
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT);
+
+		params.setMargins(0, 0, 0, DensityUtil.dip2px(dp));
+		view.setLayoutParams(params);
+		return view;
 	}
 
 }

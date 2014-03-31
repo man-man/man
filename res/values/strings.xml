@@ -85,6 +85,9 @@
     <string name="tree_info_title">TA的小秘密</string>
     <string name="tree_repeat_hint">回复楼主</string>
     <string name="tree_repeat_submit">发布</string>
+    <string name="tree_write_answer">评论发表成功</string>
+    <string name="tree_support_answer_success">支持成功</string>
+    <string name="tree_dissupport_success">不支持成功</string>
     <string name="title_activity_comment">Comment</string>
 
     <!-- 评论 -->
@@ -110,13 +113,36 @@
     <string name="bottom_menu_editTxt">编辑描述文字</string>
 
     <!-- 个人中心 -->
-	<string name="person_title">TA的主页</string>
-	<string name="upload_img_success">上传图片成功</string>
-	<string name="sign_txt">签到</string>
-	<string name="sign_has_txt">已签到</string>
-	<string name="sign_req_success">签到成功</string>
-	<string name="atten_txt">关注</string>
-	<string name="atten_has_txt">已关注</string>
-	<string name="atten_req_success">关注成功</string>
-	<string name="atten_cancel_req_success">取消关注成功</string>
+    <string name="person_title">TA的主页</string>
+    <string name="upload_img_success">上传图片成功</string>
+    <string name="sign_txt">签到</string>
+    <string name="sign_has_txt">已签到</string>
+    <string name="sign_req_success">签到成功</string>
+    <string name="atten_txt">关注</string>
+    <string name="atten_has_txt">已关注</string>
+    <string name="atten_req_success">关注成功</string>
+    <string name="atten_cancel_req_success">取消关注成功</string>
+    <string name="title_activity_photo_album">PhotoAlbum</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- 相册 -->
+    <string name="photo_album_title">相册</string>
+    <string name="album_name_hint">请输入相册名字</string>
+    <string name="album_name_submit">确定</string>
+    <string name="album_name_null">请输入相册名字</string>
+    <string name="create_album_success">创建相册成功</string>
+    <string name="del_album_success">删除相册成功</string>
+    
+    <!-- 照片 -->
+    <string name="photo_title">照片</string>
+    <string name="photo_des_hit">请输入照片描述</string>
+    <string name="photo_des_submit">确定</string>
+    <string name="add_photo_success">添加照片成功</string>
+    <string name="del_photo_success">删除照片成功</string>
+    
+    <!-- 我的收藏 -->
+    <string name="collect_title">我的收藏</string>
+    
+    
+
 </resources>

@@ -15,10 +15,10 @@ import android.widget.TextView;
 import com.app.man.R;
 
 public class AlertDialogWindow {
-	//数据
-	private String titleData; //标题数据
-	private String[] menuDatas; //动态menu数据
-	
+	// 数据
+	private String titleData; // 标题数据
+	private String[] menuDatas; // 动态menu数据
+
 	private Context context;
 	private Map<String, Object> cacheObj;
 	private OnClickListener clickListener;
@@ -48,19 +48,21 @@ public class AlertDialogWindow {
 				R.layout.win_menu, null);
 		btnsContainer = (LinearLayout) winMenuViewGroup
 				.findViewById(R.id.win_menu_bt_container);
-		titleView = (TextView) winMenuViewGroup.findViewById(R.id.win_menu_title);
-		cancleView = (TextView) winMenuViewGroup.findViewById(R.id.win_menu_cancle);
-		
+		titleView = (TextView) winMenuViewGroup
+				.findViewById(R.id.win_menu_title);
+		cancleView = (TextView) winMenuViewGroup
+				.findViewById(R.id.win_menu_cancle);
+
 		titleView.setText(titleData);
 		createMenuWin();
 		cancleView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				getDialog().hide();
 			}
 		});
-		
+
 		builder = new AlertDialog.Builder(context);
 		dialog = builder.setView(winMenuViewGroup).create();
 
@@ -121,4 +123,14 @@ public class AlertDialogWindow {
 	public void setClickListener(OnClickListener clickListener) {
 		this.clickListener = clickListener;
 	}
+
+	public String getTitleData() {
+		return titleData;
+	}
+
+	public void setTitleData(String titleData) {
+		this.titleData = titleData;
+		titleView.setText(titleData);
+	}
+
 }

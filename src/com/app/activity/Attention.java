@@ -1,7 +1,6 @@
 package com.app.activity;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -9,12 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -29,6 +31,8 @@ import com.app.util.DensityUtil;
 import com.app.view.NetImageView;
 
 public class Attention extends BaseActivity {
+	
+	Context context = this;
 
 	private ViewGroup attList; // 关注的人列表
 
@@ -98,6 +102,21 @@ public class Attention extends BaseActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		try {
+			convertView.setTag(obj.getString("id"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		convertView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, PersonMan.class);
+				intent.putExtra("userId", v.getTag().toString());
+				context.startActivity(intent);
+			}
+		});
 
 		return convertView;
 	}

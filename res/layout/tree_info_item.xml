@@ -18,12 +18,14 @@
         android:orientation="vertical" >
 
         <ImageView
+            android:id="@+id/tree_support_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/tree_up_icon" />
 
         <TextView
+            android:id="@+id/tree_info_supportNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="80"
@@ -31,6 +33,7 @@
             android:textSize="12sp" />
 
         <ImageView
+            android:id="@+id/tree_dissupport_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -44,11 +47,11 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/tree_info_item_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:lineSpacingMultiplier="1.2"
-            android:text="树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞"
             android:textColor="#565656"
             android:textSize="14sp" />
 
@@ -59,15 +62,18 @@
 			
             <!-- 临时名 -->
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tree_info_item_name"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="sadfwer"
                 android:textColor="#b1b1b1"
                 android:textSize="12sp"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:layout_marginRight="20dp" />
 			
             <!-- 发表日期 -->
             <TextView
+                android:id="@+id/tree_info_item_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2014-3-1"

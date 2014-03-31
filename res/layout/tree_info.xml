@@ -43,12 +43,12 @@
                 <!-- 文章内容 -->
 
                 <TextView
+                    android:id="@+id/tree_info_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:lineSpacingMultiplier="1.2"
                     android:lines="3"
-                    android:text="树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树洞树树洞"
                     android:textColor="#565656"
                     android:textSize="14sp" />
 
@@ -61,16 +61,19 @@
                     <!-- 作者临时名 -->
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tree_info_question_author"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:text="asafdkl"
+                        android:ellipsize="end"
+                        android:singleLine="true"
                         android:textColor="#b1b1b1"
                         android:textSize="12sp" />
 
                     <!-- 发表时间 -->
 
                     <TextView
+                        android:id="@+id/tree_info_question_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -83,15 +86,18 @@
             <!-- 回复总条数 -->
 
             <TextView
+                android:id="@+id/tree_info_question_replyNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="200条回复 "
                 android:textColor="#b1b1b1"
                 android:textSize="14sp" />
-			
+
             <!-- 评论内容容器 -->
+
             <LinearLayout
+                android:id="@+id/tree_info_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -108,28 +114,33 @@
 
                 <include layout="@layout/tree_info_item" />
             </LinearLayout>
-            
         </LinearLayout>
     </ScrollView>
-	
-    <LinearLayout android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
-        
-        <EditText android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <EditText
+            android:id="@+id/tree_answer_input"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_marginRight="5dp"
+            android:layout_weight="2"
             android:background="@drawable/tree_input_bg"
-            android:textSize="16sp"
-            android:hint="@string/tree_repeat_hint"/>
-        
-        <Button android:layout_width="45dp"
+            android:hint="@string/tree_repeat_hint"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/tree_answer_submit"
+            android:layout_width="45dp"
             android:layout_height="34dp"
             android:background="@drawable/tree_repeat_submit_bg"
-            android:textSize="16sp"
+            android:text="@string/tree_repeat_submit"
             android:textColor="#fff"
-            android:text="@string/tree_repeat_submit"/>
+            android:textSize="16sp" />
     </LinearLayout>
+
 </LinearLayout>

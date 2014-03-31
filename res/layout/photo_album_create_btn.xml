@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_df_whitebg"
+    android:layout_marginBottom="10dp">
+
+    <com.app.view.NetImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:src="@drawable/add_icon"
+        man:isRect="true" />
+
+</RelativeLayout>

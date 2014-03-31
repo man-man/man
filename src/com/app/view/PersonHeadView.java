@@ -1,8 +1,5 @@
 package com.app.view;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
