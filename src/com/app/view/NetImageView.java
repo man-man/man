@@ -207,16 +207,13 @@ public class NetImageView extends ImageView {
 	public void layout(int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
 		super.layout(l, t, r, b);
-		// if (!hasLayout) {
+		 if (!hasLayout) {
 		LayoutParams params = (LayoutParams) this.getLayoutParams();
 
 		// 图片为矩形
 		if (isRect) {
 			params.height = getWidth();
 		}
-		System.out.println("===================width:" + getWidth());
-		System.out.println("===================parent width:"
-				+ ((View) this.getParent()).getWidth());
 
 		if (heightOfWidth != 0) {
 			params.height = (int) (getWidth() * heightOfWidth + 0.5);
@@ -225,8 +222,8 @@ public class NetImageView extends ImageView {
 		this.setLayoutParams(params);
 		startLoadImg();
 
-		// hasLayout = true;
-		// }
+			hasLayout = true;
+		}
 	}
 
 	@Override

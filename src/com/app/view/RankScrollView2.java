@@ -26,10 +26,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.activity.PersonMan;
-import com.app.activity.Woman;
 import com.app.common.ImageLoader;
 import com.app.man.R;
 import com.app.model.WomanItemModel;
@@ -105,14 +103,15 @@ public class RankScrollView2 extends ScrollView {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
 
-//		if (changed && !loadOnce) {
+		if (changed && !loadOnce) {
 			firstColumn = (LinearLayout) findViewById(R.id.rank_first_column);
 			secondColumn = (LinearLayout) findViewById(R.id.rank_second_column);
 			columnWidth = firstColumn.getWidth();
+			
 			loadOnce = true;
 
 			rendItems();
-//		}
+		}
 	}
 
 	/**
@@ -156,16 +155,12 @@ public class RankScrollView2 extends ScrollView {
 		((TextView) convertView.findViewById(R.id.woman_rank_vote))
 				.setText(model.getVote() + "");
 		imgView = (NetImageView) convertView.findViewById(R.id.woman_rank_img);
-
+		
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				columnWidth, columnWidth);
+		imgView.setLayoutParams(params);
 		if (!"".equals(imgUrl) && imgUrl != null) { // 异步加载图片
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					columnWidth, columnWidth);
-
-			imgView.setLayoutParams(params);
 			imgView.setNetUrl(imgUrl);
-			// LoadImageTask task = new LoadImageTask(imgView);
-			// taskCollection.add(task);
-			// task.execute(imgUrl);
 		}
 
 		convertView.setTag(model.getId());
