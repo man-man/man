@@ -56,6 +56,7 @@ public class Photo extends BaseActivity {
 	private String imgBase64; // 上传照片数据
 	private JSONArray imgArr;
 	private JSONObject imgBase64Arr; // 上传照片数组
+	private String type = null; // 相册类型
 
 	// 控件
 	private ViewPagerView pagerView; // 图片切换组件
@@ -84,6 +85,7 @@ public class Photo extends BaseActivity {
 
 		Bundle b = getIntent().getExtras();
 		albumId = b.getString("albumId");
+		type = b.getString("type");
 		try {
 			photoDatas = new JSONArray(b.getString("imgs"));
 		} catch (JSONException e) {
@@ -107,6 +109,10 @@ public class Photo extends BaseActivity {
 		createBtn = LayoutInflater.from(this).inflate(
 				R.layout.photo_album_create_btn, null);
 
+		if ("other".equals(type)) {
+			createBtn.setVisibility(View.GONE);
+		}
+
 		createBtn.setOnClickListener(addImgOnClick);
 
 		summaryYesBtn.setOnClickListener(summarySubmitClick);
@@ -126,7 +132,7 @@ public class Photo extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			photoDesContainer.setVisibility(View.GONE);
-			
+
 		}
 	};
 
@@ -149,7 +155,19 @@ public class Photo extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			curClickPhoto = v;
-			alertDialogWindow.getDialog().show();
+
+			JSONObject curPhotoData = (JSONObject) curClickPhoto.getTag();
+
+			if ("other".equals(type)) {
+				try {
+					pagerView.setData(curPhotoData.getInt("id"), photoDatas);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				pagerView.setVisibility(View.VISIBLE);
+			} else {
+				alertDialogWindow.getDialog().show();
+			}
 		}
 	};
 
@@ -262,21 +280,40 @@ public class Photo extends BaseActivity {
 				e.printStackTrace();
 			}
 
-			switch (i % 4) {
-			case 0:
-				photoCol_2.addView(addMarginBottom(getView(itemData)));
-				break;
-			case 1:
-				photoCol_3.addView(addMarginBottom(getView(itemData)));
-				break;
-			case 2:
-				photoCol_4.addView(addMarginBottom(getView(itemData)));
-				break;
-			case 3:
-				photoCol_1.addView(addMarginBottom(getView(itemData)));
-				break;
-			default:
-				break;
+			if ("other".equals(type)) {
+				switch (i % 4) {
+				case 0:
+					photoCol_1.addView(addMarginBottom(getView(itemData)));
+					break;
+				case 1:
+					photoCol_2.addView(addMarginBottom(getView(itemData)));
+					break;
+				case 2:
+					photoCol_3.addView(addMarginBottom(getView(itemData)));
+					break;
+				case 3:
+					photoCol_4.addView(addMarginBottom(getView(itemData)));
+					break;
+				default:
+					break;
+				}
+			} else {
+				switch (i % 4) {
+				case 0:
+					photoCol_2.addView(addMarginBottom(getView(itemData)));
+					break;
+				case 1:
+					photoCol_3.addView(addMarginBottom(getView(itemData)));
+					break;
+				case 2:
+					photoCol_4.addView(addMarginBottom(getView(itemData)));
+					break;
+				case 3:
+					photoCol_1.addView(addMarginBottom(getView(itemData)));
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}

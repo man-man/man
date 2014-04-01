@@ -8,6 +8,7 @@ import org.json.JSONTokener;
 import com.app.activity.Mine.UserInfoHttpHandler;
 import com.app.common.BaseUtils;
 import com.app.common.BubbleUtil;
+import com.app.common.Constant;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
@@ -17,6 +18,7 @@ import com.app.view.ManListView;
 import com.app.view.MenuView;
 import com.app.view.PersonHeadView;
 import com.app.view.ViewPagerView;
+import com.app.view.WomanPhotoList;
 
 import android.os.Bundle;
 import android.os.Looper;
@@ -24,6 +26,7 @@ import android.os.Message;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AbsoluteLayout;
@@ -39,6 +42,7 @@ public class PersonMan extends Activity {
 	private ScrollView parentScroll; // 父scroll
 	private MenuView menuView; // 更多菜单
 	private ManListView manListView; // 文章列表
+	private WomanPhotoList personWomanList; // 相冊列表
 	private PersonHeadView personHeadView; // 用戶信息
 	private ViewPagerView pagerView; // 图片切换组件
 
@@ -57,6 +61,7 @@ public class PersonMan extends Activity {
 		parentScroll = (ScrollView) findViewById(R.id.person_man_list_scroll);
 		menuView = (MenuView) findViewById(R.id.person_man_menu_vew);
 		manListView = (ManListView) findViewById(R.id.person_man_list);
+		personWomanList = (WomanPhotoList) findViewById(R.id.person_woman_list);
 		pagerView = (ViewPagerView) findViewById(R.id.person_man_pager_view);
 
 		sendReq();
@@ -66,6 +71,40 @@ public class PersonMan extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		personHeadView.activityResult(requestCode, resultCode, data);
+	}
+
+	private void rendItems(JSONObject data) {
+		int groupId = Constant.USER_TYPE_COMMON;
+
+		try {
+			groupId = data.getInt("groupId");
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+
+		personHeadView.setData(data);
+
+		switch (groupId) {
+		case Constant.USER_TYPE_WOMAN:
+			try {
+				JSONArray albums = data.getJSONArray("albums");
+				personWomanList.setDatas(albums);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			personWomanList.setVisibility(View.VISIBLE);
+			break;
+		case Constant.USER_TYPE_MAN:
+			try {
+				JSONArray articles = data.getJSONArray("articles");
+				manListView.setupViews(absContainer, parentScroll, menuView,
+						pagerView, false).setData(articles);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			manListView.setVisibility(View.VISIBLE);
+			break;
+		}
 	}
 
 	private void sendReq() {
@@ -103,12 +142,7 @@ public class PersonMan extends Activity {
 				Boolean success = resultObj.getBoolean("success");
 				if (success) {
 					JSONObject data = (JSONObject) resultObj.get("data");
-					personHeadView.setData(data);
-
-					JSONArray articles = data.getJSONArray("articles");
-					manListView.setupViews(absContainer, parentScroll,
-							menuView, pagerView, false).setData(articles);
-
+					rendItems(data);
 				} else {
 					BubbleUtil.alertMsg(PersonMan.this,
 							resultObj.getString("errorMessage"));

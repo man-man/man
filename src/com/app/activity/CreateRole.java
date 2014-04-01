@@ -13,10 +13,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.app.common.BaseUtils;
@@ -24,15 +24,15 @@ import com.app.common.BubbleUtil;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
-import com.app.view.TitleView;
+import com.app.view.SexView;
 
-public class WriteArticle extends Activity {
+public class CreateRole extends Activity {
+	Context context = this;
 
-	private Context context = this;
-
-	private TitleView titleView; // 标题view
-	private EditText articleTitleView; // 文章标题输入框
-	private EditText articleView; // 文章内容输入框
+	// 控件
+	private EditText roleNameView;
+	private SexView roleSexView;
+	private Button submitBtn;
 
 	private SubmitHttpHandler submitHttpHandle = new SubmitHttpHandler();
 
@@ -40,21 +40,22 @@ public class WriteArticle extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.write_article);
+		setContentView(R.layout.create_role);
+		setupViews();
+	}
 
-		titleView = (TitleView) findViewById(R.id.write_article_title);
-		articleView = (EditText) findViewById(R.id.write_article_input);
-		articleTitleView = (EditText) findViewById(R.id.write_article_title_input);
+	private void setupViews() {
+		roleNameView = (EditText) findViewById(R.id.role_name_input);
+		roleSexView = (SexView) findViewById(R.id.role_sex_sel);
+		submitBtn = (Button) findViewById(R.id.role_submit);
 
-		titleView.setmRightBtClickListener(submitOnClick);
-
+		submitBtn.setOnClickListener(submitOnClick);
 	}
 
 	OnClickListener submitOnClick = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			BubbleUtil.alertMsg(context, "点击了发布");
 			reqSend();
 		}
 	};
@@ -63,7 +64,7 @@ public class WriteArticle extends Activity {
 	 * 转换到其它activity
 	 */
 	private void redirect() {
-		startActivity(new Intent(this, Man.class));
+		startActivity(new Intent(this, Woman.class));
 		finish();
 	}
 
@@ -79,14 +80,13 @@ public class WriteArticle extends Activity {
 				Bundle bundle = new Bundle();
 				StringBuilder stringBuilder = new StringBuilder();
 				stringBuilder.append(HttpRequestUtils.BASE_HTTP_CONTEXT);
-				stringBuilder.append("WriteArticle.shtml?userId="
-						+ BaseUtils.CUR_USER_MAP.get("id"));
-				stringBuilder.append("&title=");
+				stringBuilder.append("SaveUser.shtml?userId=");
+				stringBuilder.append(BaseUtils.CUR_USER_MAP.get("id"));
+				stringBuilder.append("&gender=");
+				stringBuilder.append(roleSexView.getCurSex());
+				stringBuilder.append("&name=");
 				try {
-					stringBuilder.append(URLEncoder.encode(articleTitleView
-							.getText().toString(), "UTF-8"));
-					stringBuilder.append("&summary=");
-					stringBuilder.append(URLEncoder.encode(articleView
+					stringBuilder.append(URLEncoder.encode(roleNameView
 							.getText().toString(), "UTF-8"));
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
@@ -117,8 +117,7 @@ public class WriteArticle extends Activity {
 				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
 				Boolean success = resultObj.getBoolean("success");
 				if (success) {
-					BubbleUtil.alertMsg(context,
-							R.string.write_article_submite_success);
+					BubbleUtil.alertMsg(context, R.string.role_create_success);
 					redirect();
 				} else {
 					BubbleUtil.alertMsg(context,
@@ -131,4 +130,5 @@ public class WriteArticle extends Activity {
 		}
 
 	}
+
 }

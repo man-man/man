@@ -30,6 +30,7 @@ public class TitleView extends LinearLayout {
 	private TextView releaseView; // 左侧发布按钮（发布秘密）
 
 	// 是否显示控件
+	private boolean isBack; // 是否显示返回按钮
 	private boolean isSubmit; // 是否显示提交按钮
 	private boolean isRelease; // 是否显示发布按钮
 
@@ -69,14 +70,13 @@ public class TitleView extends LinearLayout {
 				R.styleable.Title);
 
 		// 获取自定义属性和默认值
+		isBack = mTypedArray.getBoolean(R.styleable.Title_isBack, true);
 		isSubmit = mTypedArray.getBoolean(R.styleable.Title_isSubmit, false);
 		isRelease = mTypedArray.getBoolean(R.styleable.Title_isRelease, false);
 		titleName = mTypedArray.getString(R.styleable.Title_titleName);
 
 		mTypedArray.recycle();
 	}
-
-	
 
 	private void setupViews() {
 		LayoutInflater.from(getContext()).inflate(R.layout.title, this);
@@ -96,6 +96,10 @@ public class TitleView extends LinearLayout {
 				((Activity) getContext()).finish();
 			}
 		});
+
+		if (!isBack) {
+			backView.setVisibility(View.GONE);
+		}
 
 		// 提交按钮
 		if (isSubmit) {

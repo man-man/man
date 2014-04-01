@@ -32,6 +32,7 @@
     </declare-styleable>
     <!-- title -->
     <declare-styleable name="Title">
+        <attr name="isBack" format="boolean" />
         <attr name="isSubmit" format="boolean" />
         <attr name="isRelease" format="boolean" />
         <attr name="titleName" format="string"/>

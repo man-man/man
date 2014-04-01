@@ -207,20 +207,20 @@ public class NetImageView extends ImageView {
 	public void layout(int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
 		super.layout(l, t, r, b);
-		 if (!hasLayout) {
-		LayoutParams params = (LayoutParams) this.getLayoutParams();
+		if (!hasLayout) {
+			LayoutParams params = (LayoutParams) this.getLayoutParams();
 
-		// 图片为矩形
-		if (isRect) {
-			params.height = getWidth();
-		}
+			// 图片为矩形
+			if (isRect) {
+				params.height = getWidth();
+			}
 
-		if (heightOfWidth != 0) {
-			params.height = (int) (getWidth() * heightOfWidth + 0.5);
-		}
+			if (heightOfWidth != 0) {
+				params.height = (int) (getWidth() * heightOfWidth + 0.5);
+			}
 
-		this.setLayoutParams(params);
-		startLoadImg();
+			this.setLayoutParams(params);
+			startLoadImg();
 
 			hasLayout = true;
 		}
@@ -434,6 +434,12 @@ public class NetImageView extends ImageView {
 
 	public void setRect(boolean isRect) {
 		this.isRect = isRect;
+		LayoutParams params = (LayoutParams) this.getLayoutParams();
+		// 图片为矩形
+		if (isRect) {
+			params.height = getWidth();
+		}
+		this.setLayoutParams(params);
 	}
 
 	public Integer getImgResizeWidth() {

@@ -42,7 +42,17 @@
         <item name="android:background">@drawable/loginb_txt_bg</item>
     </style>
     <!-- 登陆注册end -->
-
+    
+    <!-- 创建角色 -->
+	<style name="role_sex_txt">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#007FFA</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:background">#fff</item>
+    </style>
 
     <!-- 装女郎 排行榜 -->
     <style name="woman_rank_name">

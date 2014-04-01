@@ -2,56 +2,68 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
+    android:baselineAligned="false"
     android:orientation="horizontal"
+    android:paddingBottom="4dp"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
-    android:paddingBottom="4dp" android:baselineAligned="false">
+    android:layout_marginTop="5dp" >
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical" >
+
         <TextView
             android:id="@+id/woman_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/head_bottom"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="@string/title_rank"
             android:textColor="#000"
-            android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="4dp" />
+            android:textSize="20sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical" >
+
         <TextView
             android:id="@+id/woman_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="@string/title_choice"
             android:textColor="#000"
-            android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="4dp" />
+            android:textSize="20sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
+
         <TextView
             android:id="@+id/woman_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="@string/title_signup"
             android:textColor="#000"
-            android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="4dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

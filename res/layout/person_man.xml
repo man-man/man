@@ -45,8 +45,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="5dp" >
+                    android:padding="5dp"
+                    android:visibility="gone" >
                 </com.app.view.ManListView>
+
+                <com.app.view.WomanPhotoList
+                    android:id="@+id/person_woman_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

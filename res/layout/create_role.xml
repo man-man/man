@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateRole" >
+
+    <!-- title -->
+
+    <com.app.view.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:titleName="@string/login_title" >
+    </com.app.view.TitleView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="25dp" >
+
+        <!-- 昵称 -->
+
+        <EditText
+            android:id="@+id/role_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/login_input_bg"
+            android:drawableLeft="@drawable/role_name_icon"
+            android:drawablePadding="15dp"
+            android:hint="@string/rolename_input_hint"
+            android:textSize="18sp" />
+
+        <com.app.view.SexView
+            android:id="@+id/role_sex_sel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" >
+        </com.app.view.SexView>
+
+        <!-- 提交 -->
+
+        <Button
+            android:id="@+id/role_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_submit_corner"
+            android:text="@string/role_submit_btn"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>
