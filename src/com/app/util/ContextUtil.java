@@ -23,7 +23,7 @@ public class ContextUtil extends Application {
 		LruCache lruCache = new LruCache(this);
 		COMMON_PICASSO = new Picasso.Builder(getApplicationContext())
 				.memoryCache(lruCache).build();
-		COMMON_PICASSO.setDebugging(true);
+//		COMMON_PICASSO.setDebugging(true);
 		instance = this;
 	}
 }
