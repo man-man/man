@@ -7,8 +7,10 @@
     tools:context=".Tree" >
 
     <com.app.view.TitleView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        man:isWrite="true"
         man:titleName="@string/tree_title" >
     </com.app.view.TitleView>
 
@@ -27,7 +29,7 @@
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:paddingTop="10dp" >
-
+		<!-- 
             <include layout="@layout/tree_item" />
 
             <include layout="@layout/tree_item" />
@@ -37,6 +39,7 @@
             <include layout="@layout/tree_item" />
 
             <include layout="@layout/tree_item" />
+             -->
         </LinearLayout>
     </ScrollView>
 

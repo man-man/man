@@ -9,19 +9,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.activity.PersonMan;
 import com.app.activity.VoteAfter;
-import com.app.common.BaseUtils;
 import com.app.man.R;
 
 /**
@@ -31,7 +30,9 @@ import com.app.man.R;
  * 
  */
 @SuppressLint("NewApi")
-public class VoteView extends LinearLayout {
+public class VoteView extends LinearLayout implements OnClickListener {
+
+	Context context;
 
 	/**
 	 * 评选信息左侧
@@ -64,14 +65,17 @@ public class VoteView extends LinearLayout {
 
 	public VoteView(Context context) {
 		super(context);
+		this.context = context;
 	}
 
 	public VoteView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.context = context;
 	}
 
 	public VoteView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.context = context;
 	}
 
 	@Override
@@ -89,33 +93,13 @@ public class VoteView extends LinearLayout {
 		voteBtLeft = (VoteButtonView) findViewById(R.id.vote_bt_left);
 		voteBtRight = (VoteButtonView) findViewById(R.id.vote_bt_right);
 
-		voteBtLeft.setOnClickListener(new VoteBtLeftOnClick());
-		voteBtRight.setOnClickListener(new VoteBtRightOnClick());
+		voteInfoLeft.setOnClickListener(this);
+		voteInfoRight.setOnClickListener(this);
+		voteBtLeft.setOnClickListener(this);
+		voteBtRight.setOnClickListener(this);
 
 		rendItems();
 	}
-
-	// private View getItemView() {
-	// System.out.println("-----------voteInfoLeft" + voteInfoLeft);
-	//
-	// View itemView = LayoutInflater.from(getContext()).inflate(
-	// R.layout.vote_item, null);
-	//
-	// LinearLayout itemContent = (LinearLayout) itemView
-	// .findViewById(R.id.vote_item);
-	// itemContent.setLayoutParams(new LinearLayout.LayoutParams(voteInfoLeft
-	// .getWidth(), voteInfoLeft.getHeight()));
-	//
-	// ImageView img = (ImageView) itemView.findViewById(R.id.vote_item_img);
-
-	// LayoutParams params = (LayoutParams) img.getLayoutParams();
-	// params.width = voteInfoLeft.getWidth();
-	// params.height = (int) (272/152f * params.width);
-
-	// img.setLayoutParams(params);
-
-	// return itemView;
-	// }
 
 	public void setData(JSONObject data) {
 		JSONArray users;
@@ -166,9 +150,6 @@ public class VoteView extends LinearLayout {
 				.findViewById(R.id.vote_item_img);
 		try {
 			img.setNetUrl(userObj.getString("imageUrl"));
-			// img.setImageDrawable(Drawable.createFromPath(BaseUtils
-			// .downloadImage(userObj.getString("imageUrl"), BaseUtils
-			// .getScreenWidth(VoteView.this.getContext()) / 2)));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -199,59 +180,49 @@ public class VoteView extends LinearLayout {
 		return itemView;
 	}
 
-	class VoteBtLeftOnClick implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			Log.d("test", "--------------VoteBtLeftOnClick setupViews");
-
-			Intent intent = new Intent(getContext(), VoteAfter.class);
-			if (leftUserData != null) {
-				try {
-					String id = leftUserData.getString("id");
-					intent.putExtra("girlId", id);
-					// HttpRequestUtils.getResFromHttpUrl(false,
-					// HttpRequestUtils.BASE_HTTP_CONTEXT
-					// + "Vote.shtml?userId="
-					// + BaseUtils.CUR_USER_MAP.get("id")
-					// + "&girlId=" + id, null);
-					getContext().startActivity(intent);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
-
+	/**
+	 * 跳转到个人中心
+	 */
+	private void redirectPerson(String userId) {
+		Intent intentPerson = new Intent();
+		intentPerson.setClass(context, PersonMan.class);
+		intentPerson.putExtra("userId", userId);
+		context.startActivity(intentPerson);
 	}
 
-	class VoteBtRightOnClick implements OnClickListener {
+	/**
+	 * 跳转到招标后页面
+	 */
+	private void redirectVoteAfter(String userId) {
+		Intent intent = new Intent(context, VoteAfter.class);
+		intent.putExtra("girlId", userId);
+		context.startActivity(intent);
+		((Activity) context).finish();
+	}
 
-		@Override
-		public void onClick(View v) {
-			Log.d("test", "--------------VoteBtRightOnClick setupViews");
-			Activity a = (Activity) getContext();
+	@Override
+	public void onClick(View v) {
 
-			Intent intent = new Intent(getContext(), VoteAfter.class);
-
-			if (rightUserData != null) {
-				try {
-					String id = rightUserData.getString("id");
-					intent.putExtra("girlId", id);
-					// HttpRequestUtils.getResFromHttpUrl(false,
-					// HttpRequestUtils.BASE_HTTP_CONTEXT
-					// + "Vote.shtml?userId="
-					// + BaseUtils.CUR_USER_MAP.get("id")
-					// + "&girlId=" + id, null);
-					getContext().startActivity(intent);
-					a.finish();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+		try {
+			switch (v.getId()) {
+			case R.id.vote_info_left:
+				redirectPerson(leftUserData.getString("id"));
+				break;
+			case R.id.vote_info_right:
+				redirectPerson(rightUserData.getString("id"));
+				break;
+			case R.id.vote_bt_left:
+				redirectVoteAfter(leftUserData.getString("id"));
+				break;
+			case R.id.vote_bt_right:
+				redirectVoteAfter(rightUserData.getString("id"));
+				break;
+			default:
+				break;
 			}
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
 	}
 
 }

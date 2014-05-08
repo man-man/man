@@ -4,6 +4,8 @@
     android:id="@+id/abs_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".Man" >
 
     <!-- 页面信息 -->
@@ -35,7 +37,7 @@
                 android:padding="5dp" >
             </com.app.view.ManListView>
         </ScrollView>
-
+	
         <com.app.view.FootView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -23,6 +23,7 @@ import com.app.common.BaseUtils;
 import com.app.common.HttpCallBackHandler;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
+import com.app.view.TitleView;
 
 public class Tree extends BaseActivity {
 
@@ -30,6 +31,7 @@ public class Tree extends BaseActivity {
 
 	JSONObject curTreeData;
 
+	private TitleView titleView;
 	private ViewGroup treeList;
 
 	TreeHttpHandler treeHttpHandler = new TreeHttpHandler();
@@ -46,6 +48,18 @@ public class Tree extends BaseActivity {
 
 	private void setupViews() {
 		treeList = (ViewGroup) findViewById(R.id.tree_list);
+		titleView = (TitleView) findViewById(R.id.title);
+		
+		if(titleView != null){
+			titleView.setmRightBtClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Tree.this, TreeWrite.class);
+					startActivity(intent);
+				}
+			});
+		}
 	}
 
 	private void rendItems(JSONArray arr) {

@@ -29,23 +29,20 @@
     <string name="login_goddess">女神帐号登陆</string>
     <string name="login_weibo">微博帐号登陆</string>
     <string name="register">注册</string>
-    <!-- 登陆注册end -->
-    
+
     <!-- 创建角色 -->
     <string name="role_title">填写必要资料</string>
-	<string name="rolename_input_hint">请输入昵称，保存后不可更改</string>
-	<string name="sex_girl_txt">女</string>
-	<string name="sex_boy_txt">男</string>
-	<string name="role_sex_des">性别保存后不可更改</string>
-	<string name="role_submit_btn">保存并开始使用</string>
-	<string name="role_create_success">角色创建成功</string>
+    <string name="rolename_input_hint">请输入昵称，保存后不可更改</string>
+    <string name="sex_girl_txt">女</string>
+    <string name="sex_boy_txt">男</string>
+    <string name="role_sex_des">性别保存后不可更改</string>
+    <string name="role_submit_btn">保存并开始使用</string>
+    <string name="role_create_success">角色创建成功</string>
 
     <!-- woman rank使用 -->
     <string name="border_top">Border Top</string>
     <string name="border_bottom">Border Bottom</string>
     <string name="image_url">Image Url</string>
-    <!-- woman rank使用end -->
-
 
     <!-- 装女郎报名 -->
     <string name="sign_title">装女郎报名</string>
@@ -58,6 +55,8 @@
     <!-- 搜索页头 -->
     <string name="search_hint">搜索</string>
     <string name="attention_txt">关注</string>
+    <string name="search_button_txt">搜索</string>
+    <string name="search_alert_no_keyword">请输入搜索关键字</string>
 
     <!-- 常用的错误提示 -->
     <string name="base_response_error">网络请求返回错误</string>
@@ -66,6 +65,7 @@
 
     <!-- 操作成功 -->
     <string name="req_vote_success">投票成功</string>
+    <string name="give_score_success">赠送积分成功</string>
     <string name="title_activity_vote_after">VoteAfter</string>
     <string name="sanwei_1">胸围</string>
     <string name="sanwei_2">腰围</string>
@@ -97,6 +97,12 @@
     <string name="tree_support_answer_success">支持成功</string>
     <string name="tree_dissupport_success">不支持成功</string>
     <string name="title_activity_comment">Comment</string>
+    <string name="tree_write_title">发布秘密</string>
+    <string name="tree_write_nick_hint">请输入临时昵称</string>
+    <string name="tree_write_content_hint">请输入秘密内容</string>
+    <string name="tree_write_nick_tip">请输入临时昵称</string>
+    <string name="tree_write_content_tip">请输入秘密内容</string>
+    <string name="tree_write_success">发布秘密成功</string>
 
     <!-- 评论 -->
     <string name="comment_txt">评论</string>
@@ -154,5 +160,10 @@
     <!-- 个人中心相册 -->
     <string name="woman_photo_title">她的相册</string>
     <string name="title_activity_create_role">CreateRole</string>
+
+    <!-- 男人帮 -->
+    <string name="man_show_all">显示全部</string>
+    <string name="man_txt_up">收起文字</string>
+    <string name="title_activity_tree_write">TreeWrite</string>
 
 </resources>

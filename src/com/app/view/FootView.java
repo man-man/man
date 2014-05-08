@@ -53,18 +53,21 @@ public class FootView extends LinearLayout {
 	public FootView(Context context) {
 		super(context);
 		curActivity = (Activity) context;
+		setupViews();
 	}
 
 	public FootView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initAttrs(context, attrs);
 		curActivity = (Activity) context;
+		setupViews();
 	}
 
 	public FootView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initAttrs(context, attrs);
 		curActivity = (Activity) context;
+		setupViews();
 	}
 	
 	private void initAttrs(Context context, AttributeSet attrs) {
@@ -73,14 +76,14 @@ public class FootView extends LinearLayout {
 
 		// 获取自定义属性和默认值
 		currentTab = mTypedArray.getString(R.styleable.FootView_currentTab);
-
+		
 		mTypedArray.recycle();
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		super.onLayout(changed, l, t, r, b);
-		setupViews();
+//		setupViews();
 	}
 
 	private void setupViews() {
@@ -135,12 +138,21 @@ public class FootView extends LinearLayout {
 
 			switch (v.getId()) {
 			case R.id.foot_woman:
+				if (TABS[0].equals(currentTab)) {
+					return;
+				}
 				cls = Woman.class;
 				break;
 			case R.id.foot_man:
+				if (TABS[1].equals(currentTab)) {
+					return;
+				}
 				cls = Man.class;
 				break;
 			case R.id.foot_mine:
+				if (TABS[2].equals(currentTab)) {
+					return;
+				}
 				cls = Mine.class;
 				break;
 				

@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:man="http://schemas.android.com/apk/res/com.app.man"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    android:orientation="vertical"
+    tools:context=".TreeWrite" >
+
+    <com.app.view.TitleView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        man:isRelease="true"
+        man:titleName="@string/tree_write_title" >
+    </com.app.view.TitleView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/tree_nick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/tree_input_bg"
+            android:hint="@string/tree_write_nick_hint" />
+
+        <EditText
+            android:id="@+id/tree_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="25dp"
+            android:layout_weight="2"
+            android:background="@drawable/tree_input_bg"
+            android:gravity="top|left"
+            android:hint="@string/tree_write_content_hint"
+            android:inputType="textMultiLine"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -28,11 +28,13 @@ public class TitleView extends LinearLayout {
 	private TextView titleView; // 中间title
 	private TextView submitView; // 左侧提交按钮(装女郎报名)
 	private TextView releaseView; // 左侧发布按钮（发布秘密）
+	private ImageView writeView; // 左侧撰写按钮（撰写树洞）
 
 	// 是否显示控件
 	private boolean isBack; // 是否显示返回按钮
 	private boolean isSubmit; // 是否显示提交按钮
 	private boolean isRelease; // 是否显示发布按钮
+	private boolean isWrite; // 是否显示撰写按钮
 
 	private String titleName; // 标题
 
@@ -73,6 +75,7 @@ public class TitleView extends LinearLayout {
 		isBack = mTypedArray.getBoolean(R.styleable.Title_isBack, true);
 		isSubmit = mTypedArray.getBoolean(R.styleable.Title_isSubmit, false);
 		isRelease = mTypedArray.getBoolean(R.styleable.Title_isRelease, false);
+		isWrite = mTypedArray.getBoolean(R.styleable.Title_isWrite, false);
 		titleName = mTypedArray.getString(R.styleable.Title_titleName);
 
 		mTypedArray.recycle();
@@ -85,6 +88,7 @@ public class TitleView extends LinearLayout {
 		titleView = (TextView) findViewById(R.id.title_name);
 		submitView = (TextView) findViewById(R.id.title_submit);
 		releaseView = (TextView) findViewById(R.id.title_release);
+		writeView = (ImageView) findViewById(R.id.title_write);
 
 		titleView.setText(titleName);
 
@@ -103,7 +107,7 @@ public class TitleView extends LinearLayout {
 
 		// 提交按钮
 		if (isSubmit) {
-			submitView.setVisibility(VISIBLE);
+			submitView.setVisibility(View.VISIBLE);
 			submitView.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -117,7 +121,7 @@ public class TitleView extends LinearLayout {
 
 		// 发布按钮
 		if (isRelease) {
-			releaseView.setVisibility(VISIBLE);
+			releaseView.setVisibility(View.VISIBLE);
 			releaseView.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -127,6 +131,21 @@ public class TitleView extends LinearLayout {
 					}
 				}
 			});
+		}
+		
+		//撰写按钮
+		if (isWrite) {
+			writeView.setVisibility(View.VISIBLE);
+			writeView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					if (mRightBtClickListener != null) {
+						mRightBtClickListener.onClick(v);
+					}
+				}
+			});
+
 		}
 	}
 

@@ -55,5 +55,16 @@
         android:layout_marginRight="6dp"
         android:background="@drawable/release_bt_bg"
         android:visibility="gone" />
+    
+    <!-- 右侧撰写按钮 -->
+    <ImageView
+        android:id="@+id/title_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="10dp"
+        android:src="@drawable/tree_write"
+        android:visibility="gone" />
 
 </RelativeLayout>

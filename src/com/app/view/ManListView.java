@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -100,8 +101,55 @@ public class ManListView extends LinearLayout {
 			}
 			if (itemView != null) {
 				addView(itemView);
+				upDownSummary((ViewGroup) itemView);
 			}
 		}
+	}
+	
+	/**
+	 * 展开 收藏 文章内容
+	 * @param itemView
+	 */
+	private void upDownSummary(ViewGroup itemView) {
+		// 展开 收起
+		final TextView summaryView = (TextView) itemView
+				.findViewById(R.id.man_item_summary);
+		final TextView upDownView = (TextView) itemView
+				.findViewById(R.id.man_item_up_down);
+		upDownView.setTag(summaryView);
+
+		summaryView.post(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("-------------summaryView.getLineCount():"
+						+ summaryView.getLineCount());
+				if (summaryView.getLineCount() >= 3) {
+					upDownView.setVisibility(View.VISIBLE);
+					upDownView.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							TextView tv = (TextView) v;
+							TextView summaryView = (TextView) v.getTag();
+							String text = tv.getText().toString();
+
+							if (getResources().getString(R.string.man_show_all)
+									.equals(text)) { // 显示全部
+								summaryView.setSingleLine(false);
+								summaryView.setEllipsize(null);
+								tv.setText(R.string.man_txt_up);
+							} else if (getResources().getString(
+									R.string.man_txt_up).equals(text)) { // 收起文字
+								summaryView.setLines(3);
+								summaryView
+										.setEllipsize(TextUtils.TruncateAt.END);
+								tv.setText(R.string.man_show_all);
+							}
+						}
+					});
+				}
+			}
+		});
 	}
 
 	public View getView(JSONObject article) {

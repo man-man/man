@@ -1,28 +1,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="5dp"
-    android:paddingRight="15dp"
     android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp">
-    
-    <EditText android:layout_width="0dp"
+    android:layout_marginTop="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="15dp" >
+
+    <RelativeLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:drawableLeft="@drawable/search_icon"
-        android:drawablePadding="5dp"
-        android:background="@drawable/search_input"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        android:paddingLeft="8dp"
         android:layout_marginRight="10dp"
-        android:hint="@string/search_hint"/>
-    
-    <ImageView 
+        android:layout_weight="1" >
+
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_input"
+            android:drawableLeft="@drawable/search_icon"
+            android:drawablePadding="5dp"
+            android:hint="@string/search_hint"
+            android:paddingBottom="7dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="7dp" />
+
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/tree_repeat_submit_bg"
+            android:text="@string/search_button_txt"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:visibility="gone" >
+        </Button>
+    </RelativeLayout>
+
+    <ImageView
         android:id="@+id/search_view_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/edit_icon"
         android:layout_gravity="center_vertical"
-        android:visibility="gone"/>
+        android:src="@drawable/edit_icon"
+        android:visibility="gone" />
+
 </LinearLayout>

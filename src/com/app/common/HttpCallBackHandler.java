@@ -15,6 +15,10 @@ public abstract class HttpCallBackHandler extends Handler {
 
 	@Override
 	public void handleMessage(Message msg) {
+
+		System.out.println("---------网络请求2 线程："
+				+ Thread.currentThread().getId());
+
 		String resultStr = HttpRequestUtils.getResFromHttpUrl(msg);
 		// 根据http请求的返回结果，进行后续的操作
 		callAfterResponseStr(resultStr);

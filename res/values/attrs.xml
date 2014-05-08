@@ -35,6 +35,7 @@
         <attr name="isBack" format="boolean" />
         <attr name="isSubmit" format="boolean" />
         <attr name="isRelease" format="boolean" />
+        <attr name="isWrite" format="boolean"/>
         <attr name="titleName" format="string"/>
     </declare-styleable>
     <declare-styleable name="PersonHeadView">

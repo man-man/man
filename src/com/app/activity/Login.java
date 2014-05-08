@@ -33,11 +33,11 @@ import com.app.man.R;
  */
 public class Login extends BaseActivity {
 
-	 final String userName = "13691141126";
-	 final String pwd = "123456";
+	// final String userName = "13691141126";
+	// final String pwd = "123456";
 
-//	final String userName = "daren";
-//	final String pwd = "123456";
+	final String userName = "darens";
+	final String pwd = "123456";
 
 	private Button loginBt = null;
 	private EditText passport;

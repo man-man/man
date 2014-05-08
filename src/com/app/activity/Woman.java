@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.os.Bundle;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.app.common.HttpCallBackHandler;
+import com.app.common.HttpReqAsyncTask;
 import com.app.common.HttpRequestUtils;
 import com.app.man.R;
 import com.app.model.WomanItemModel;
@@ -54,7 +56,14 @@ public class Woman extends BaseActivity {
 		setContentView(R.layout.woman);
 
 		rankScrollView = (RankScrollView2) findViewById(R.id.rank_scroll_view);
+
+		// HandlerThread ht = new HandlerThread("rank_req111111111111");
+		// ht.start();
+		// rankQ = new RankListHttpHandler(ht.getLooper());
+
 		rankQ = new RankListHttpHandler();
+		System.out
+				.println("----------ui 主线程：" + Thread.currentThread().getId());
 		rankReqSend();
 	}
 
@@ -62,20 +71,32 @@ public class Woman extends BaseActivity {
 	 * 发送http请求
 	 */
 	private void rankReqSend() {
-		new Thread(new Runnable() {
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//
+//				System.out.println("----------网络请求 线程："
+//						+ Thread.currentThread().getId());
+//
+//				Message msg = rankQ.obtainMessage();
+//				Bundle bundle = new Bundle();
+//				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+//						HttpRequestUtils.BASE_HTTP_CONTEXT
+//								+ "GetGirlRank.shtml?type=1&days=30");
+//				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+//				msg.setData(bundle);
+//				msg.sendToTarget();
+//			}
+//		}).start();
 
-			@Override
-			public void run() {
-				Message msg = rankQ.obtainMessage();
-				Bundle bundle = new Bundle();
-				bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
-						HttpRequestUtils.BASE_HTTP_CONTEXT
-								+ "GetGirlRank.shtml?type=1&days=30");
-				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
-				msg.setData(bundle);
-				msg.sendToTarget();
-			}
-		}).start();
+		RankListHttpAsyncTask httpTask = new RankListHttpAsyncTask();
+		Bundle bundle = new Bundle();
+		bundle.putString(HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+				HttpRequestUtils.BASE_HTTP_CONTEXT
+						+ "GetGirlRank.shtml?type=1&days=30");
+		bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+		httpTask.execute(bundle);
 	}
 
 	/**
@@ -99,6 +120,79 @@ public class Woman extends BaseActivity {
 			models.add(model);
 		}
 		rankScrollView.setData(models, imageUrlArr);
+	}
+
+	class RankListHttpAsyncTask extends HttpReqAsyncTask {
+
+		@Override
+		public void callAfterResponseStr(String resultStr) {
+			JSONTokener jsonParser = new JSONTokener(resultStr);
+			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
+			try {
+				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
+				Boolean success = resultObj.getBoolean("success");
+
+				if (success) {
+					JSONObject data = (JSONObject) resultObj.get("data");
+					JSONArray users = null;
+
+					try {
+						users = data.getJSONArray("users");
+					} catch (Exception e) {
+						e.printStackTrace();
+						Toast.makeText(Woman.this, R.string.rank_empty,
+								Toast.LENGTH_SHORT).show();
+						return;
+					}
+					int len = users.length();
+					imageUrlArr = new String[len];
+
+					for (int i = 0; i < len; i++) {
+						JSONObject userObj = users.getJSONObject(i);
+
+						WomanItemModel model = new WomanItemModel();
+						try {
+							model.setId(userObj.getString("id"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						try {
+							model.setImg(userObj.getString("imageUrl"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						try {
+							model.setName(userObj.getString("name"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						try {
+							model.setVote(userObj.getInt("votes"));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						model.setRank(i + 1);
+
+						imageUrlArr[i] = model.getImg();
+						models.add(model);
+					}
+
+					Log.d("test", "--------back-imageUrlArr:"
+							+ imageUrlArr.length);
+					rankScrollView.setData(models, imageUrlArr);
+
+				} else {
+					Toast.makeText(Woman.this,
+							resultObj.getString("errorMessage"),
+							Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				Toast.makeText(Woman.this, R.string.base_response_error,
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+
 	}
 
 	/**
@@ -164,7 +258,7 @@ public class Woman extends BaseActivity {
 							e.printStackTrace();
 						}
 						model.setRank(i + 1);
-						
+
 						imageUrlArr[i] = model.getImg();
 						models.add(model);
 					}
@@ -239,12 +333,5 @@ public class Woman extends BaseActivity {
 			"http://img.my.csdn.net/uploads/201308/31/1377949441_5454.jpg",
 			"http://img.my.csdn.net/uploads/201308/31/1377949454_6367.jpg",
 			"http://img.my.csdn.net/uploads/201308/31/1377949442_4562.jpg" };
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.woman, menu);
-		return true;
-	}
 
 }

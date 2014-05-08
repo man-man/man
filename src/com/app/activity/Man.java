@@ -1,5 +1,8 @@
 package com.app.activity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +57,8 @@ public class Man extends BaseActivity {
 
 	private MenuView menuView; // 更多菜单
 
-	ManHttpHandler manHttpHandler;
+	ManHttpHandler manHttpHandler = new ManHttpHandler();
+	SearchHttpHandler searchHttpHandler = new SearchHttpHandler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,24 @@ public class Man extends BaseActivity {
 
 		absContainer.setOnTouchListener(absCOnTouch);
 
-		manHttpHandler = new ManHttpHandler();
+		parentScroll.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				searchView.clearInputFocus();
+				return false;
+			}
+		});
+
+		searchView.setSearchOnClick(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				System.out.println("---------------*********searchView click");
+				searchReq();
+			}
+		});
+
 		rankReqSend();
 	}
 
@@ -88,6 +109,41 @@ public class Man extends BaseActivity {
 			return false;
 		}
 	};
+
+	/**
+	 * 搜索请求
+	 */
+	private void searchReq() {
+		String keyword = searchView.getKeyword();
+
+		// if (keyword == null || "".equals(keyword)) {
+		// Toast.makeText(Man.this, R.string.search_alert_no_keyword,
+		// Toast.LENGTH_SHORT).show();
+		// return;
+		// }
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = searchHttpHandler.obtainMessage();
+				Bundle bundle = new Bundle();
+				try {
+					bundle.putString(
+							HttpRequestUtils.BUNDLE_KEY_HTTPURL,
+							HttpRequestUtils.BASE_HTTP_CONTEXT
+									+ "SearchArticle.shtml?keyword="
+									+ URLEncoder.encode(
+											searchView.getKeyword(), "UTF-8")
+									+ "&pageNumber=1&pageLine=15");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				bundle.putBoolean(HttpRequestUtils.BUNDLE_KEY_ISPOST, false);
+				msg.setData(bundle);
+				msg.sendToTarget();
+			}
+		}).start();
+	}
 
 	/**
 	 * 发送http请求
@@ -124,6 +180,57 @@ public class Man extends BaseActivity {
 		}
 
 		public ManHttpHandler() {
+		}
+
+		@Override
+		public void callAfterResponseStr(String resultStr) {
+			JSONTokener jsonParser = new JSONTokener(resultStr);
+			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
+			try {
+				JSONObject resultObj = (JSONObject) jsonParser.nextValue();
+				Boolean success = resultObj.getBoolean("success");
+
+				if (success) {
+					JSONObject data = (JSONObject) resultObj.get("data");
+					JSONArray articles = null;
+					try {
+						articles = data.getJSONArray("articles");
+					} catch (Exception e) {
+						Toast.makeText(Man.this, "暂无数据", Toast.LENGTH_SHORT)
+								.show();
+						return;
+					}
+
+					manListView.setupViews(absContainer, parentScroll,
+							menuView, pagerView, true).setData(articles);
+
+				} else {
+					Toast.makeText(Man.this,
+							resultObj.getString("errorMessage"),
+							Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				Toast.makeText(Man.this, R.string.base_response_error,
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	}
+
+	/**
+	 * 搜索请求内部类
+	 * 
+	 * @author XH
+	 * 
+	 */
+	class SearchHttpHandler extends HttpCallBackHandler {
+
+		public SearchHttpHandler(Looper looper) {
+			super(looper);
+		}
+
+		public SearchHttpHandler() {
 		}
 
 		@Override

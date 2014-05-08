@@ -43,6 +43,9 @@ public class MenuView extends RelativeLayout {
 	private TextView attenView; // 关注
 	private TextView collectView; // 收藏
 	private TextView shareView; // 分享
+	
+	private boolean isAttention = false; //是否关注
+	private boolean isCollect = false; //是否收藏
 
 	HttpHandler httpHandler = new HttpHandler(); // http请求
 	Bundle bundle; // http请求数据
@@ -78,6 +81,8 @@ public class MenuView extends RelativeLayout {
 
 		if (v != null && pv != null) {
 			targetData = (JSONObject) targetView.getTag();
+			
+			
 
 			hide();
 
@@ -96,8 +101,9 @@ public class MenuView extends RelativeLayout {
 			collectView.setText(true ? "收藏" : "取消收藏");
 
 			// 男性则显示收藏,女性不显示收藏
-			collectView.setVisibility(Integer.valueOf(BaseUtils.CUR_USER_MAP
-					.get("gender").toString()) == 1 ? View.VISIBLE : View.GONE);
+			// collectView.setVisibility(Integer.valueOf(BaseUtils.CUR_USER_MAP
+			// .get("gender").toString()) == 1 ? View.VISIBLE : View.GONE);
+			collectView.setVisibility(View.VISIBLE);
 
 			this.setVisibility(View.VISIBLE);
 		}
@@ -152,7 +158,7 @@ public class MenuView extends RelativeLayout {
 			boolean isHttp = false;
 			String articleId = null;
 			String fllowUserId = null;
-			int value = 0; // 收藏，关注默认取消状态
+			String un = "Un"; // 收藏，关注默认取消状态
 
 			try {
 				articleId = targetData.getString("id");
@@ -172,23 +178,22 @@ public class MenuView extends RelativeLayout {
 				OPT_SUCCESS = "取消收藏成功";
 
 				if ("收藏".equals(((TextView) v).getText().toString())) {
-					value = 1;
+					un = "";
 					OPT_SUCCESS = "收藏成功";
 				}
-				params = "Favorite.shtml?articleId=" + articleId + "&value="
-						+ value + "&userId=" + BaseUtils.CUR_USER_MAP.get("id");
+				params = un + "Favorite.shtml?articleId=" + articleId
+						+ "&userId=" + BaseUtils.CUR_USER_MAP.get("id");
 				break;
-			case R.id.menu_atten: // 关注
+			case R.id.menu_atten: // 关注或取消关注
 				isHttp = true;
 				OPT_SUCCESS = "取消关注成功";
 
 				if ("关注".equals(((TextView) v).getText().toString())) {
-					value = 1;
+					un = "";
 					OPT_SUCCESS = "关注成功";
 				}
-				params = "FollowUser.shtml?followUserId=" + fllowUserId
-						+ "&value=" + value + "&userId="
-						+ BaseUtils.CUR_USER_MAP.get("id");
+				params = un + "FollowUser.shtml?followUserId=" + fllowUserId
+						+ "&userId=" + BaseUtils.CUR_USER_MAP.get("id");
 				break;
 			case R.id.menu_share:
 				break;

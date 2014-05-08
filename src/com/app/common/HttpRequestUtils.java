@@ -42,6 +42,14 @@ public class HttpRequestUtils {
 		return getResFromHttpUrl(isPost, httpUrl, params);
 	}
 
+	public static String getResFromHttpUrl(Bundle bundle) {
+		// 先获取传入的参数
+		Boolean isPost = bundle.getBoolean(BUNDLE_KEY_ISPOST);
+		String httpUrl = bundle.getString(BUNDLE_KEY_HTTPURL);
+		Object params = bundle.get(BUNDLE_KEY_PARAMS);
+		return getResFromHttpUrl(isPost, httpUrl, params);
+	}
+
 	public static String getNetworkWrongStr() {
 		// JSONObject jsonObject = new JSONObject();
 		// try {
